@@ -7,7 +7,7 @@ const AboutUsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex md:flex-row flex-col items-center lg:items-start justify-center gap-8 lg:gap-12">
           {/* Left Column - 720px */}
-          <div className="w-full lg:max-w-[720px] lg:flex-shrink-0 space-y-8 ">
+          <div className="w-full lg:max-w-[720px] lg:flex-shrink-0 space-y-8">
             {/* About Us Header and Text */}
             <div>
               <h3 className="text-green-500 font-medium text-sm mb-4 uppercase tracking-wide">
@@ -26,38 +26,38 @@ const AboutUsSection: React.FC = () => {
             </div>
 
             {/* Large Group Photo */}
-            <div className="w-full ">
-              <div className="relative w-full  rounded-lg overflow-hidden bg-gray-200 mx-auto max-w-[720px]">
+            <div className="w-full">
+              <div className="relative w-full aspect-[9/7] rounded-lg overflow-hidden bg-gray-200">
                 <Image
                   src="/assets/about-left.png"
                   alt="Evolution Impact Initiative team group photo"
-                  width={720}
-                  height={560}
+                  fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 720px, 720px"
                 />
               </div>
             </div>
           </div>
 
           {/* Right Column - 480px */}
-          <div className="w-full lg:max-w-[480px] lg:flex-shrink-0 flex flex-col ">
+          <div className="w-full lg:max-w-[480px] lg:flex-shrink-0 flex flex-col">
             {/* Mission Statement - Shows first on mobile */}
             <div className="bg-white rounded-lg order-1 lg:order-2 lg:mt-8">
-              <p className="text-gray-800 text-lg leading-relaxed ">
+              <p className="text-gray-800 text-lg leading-relaxed">
                 We believe every individual deserves the chance to thrive. By
                 combining sport, education, creativity, and social support,
                 we&apos;re shaping a stronger, more connected community.
               </p>
             </div>
 
-            <div className="w-full  mt-8 lg:mt-0">
-              <div className="relative w-full  rounded-lg overflow-hidden bg-gray-200 mx-auto max-w-[480px]">
+            <div className="w-full mt-8 lg:mt-0 order-2 lg:order-1">
+              <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-200">
                 <Image
                   src="/assets/about-right.png"
                   alt="Team members at Evolution Impact Initiative"
-                  width={480}
-                  height={480}
+                  fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 480px, 480px"
                 />
               </div>
             </div>
