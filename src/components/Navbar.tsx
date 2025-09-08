@@ -38,11 +38,11 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`w-full px-6 py-4 flex items-center justify-between fixed top-0 left-0 z-50 transition-all duration-300 ${
+        className={`w-full px-6 py-4 flex items-center justify-between fixed top-0 left-0 transition-all duration-300 ${
           isScrolled
             ? "backdrop-blur-md bg-opacity-95 shadow-lg"
             : "bg-opacity-100"
-        }`}
+        } ${isMobileMenuOpen ? "z-30" : "z-50"}`}
         style={{ backgroundColor: "#17569D" }}
       >
         {/* Logo Section */}
@@ -108,44 +108,33 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        {/* Mobile Menu Button - Hidden when sidebar is open */}
+        <div className={`md:hidden ${isMobileMenuOpen ? "invisible" : "visible"}`}>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-white p-2 transition-transform duration-200 hover:scale-110"
             aria-label="Toggle mobile menu"
           >
             <svg
-              className={`w-6 h-6 transform transition-transform duration-300 ${
-                isMobileMenuOpen ? "rotate-90" : ""
-              }`}
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </div>
       </nav>
 
-      {/* Mobile Sidebar Overlay */}
+      {/* Mobile Sidebar Overlay with proper blur */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 backdrop-blur-sm bg-black/30 z-40 transition-all duration-300 md:hidden ${
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -227,9 +216,9 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Sidebar Footer with Donate Button */}
-          <div className="px-6 py-6 border-t border-white border-opacity-20">
+          <div className="px-4 py-4 border-t border-white border-opacity-20">
             <Link href="/donate" onClick={closeMobileMenu}>
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-3 rounded-full flex items-center justify-center space-x-2 transition-colors duration-200">
+              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-3 rounded-full flex items-center justify-center space-x-2 transition-colors duration-200">
                 <span>Donate Us</span>
                 <Image
                   src="/assets/bx_donate-heart-white.svg"
