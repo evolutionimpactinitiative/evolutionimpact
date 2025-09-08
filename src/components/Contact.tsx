@@ -34,7 +34,7 @@ const ContactSection: React.FC = () => {
           {/* Left Column - Contact Info */}
           <div>
             <h2 className="text-2xl lg:text-4xl font-bold text-[#0F0005] mb-5">
-              Let's Connect
+              Let&apos;s Connect
             </h2>
             <p className="text-[#0F0005] text-lg mb-13">
               Because every connection has the power to spark new ideas, open
