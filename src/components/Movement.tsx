@@ -812,7 +812,7 @@ const JoinMovementSection: React.FC = () => {
           Join The Movement
         </h2>
         <p className="text-gray-700 text-lg max-w-3xl mx-auto">
-          We can't create impact alone — we need people like you! There are many
+          We can&apos;t create impact alone — we need people like you! There are many
           ways to get involved with Evolution Impact Initiative CIC
         </p>
       </div>

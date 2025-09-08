@@ -56,7 +56,7 @@ export default function About() {
 
               <p>
                 By combining sport, education, creativity, and social support,
-                we're shaping a stronger, more connected community where
+                we&apos;re shaping a stronger, more connected community where
                 opportunities are accessible to all. Our work is rooted in
                 collaboration with local schools, community leaders, families,
                 and organisations to create long-lasting impact.

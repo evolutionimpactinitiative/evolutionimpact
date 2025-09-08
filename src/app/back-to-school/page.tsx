@@ -113,9 +113,9 @@ export default function BackToSchoolGiveaway() {
                 {/* Call to Action */}
                 <div className="mt-5 font-medium text-[#0F0005] text-base 2xl:text-2xl">
                   <p className="text-[#0F0005] ">
-                    Come along, collect your child's school essentials, and give
-                    them a strong start to the school year. Together, we're
-                    building a supportive community for Medway's future!
+                    Come along, collect your child&apos;s school essentials, and give
+                    them a strong start to the school year. Together, we&apos;re
+                    building a supportive community for Medway&apos;s future!
                   </p>
                 </div>
               </div>

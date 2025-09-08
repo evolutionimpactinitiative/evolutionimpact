@@ -219,7 +219,7 @@ const WarmthForAll = () => {
                   Why It Matters
                 </h2>
                 <p className=" 2xl:text-xl">
-                  Homelessness is not just about lacking shelter – it's about
+                  Homelessness is not just about lacking shelter – it&apos;s about
                   dignity, safety, and survival. Something as simple as a warm
                   coat or sleeping bag can make the difference between hardship
                   and hope. By coming together as a community, we can ensure no

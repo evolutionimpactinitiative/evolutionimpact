@@ -373,7 +373,7 @@ const WarmthVolunteerModal: React.FC<{
 
                   <div>
                     <label className="block text-sm 2xl:text-base font-medium text-gray-700 mb-2">
-                      Any additional comments or skills you'd like to share?
+                      Any additional comments or skills you&apos;d like to share?
                     </label>
                     <textarea
                       name="additionalComments"

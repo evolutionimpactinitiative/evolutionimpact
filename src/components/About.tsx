@@ -46,7 +46,7 @@ const AboutUsSection: React.FC = () => {
               <p className="text-gray-800 text-lg leading-relaxed ">
                 We believe every individual deserves the chance to thrive. By
                 combining sport, education, creativity, and social support,
-                we're shaping a stronger, more connected community.
+                we&apos;re shaping a stronger, more connected community.
               </p>
             </div>
 
