@@ -32,8 +32,13 @@ interface B2UploadResponse {
   uploadTimestamp: number;
 }
 
+interface UploadError extends Error {
+  status?: number;
+  retryable?: boolean;
+}
+
 // Validate environment variables
-function validateEnv() {
+function validateEnv(): void {
   if (
     !B2_ACCOUNT_ID ||
     !B2_APPLICATION_KEY ||
@@ -65,7 +70,7 @@ function delay(ms: number, attempt: number = 1): Promise<void> {
 }
 
 // Check if error is retryable
-function isRetryableError(error: any): boolean {
+function isRetryableError(error: unknown): boolean {
   if (error instanceof Error) {
     const message = error.message.toLowerCase();
     // Retry on 503, 502, 504, 429, and network errors
@@ -121,7 +126,8 @@ async function getB2Authorization(): Promise<B2AuthResponse> {
         throw error;
       }
 
-      return await response.json();
+      const result = await response.json();
+      return result as B2AuthResponse;
     } catch (error) {
       lastError = error as Error;
       if (isRetryableError(error) && attempt < maxRetries) {
@@ -173,7 +179,8 @@ async function getB2UploadUrl(
         throw error;
       }
 
-      return await response.json();
+      const result = await response.json();
+      return result as B2UploadUrlResponse;
     } catch (error) {
       lastError = error as Error;
       if (isRetryableError(error) && attempt < maxRetries) {
@@ -220,7 +227,8 @@ async function uploadToB2(
     throw new Error(`Upload failed: ${response.status} - ${errorText}`);
   }
 
-  return await response.json();
+  const result = await response.json();
+  return result as B2UploadResponse;
 }
 
 // Generate unique filename
@@ -244,7 +252,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate file type
-    const allowedTypes = [
+    const allowedTypes: string[] = [
       "application/pdf",
       "image/jpeg",
       "image/jpg",

@@ -19,8 +19,41 @@ async function connectToMongoDB() {
   return client;
 }
 
+// TypeScript interfaces
+interface CertificationFile {
+  url: string;
+  fileName?: string;
+}
+
+interface VolunteerFormData {
+  fullName: string;
+  dateOfBirth: string;
+  email: string;
+  phoneNumber: string;
+  address?: string;
+  areasOfInterest: string[];
+  availability: string[];
+  whyVolunteer?: string;
+  skills?: string;
+  hasCertifications: string;
+  hasDbsCertificate: string;
+  assistWithDbs: string;
+  certificationFiles?: CertificationFile[];
+  emergencyContactName: string;
+  emergencyContactRelationship: string;
+  emergencyContactPhone: string;
+  confirmInformation: boolean;
+}
+
+interface VolunteerDataWithMetadata extends VolunteerFormData {
+  submittedAt: Date;
+  status: string;
+  project: string;
+  source: string;
+}
+
 // Email templates
-const getUserEmailTemplate = (formData: any) => `
+const getUserEmailTemplate = (formData: VolunteerFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +133,7 @@ const getUserEmailTemplate = (formData: any) => `
 </html>
 `;
 
-const getAdminEmailTemplate = (formData: any) => `
+const getAdminEmailTemplate = (formData: VolunteerFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -254,7 +287,7 @@ const getAdminEmailTemplate = (formData: any) => `
             <div style="background-color: #f0fdf4; padding: 15px; border-radius: 8px; border: 1px solid #bbf7d0; margin-bottom: 20px;">
                 ${formData.certificationFiles
                   .map(
-                    (file: any, index: number) => `
+                    (file: CertificationFile, index: number) => `
                     <div style="margin-bottom: 10px;">
                         <a href="${
                           file.url
@@ -336,10 +369,10 @@ const getAdminEmailTemplate = (formData: any) => `
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.json();
+    const formData: VolunteerFormData = await request.json();
 
     // Validate required fields
-    const requiredFields = [
+    const requiredFields: (keyof VolunteerFormData)[] = [
       "fullName",
       "dateOfBirth",
       "email",
@@ -395,7 +428,7 @@ export async function POST(request: NextRequest) {
     const db = client.db(process.env.MONGODB_DB_NAME || "evolutionimpact");
     const collection = db.collection("volunteer_registrations");
 
-    const volunteerData = {
+    const volunteerData: VolunteerDataWithMetadata = {
       ...formData,
       submittedAt: new Date(),
       status: "pending_review",
@@ -497,7 +530,7 @@ ${
 Certification Documents:
 ${formData.certificationFiles
   .map(
-    (file: any, index: number) =>
+    (file: CertificationFile, index: number) =>
       `• ${file.fileName || `Document ${index + 1}`}: ${file.url}`
   )
   .join("\n")}

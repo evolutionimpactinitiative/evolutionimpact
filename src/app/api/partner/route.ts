@@ -19,8 +19,24 @@ async function connectToMongoDB() {
   return client;
 }
 
+// TypeScript interfaces
+interface PartnerFormData {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  organisationalName: string;
+  organisationType: string;
+  partnershipDescription: string;
+}
+
+interface PartnershipDataWithMetadata extends PartnerFormData {
+  submittedAt: Date;
+  status: string;
+  source: string;
+}
+
 // Email templates
-const getUserEmailTemplate = (formData: any) => `
+const getUserEmailTemplate = (formData: PartnerFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +111,7 @@ const getUserEmailTemplate = (formData: any) => `
 </html>
 `;
 
-const getAdminEmailTemplate = (formData: any) => `
+const getAdminEmailTemplate = (formData: PartnerFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -202,10 +218,10 @@ const getAdminEmailTemplate = (formData: any) => `
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.json();
+    const formData: PartnerFormData = await request.json();
 
     // Validate required fields
-    const requiredFields = [
+    const requiredFields: (keyof PartnerFormData)[] = [
       "fullName",
       "email",
       "phoneNumber",
@@ -213,6 +229,7 @@ export async function POST(request: NextRequest) {
       "organisationType",
       "partnershipDescription",
     ];
+
     for (const field of requiredFields) {
       if (!formData[field]) {
         return NextResponse.json(
@@ -227,7 +244,7 @@ export async function POST(request: NextRequest) {
     const db = client.db(process.env.MONGODB_DB_NAME || "evolutionimpact");
     const collection = db.collection("partnership_inquiries");
 
-    const partnershipData = {
+    const partnershipData: PartnershipDataWithMetadata = {
       ...formData,
       submittedAt: new Date(),
       status: "pending",

@@ -19,8 +19,32 @@ async function connectToMongoDB() {
   return client;
 }
 
+// TypeScript interfaces
+interface WarmthVolunteerFormData {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  emergencyContactName?: string;
+  emergencyContactNumber?: string;
+  roles: string[];
+  availableOnEventDay: string;
+  otherRoleSpecify?: string;
+  relevantExperience?: string;
+  healthConditions?: string;
+  additionalComments?: string;
+  agreeToTerms: boolean;
+}
+
+interface WarmthVolunteerDataWithMetadata extends WarmthVolunteerFormData {
+  submittedAt: Date;
+  status: string;
+  eventDate: string;
+  project: string;
+  source: string;
+}
+
 // User confirmation email template
-const getUserEmailTemplate = (formData: any) => `
+const getUserEmailTemplate = (formData: WarmthVolunteerFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,7 +151,7 @@ const getUserEmailTemplate = (formData: any) => `
 `;
 
 // Admin notification email template
-const getAdminEmailTemplate = (formData: any) => `
+const getAdminEmailTemplate = (formData: WarmthVolunteerFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -288,10 +312,10 @@ const getAdminEmailTemplate = (formData: any) => `
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.json();
+    const formData: WarmthVolunteerFormData = await request.json();
 
     // Validate required fields
-    const requiredFields = [
+    const requiredFields: (keyof WarmthVolunteerFormData)[] = [
       "fullName",
       "email",
       "phoneNumber",
@@ -327,7 +351,7 @@ export async function POST(request: NextRequest) {
     const db = client.db(process.env.MONGODB_DB_NAME || "evolutionimpact");
     const collection = db.collection("warmth_volunteers");
 
-    const volunteerData = {
+    const volunteerData: WarmthVolunteerDataWithMetadata = {
       ...formData,
       submittedAt: new Date(),
       status: "registered",

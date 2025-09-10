@@ -22,9 +22,35 @@ async function connectToMongoDB() {
   return client;
 }
 
+// TypeScript interfaces
+interface DonationData {
+  sessionId: string;
+  campaignId: string;
+  campaignTitle: string;
+  amount: number;
+  currency: string;
+  customerEmail: string | null;
+  customerName: string | null;
+  paymentStatus: string;
+  createdAt: Date;
+  source: string;
+}
+
+interface DonationDetails {
+  amount: number;
+  currency: string;
+  customerEmail: string | null;
+  customerName: string | null;
+  campaignTitle: string;
+}
+
+interface RequestBody {
+  sessionId: string;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { sessionId } = await request.json();
+    const { sessionId }: RequestBody = await request.json();
 
     if (!sessionId) {
       return NextResponse.json(
@@ -48,7 +74,7 @@ export async function POST(request: NextRequest) {
     const campaignTitle = session.metadata?.campaignTitle || "General Donation";
     const campaignId = session.metadata?.campaignId || "";
 
-    const donationDetails = {
+    const donationDetails: DonationDetails = {
       amount,
       currency,
       customerEmail,
@@ -66,7 +92,7 @@ export async function POST(request: NextRequest) {
 
     // If donation hasn't been processed yet, process it now
     if (!existingDonation && session.payment_status === "paid") {
-      const donation = {
+      const donation: DonationData = {
         sessionId: session.id,
         campaignId: campaignId,
         campaignTitle: campaignTitle,
@@ -76,7 +102,6 @@ export async function POST(request: NextRequest) {
         customerName: customerName,
         paymentStatus: session.payment_status,
         createdAt: new Date(),
-        // stripeCustomerId: session.c,
         source: "stripe_checkout_direct",
       };
 
@@ -132,7 +157,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function updateCampaignTotals(campaignId: string, amount: number) {
+async function updateCampaignTotals(
+  campaignId: string,
+  amount: number
+): Promise<void> {
   try {
     const client = await connectToMongoDB();
     const db = client.db(process.env.MONGODB_DB_NAME || "evolutionimpact");
@@ -159,7 +187,7 @@ async function updateCampaignTotals(campaignId: string, amount: number) {
 }
 
 // Email templates
-const getDonationConfirmationTemplate = (donation: any) => `
+const getDonationConfirmationTemplate = (donation: DonationData): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -254,7 +282,9 @@ const getDonationConfirmationTemplate = (donation: any) => `
 </html>
 `;
 
-const getAdminDonationNotificationTemplate = (donation: any) => `
+const getAdminDonationNotificationTemplate = (
+  donation: DonationData
+): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -359,7 +389,7 @@ const getAdminDonationNotificationTemplate = (donation: any) => `
 `;
 
 // Text email templates
-function getDonationConfirmationTextTemplate(donation: any) {
+function getDonationConfirmationTextTemplate(donation: DonationData): string {
   return `
 Hello ${donation.customerName || "Friend"},
 
@@ -391,7 +421,9 @@ Website: https://evolutionimpactinitiative.co.uk
   `.trim();
 }
 
-function getAdminDonationNotificationTextTemplate(donation: any) {
+function getAdminDonationNotificationTextTemplate(
+  donation: DonationData
+): string {
   return `
 🎉 NEW DONATION RECEIVED!
 
