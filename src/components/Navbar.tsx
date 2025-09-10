@@ -40,6 +40,30 @@ const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Smooth scroll function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 80; // Height of your fixed navbar
+      const elementPosition = element.offsetTop - navbarHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+    closeMobileMenu(); // Close mobile menu after clicking
+  };
+
+  // Scroll to top for home
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    closeMobileMenu();
+  };
+
   return (
     <>
       <nav
@@ -52,7 +76,7 @@ const Navbar: React.FC = () => {
       >
         {/* Logo Section */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center">
+          <button onClick={scrollToTop} className="flex items-center">
             <Image
               src="/assets/logo.png"
               alt="Evolution Impact Initiative"
@@ -60,41 +84,41 @@ const Navbar: React.FC = () => {
               height={44}
               className="h-11 w-auto"
             />
-          </Link>
+          </button>
         </div>
 
         {/* Desktop Navigation Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
+          <button
+            onClick={scrollToTop}
             className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Home
-          </Link>
-          <Link
-            href="/about"
+          </button>
+          <button
+            onClick={() => scrollToSection('about')}
             className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
           >
             About Us
-          </Link>
-          <Link
-            href="/pillars"
+          </button>
+          <button
+            onClick={() => scrollToSection('pillars')}
             className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Our Pillars
-          </Link>
-          <Link
-            href="/projects"
+          </button>
+          <button
+            onClick={() => scrollToSection('projects')}
             className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Projects
-          </Link>
-          <Link
-            href="/contact"
+          </button>
+          <button
+            onClick={() => scrollToSection('contact')}
             className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Contact Us
-          </Link>
+          </button>
         </div>
 
         {/* Desktop Donate Button */}
@@ -160,13 +184,15 @@ const Navbar: React.FC = () => {
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-white border-opacity-20">
-            <Image
-              src="/assets/logo.png"
-              alt="Evolution Impact Initiative"
-              width={140}
-              height={38}
-              className="h-10 w-auto"
-            />
+            <button onClick={scrollToTop}>
+              <Image
+                src="/assets/logo.png"
+                alt="Evolution Impact Initiative"
+                width={140}
+                height={38}
+                className="h-10 w-auto"
+              />
+            </button>
             <button
               onClick={closeMobileMenu}
               className="text-white p-2 hover:bg-white hover:bg-opacity-10 rounded-full transition-colors duration-200"
@@ -190,41 +216,36 @@ const Navbar: React.FC = () => {
           {/* Sidebar Navigation */}
           <div className="flex-1 px-6 py-8">
             <div className="space-y-6">
-              <Link
-                href="/"
-                onClick={closeMobileMenu}
-                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2"
+              <button
+                onClick={scrollToTop}
+                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Home
-              </Link>
-              <Link
-                href="/about"
-                onClick={closeMobileMenu}
-                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2"
+              </button>
+              <button
+                onClick={() => scrollToSection('about')}
+                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 About Us
-              </Link>
-              <Link
-                href="/pillars"
-                onClick={closeMobileMenu}
-                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2"
+              </button>
+              <button
+                onClick={() => scrollToSection('pillars')}
+                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Our Pillars
-              </Link>
-              <Link
-                href="/projects"
-                onClick={closeMobileMenu}
-                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2"
+              </button>
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Projects
-              </Link>
-              <Link
-                href="/contact"
-                onClick={closeMobileMenu}
-                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2"
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Contact Us
-              </Link>
+              </button>
             </div>
           </div>
 

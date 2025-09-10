@@ -13,14 +13,22 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero/>
-      <AboutUsSection />
-      <OurPillarsSection />
-      <ProjectsSection />
-      <SubscriptionSection/>
+      <Hero />
+      <div id="about">
+        <AboutUsSection />
+      </div>
+      <div id="pillars">
+        <OurPillarsSection />
+      </div>
+      <div id="projects">
+        <ProjectsSection />
+      </div>
+      <SubscriptionSection />
       <DonationSection />
       <JoinMovementSection />
-      <ContactSection />
+      <div id="contact">
+        <ContactSection />
+      </div>
       <Footer />
     </>
   );
