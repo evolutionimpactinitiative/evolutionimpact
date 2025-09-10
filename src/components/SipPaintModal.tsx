@@ -182,13 +182,6 @@ const SipPaintModal: React.FC<{
             <h2 className="text-xl font-semibold text-[#17569D]">
               FREE- Sip & Paint for Kids – Registration Form
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
-              Hosted by Evolution Impact Initiative CIC
-            </p>
-            <p className="text-sm text-gray-600">
-              📅 Saturday, 27th September 2025 | 🕐 1:00 PM – 3:00 PM | 📍
-              Gillingham Children & Family Hub, ME7 2BX
-            </p>
           </div>
           <button
             onClick={onClose}

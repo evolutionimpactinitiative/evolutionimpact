@@ -7,7 +7,7 @@ import SafetyModal from "@/components/SafetyModal";
 import Image from "next/image";
 import React from "react";
 import { useState } from "react";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 
 // Project data structure
 interface ProjectData {
@@ -46,7 +46,7 @@ interface ProjectData {
       type: "primary" | "secondary";
       action: "volunteer" | "donate" | "share";
     }>;
-    footerMessage: string;
+    footerMessage?: string;
   };
   modalType: "warmth" | "safety" | "sipPaint" | "none";
 }
@@ -417,7 +417,107 @@ const projectsData: Record<string, ProjectData> = {
         { icon: "/assets/time-icon-white.svg", label: "Cost", value: "FREE" },
       ],
       buttons: [],
-      footerMessage: "Thank you for making this event a success!",
+    },
+    modalType: "none",
+  },
+  "summer-warriors": {
+    slug: "summer-warriors",
+    title: "Evolution Kids: Summer Warriors Day",
+    subtitle:
+      "FREE KIDS EVENT – Ages 5–11 | 2 Hours of Fun | Confidence & Energy",
+    bannerImage: "/assets/summer-warriors-banner.jpg",
+    isPastEvent: true,
+    about: {
+      title: "About the Event",
+      content: [
+        "Give your child a taste of martial arts and fitness in a safe, supportive space! This wasn't just about sport — it was about confidence, discipline, focus, and fun. Children left feeling proud, empowered, and full of positive energy.",
+        "This high-energy event provided children aged 5–11 with an introduction to martial arts in a fun, inclusive environment delivered by qualified coaches.",
+      ],
+    },
+    eventDetails: {
+      venue: "Evolution Combat Academy, Rochester, Kent",
+      date: "Saturday, 19th July 2025",
+      time: "11:00 AM – 1:00 PM",
+    },
+    sections: [
+      {
+        title: "Event Activities",
+        content: [
+          "This successful event included a variety of martial arts and fitness activities designed to build confidence and have fun:",
+        ],
+        list: [
+          { text: "Boxing Basics" },
+          { text: "Kickboxing & K1 Fun" },
+          { text: "Brazilian Jiu-Jitsu Play Zone" },
+          { text: "Obstacle Course & Relay Challenges" },
+          { text: "Medals & Certificates for All Kids!" },
+        ],
+      },
+      {
+        title: "Special Awards",
+        content: [
+          "Every child received recognition, with special awards given for:",
+        ],
+        list: [
+          { text: "Bravest Warrior" },
+          { text: "Best Energy" },
+          { text: "Most Respectful" },
+        ],
+      },
+      {
+        title: "Event Highlights",
+        content: ["This event successfully provided children with:"],
+        list: [
+          { text: "Qualified coaches delivering safe, supportive instruction" },
+          { text: "Inclusive environment welcoming all children" },
+          { text: "High-energy fun activities for every participant" },
+          { text: "Confidence-building through martial arts and fitness" },
+          {
+            text: "Completely free access to quality martial arts instruction",
+          },
+        ],
+      },
+      {
+        title: "Delivered in Partnership",
+        content: [
+          "This event was proudly brought to you by:",
+          "Evolution Impact Initiative CIC × Evolution Combat Academy (ECA)",
+        ],
+      },
+    ],
+    sidebar: {
+      title: "Past Event",
+      description:
+        "This event has already taken place. Thank you to all the families who participated and made this martial arts experience a huge success!",
+      eventDetails: [
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Evolution Kids: Summer Warriors Day",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Saturday, 19th July 2025",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "11:00 AM – 1:00 PM",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Evolution Combat Academy, Rochester, Kent",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Age Group",
+          value: "Children aged 5–11 years",
+        },
+        { icon: "/assets/time-icon-white.svg", label: "Cost", value: "FREE" },
+      ],
+      buttons: [],
     },
     modalType: "none",
   },
@@ -434,6 +534,12 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
   const resolvedParams = React.use(params);
 
   const project = projectsData[resolvedParams.slug];
+
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back();
+  };
 
   if (!project) {
     notFound();
@@ -488,7 +594,29 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
       <Navbar />
       <div className="min-h-screen bg-white">
         {/* Hero Banner - Full Width */}
-        <div className="w-full 2xl:pt-[88px] pt-[60px] px-4 max-w-[1280px] mx-auto sm:px-6 lg:px-8">
+        <div className="w-full relative 2xl:pt-[88px] pt-[60px] px-4 max-w-[1280px] mx-auto sm:px-6 lg:px-8">
+          <div className="absolute top-2 left-6 cursor-pointer z-20">
+            <button
+              onClick={handleBackClick}
+              className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-gray-800 font-medium px-4 py-2 rounded-full shadow-lg hover:bg-white hover:shadow-xl transition-all duration-200 border border-gray-200"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="rotate-0"
+              >
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+              Back
+            </button>
+          </div>
+
           <Image
             src={project.bannerImage}
             alt={project.title}

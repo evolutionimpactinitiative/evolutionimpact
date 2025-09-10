@@ -23,16 +23,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <Link href={`/projects/${slug}`} className="block bg-white cursor-pointer">
-      <div
-       
-      >
+      <div>
         {/* Project Image */}
-        <div className="relative h-[400px] mb-4">
+        <div className="relative h-[500px] mb-4">
           <Image
             src={image}
             alt={title}
             fill
-            className="object-cover rounded-lg"
+            className="object-cover  rounded-lg"
           />
           {/* Community Badge */}
           <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center space-x-2 shadow-sm">
@@ -79,7 +77,7 @@ const Projects = () => {
       title: "Sip & Paint for Kids.\n 13th September 2025 \n1:00 PM – 3:00 PM",
       description:
         "A creative weekend experience for children in a safe, welcoming environment.",
-      image: "/assets/sipandpaint.jpg",
+      image: "/assets/sip-and-paint.jpg",
       slug: "sip-and-paint",
     },
     {
@@ -110,11 +108,11 @@ const Projects = () => {
     },
     {
       title:
-        "Community Martial Arts Taster.\n Sat - 15th August 2025\n 10:00-12:00",
+        "Evolution Kids - Summer Warriors Day\n Sat -19th July 2025 \n  11:AM  - 13:0",
       description:
         "Gave children a taste of mixed martial arts with Evolution Impact Initiative.",
-      image: "/assets/project3.png",
-      slug: "back-to-school", // You can create a separate slug for this if needed
+      image: "/assets/summer-warriors.jpeg",
+      slug: "summer-warriors",
       isPastEvent: true,
     },
   ];

@@ -58,7 +58,7 @@ const ProjectsSection: React.FC = () => {
       title: "Sip & Paint for Kids.\n 13th September 2025 \n1:00 PM – 3:00 PM",
       description:
         "A creative weekend experience for children in a safe, welcoming environment.",
-      image: "/assets/sipandpaint.jpg",
+      image: "/assets/sip-and-paint.jpg",
       slug: "sip-and-paint",
     },
     {
