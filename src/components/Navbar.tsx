@@ -1,11 +1,16 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import DonationForm from "./DonationForm";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   // Handle scroll effect for sticky navbar
   useEffect(() => {
@@ -94,22 +99,25 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Donate Button */}
         <div className="hidden md:flex items-center">
-          <Link href="/donate">
-            <button className="bg-green-500 cursor-pointer hover:bg-green-600 text-white font-medium px-6 py-2.5 rounded-full flex items-center space-x-2 transition-colors duration-200">
-              <span>Donate Us</span>
-              <Image
-                src="/assets/bx_donate-heart-white.svg"
-                alt="Donate"
-                width={16}
-                height={16}
-                className="w-4 h-4"
-              />
-            </button>
-          </Link>
+          <button
+            onClick={openModal}
+            className="bg-green-500 cursor-pointer hover:bg-green-600 text-white font-medium px-6 py-2.5 rounded-full flex items-center space-x-2 transition-colors duration-200"
+          >
+            <span>Donate Us</span>
+            <Image
+              src="/assets/bx_donate-heart-white.svg"
+              alt="Donate"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+          </button>
         </div>
 
         {/* Mobile Menu Button - Hidden when sidebar is open */}
-        <div className={`md:hidden ${isMobileMenuOpen ? "invisible" : "visible"}`}>
+        <div
+          className={`md:hidden ${isMobileMenuOpen ? "invisible" : "visible"}`}
+        >
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-white p-2 transition-transform duration-200 hover:scale-110"
@@ -163,7 +171,12 @@ const Navbar: React.FC = () => {
               onClick={closeMobileMenu}
               className="text-white p-2 hover:bg-white hover:bg-opacity-10 rounded-full transition-colors duration-200"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -217,24 +230,63 @@ const Navbar: React.FC = () => {
 
           {/* Sidebar Footer with Donate Button */}
           <div className="px-4 py-4 border-t border-white border-opacity-20">
-            <Link href="/donate" onClick={closeMobileMenu}>
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-3 rounded-full flex items-center justify-center space-x-2 transition-colors duration-200">
-                <span>Donate Us</span>
-                <Image
-                  src="/assets/bx_donate-heart-white.svg"
-                  alt="Donate"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
-              </button>
-            </Link>
+            <button
+              onClick={() => {
+                openModal();
+                closeMobileMenu();
+              }}
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-3 rounded-full flex items-center justify-center space-x-2 transition-colors duration-200"
+            >
+              <span>Donate Us</span>
+              <Image
+                src="/assets/bx_donate-heart-white.svg"
+                alt="Donate"
+                width={16}
+                height={16}
+                className="w-4 h-4"
+              />
+            </button>
           </div>
         </div>
       </div>
 
       {/* Spacer to prevent content from hiding behind fixed navbar */}
       <div className="h-20"></div>
+
+      {/* Donation Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 backdrop-blur-sm bg-black/50 bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="relative bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors"
+            >
+              <svg
+                className="w-5 h-5 text-gray-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            {/* Modal Content */}
+            <div className="p-4">
+              <DonationForm
+                campaignId="warmth-for-all"
+                campaignTitle="Warmth For All"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

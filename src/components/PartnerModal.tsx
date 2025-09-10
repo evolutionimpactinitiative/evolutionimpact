@@ -129,7 +129,7 @@ const PartnerModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               <div className="ml-3">
                 <p className="text-sm text-green-700">
                   Thank you! Your partnership inquiry has been submitted
-                  successfully. We'll get back to you soon.
+                  successfully. We&apos;ll get back to you soon.
                 </p>
               </div>
             </div>

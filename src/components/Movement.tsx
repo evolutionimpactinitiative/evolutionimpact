@@ -519,7 +519,7 @@ const VolunteerModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               </div>
               <div className="ml-3">
                 <p className="text-sm text-green-700">
-                  Thank you for registering! We'll review your application and
+                  Thank you for registering! We&apos;ll review your application and
                   contact you within 5-7 business days.
                 </p>
               </div>
