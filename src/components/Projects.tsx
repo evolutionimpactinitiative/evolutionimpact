@@ -8,19 +8,19 @@ interface ProjectCardProps {
   title: string;
   description: string;
   image: string;
-  learnMoreLink: string;
+  slug: string; // Changed from learnMoreLink to slug
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   image,
-  learnMoreLink,
+  slug,
 }) => {
   return (
-    <div className="bg-white">
+    <Link href={`/projects/${slug}`} className="block bg-white cursor-pointer">
       {/* Project Image */}
-      <div className="relative h-[500] mb-4">
+      <div className="relative h-[500px] mb-4">
         <Image src={image} alt={title} fill className="object-cover" />
         {/* Community Badge */}
         <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center space-x-2 shadow-sm">
@@ -37,10 +37,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="text-gray-600 text-sm mb-4 leading-relaxed">
           {description}
         </p>
-        <Link
-          href={learnMoreLink}
-          className="inline-flex gap-[4px] items-center text-green-500 font-medium border-b border-green-500 pb-0.5 hover:text-green-600 hover:border-green-600 transition-colors duration-200"
-        >
+        <div className="inline-flex gap-[4px] items-center text-green-500 font-medium border-b border-green-500 pb-0.5 hover:text-green-600 hover:border-green-600 transition-colors duration-200">
           Learn More
           <Image
             src="/assets/arrow.svg"
@@ -49,34 +46,34 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             height={16}
             className="w-4 h-4 mr-2"
           />
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 const ProjectsSection: React.FC = () => {
   const projects = [
     {
-      title: "Back-to-School Giveaway\n(August 2025)",
+      title: "Sip & Paint for Kids.\n 13th September 2025 \n1:00 PM – 3:00 PM",
       description:
-        "Providing free school uniforms and supplies to children in Medway.",
-      image: "/assets/project1.png",
-      learnMoreLink: "/back-to-school",
+        "A creative weekend experience for children in a safe, welcoming environment.",
+      image: "/assets/sip-and-paint.jpg",
+      slug: "sip-and-paint",
     },
     {
-      title: "Back-to-School Giveaway\n(August 2025)",
+      title: "Free Child Safety Programme.\n 28th September 2025 \n11:00am – 3:00pm",
       description:
-        "Providing free school uniforms and supplies to children in Medway.",
-      image: "/assets/project2.png",
-      learnMoreLink: "/back-to-school",
+        "Essential safety skills training for children aged 5-11 in a fun and supportive environment.",
+      image: "/assets/safety.jpg",
+      slug: "child-safety",
     },
     {
-      title: "Back-to-School Giveaway\nAugust 2025",
+      title: "Warmth for all\n 18th October 2025 \n11:00am – 2:00pm",
       description:
-        "Providing free school uniforms and supplies to children in Medway.",
-      image: "/assets/project3.png",
-      learnMoreLink: "/back-to-school",
+        "Community outreach providing coats, trainers, and sleeping bags to those in need.",
+      image: "/assets/warmth.jpg",
+      slug: "warmth-for-all",
     },
   ];
 
@@ -85,7 +82,9 @@ const ProjectsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header - Centered */}
         <div className="text-center mb-12">
-          <h3 className="text-green-500 text-xs md:text-lg font-medium mb-2">Projects</h3>
+          <h3 className="text-green-500 text-xs md:text-lg font-medium mb-2">
+            Projects
+          </h3>
           <h2 className="text-2xl md:text-[48px] font-bold text-gray-900 mb-2">
             Current & Upcoming <br className="block md:hidden" /> Projects
           </h2>
@@ -102,7 +101,7 @@ const ProjectsSection: React.FC = () => {
               title={project.title}
               description={project.description}
               image={project.image}
-              learnMoreLink={project.learnMoreLink}
+              slug={project.slug}
             />
           ))}
         </div>
