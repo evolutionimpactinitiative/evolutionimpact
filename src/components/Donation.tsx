@@ -43,11 +43,11 @@ const DonationSection = () => {
         <div className="relative z-10 flex flex-col lg:flex-row items-center">
           {/* Left Content */}
           <div className="flex-1 p-8 lg:p-12 lg:pr-6">
-            <h2 className="text-white text-3xl lg:text-4xl font-bold mb-6 leading-tight">
+            <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-6 leading-tight">
               Every Contribution Counts
             </h2>
 
-            <p className="text-white text-lg leading-relaxed mb-8 opacity-95">
+            <p className="text-white text-base md:text-lg leading-relaxed mb-8 opacity-95">
               Your support helps us provide essential resources, run impactful
               programs, and reach more people in need. Together, we can
               transform lives and build stronger communities.

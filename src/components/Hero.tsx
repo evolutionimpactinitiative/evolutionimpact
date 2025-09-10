@@ -12,7 +12,7 @@ const Hero = () => {
 
   return (
     <>
-      <section className="relative mt-[37px] max-w-[1440px] mx-auto bg-white py-8 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative md:mt-[37px] max-w-[1440px] mx-auto bg-white py-8 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute -top-3 -right-10 hidden md:block">
           <Image
@@ -35,9 +35,9 @@ const Hero = () => {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-12 items-center">
+          <div className="flex flex-col-reverse items-center  md:flex-row justify-between gap-8 lg:gap-12 ">
             {/* Left Content */}
-            <div className="space-y-4 lg:space-y-3 text-center lg:text-left lg:flex-1">
+            <div className="space-y-4 lg:space-y-3 text-left lg:flex-1">
               {/* Tagline */}
               <p className="text-[#0F0005] text-sm md:text-base">
                 Healing Hearts, Healing Lives
@@ -45,25 +45,25 @@ const Hero = () => {
 
               {/* Main Heading */}
               <div className="space-y-1 md:space-y-2">
-                <h1 className="text-xl sm:text-3xl md:text-3xl xl:text-[52px] font-bold ">
+                <h1 className="text-xl sm:text-3xl md:text-5xl 2xl:text-[52px] font-bold ">
                   <span className="text-[#31B67D]">Empowering</span>{" "}
                   <span className="text-black">Communities</span>
                 </h1>
-                <h1 className="text-2xl sm:text-3xl md:text-3xl xl:text-[52px] font-bold ">
+                <h1 className="text-2xl sm:text-3xl md:text-5xl 2xl:text-[52px] font-bold ">
                   <span className="text-black">Inspiring</span>{" "}
                   <span className="text-[#31B67D]">Change</span>
                 </h1>
               </div>
 
               {/* Description */}
-              <p className="text-[#0F0005] text-sm md:text-base lg:text-base xl:text-xl max-w-lg lg:max-w-none mx-auto lg:mx-0">
+              <p className="text-[#0F0005]  text-sm md:text-base lg:text-lg 2xl:text-xl  max-w-2xl mx-auto lg:mx-0">
                 At Evolution Impact Initiative CIC, we use sport, education, and
                 community projects to create opportunities and positive change
                 for young people and families in Kent
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2">
+              <div className="flex flex-row gap-3 md:gap-4  lg:justify-start pt-2">
                 <button className="bg-[#17569D] z-10 text-white font-medium px-6 py-2 md:py-[10px] rounded-full hover:bg-[#125082] transition-colors duration-200 text-sm md:text-base">
                   Get Involved
                 </button>
@@ -74,7 +74,7 @@ const Hero = () => {
             </div>
 
             {/* Right Content - Cards */}
-            <div className="relative w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[480px] lg:flex-shrink-0 mt-8 lg:mt-0">
+            <div className="relative w-full sm:max-w-[408px] lg:flex-shrink-0 mt-8 lg:mt-0">
               {/* Floating Cards - Hidden on mobile for cleaner look */}
               <div className="hidden md:block">
                 <div
@@ -148,7 +148,7 @@ const Hero = () => {
               <div className="relative mx-auto md:ml-6 lg:ml-12">
                 <div className="bg-white rounded-2xl lg:rounded-4xl border-[0.65px] border-[#D4D4D4] overflow-hidden px-3 py-3 md:px-[16px] md:py-[12px]">
                   {/* Card Image */}
-                  <div className="relative h-48 sm:h-56 md:h-64 lg:h-73 mb-3">
+                  <div className="relative  sm:h-56 md:h-64 lg:h-73 mb-3">
                     <Image
                       src="/assets/warmth-for-all-card.png"
                       alt="Warmth for All"
@@ -204,6 +204,83 @@ const Hero = () => {
                     >
                       Donate Now
                     </button>
+                  </div>
+                </div>
+
+                <div className="flex justify-between md:hidden gap-2 mt-[24px]">
+                  {/* Volunteer Card */}
+                  <div
+                    className="bg-white rounded-[6px] flex items-center gap-2 p-[12px] flex-1"
+                    style={{ boxShadow: "0px 4px 60px 0px #00000014" }}
+                  >
+                    <div className="w-[25px] h-[25px] bg-[#31B67D1A] rounded-[6px] flex items-center justify-center flex-shrink-0">
+                      <Image
+                        src="/assets/volunteer.svg"
+                        alt="Volunteer"
+                        width={24}
+                        height={24}
+                        className="w-4 h-4"
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-black leading-tight">
+                        Volunteer
+                      </span>
+                      <span className="text-[#00000040] text-[10px] leading-tight">
+                        Support
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Non-Profit Card */}
+                  <div
+                    className="bg-white rounded-[6px] flex items-center gap-2 p-[12px] flex-1"
+                    style={{ boxShadow: "0px 4px 60px 0px #00000014" }}
+                  >
+                    <div className="w-[25px] h-[25px] bg-[#17569D1A] rounded-[6px] flex items-center justify-center flex-shrink-0">
+                      <Image
+                        src="/assets/dollar-icon.svg"
+                        alt="Non-profit"
+                        width={18}
+                        height={18}
+                        className="w-4 h-4"
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-black leading-tight">
+                        Non-Profit
+                      </span>
+                      <span className="text-[#00000040] text-[10px] leading-tight">
+                        Organisation
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Partner Card */}
+                  <div
+                    className="bg-white rounded-[6px] flex items-center gap-2 p-[12px] flex-1"
+                    style={{ boxShadow: "0px 4px 60px 0px #00000014" }}
+                  >
+                    <div className="w-[25px] h-[25px] bg-[#31B67D1A] rounded-[6px] flex items-center justify-center flex-shrink-0">
+                      <Image
+                        src="/assets/partner-heart.svg"
+                        alt="Partner"
+                        width={18}
+                        height={18}
+                        className="w-4 h-4"
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-black leading-tight">
+                        Partner
+                      </span>
+                      <span className="text-[#00000040] text-[10px] leading-tight">
+                        Provide
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

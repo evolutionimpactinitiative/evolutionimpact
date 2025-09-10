@@ -36,7 +36,7 @@ const ContactSection: React.FC = () => {
             <h2 className="text-2xl lg:text-4xl font-bold text-[#0F0005] mb-5">
               Let&apos;s Connect
             </h2>
-            <p className="text-[#0F0005] text-lg mb-13">
+            <p className="text-[#0F0005] text-sm md:text-lg mb-13">
               Because every connection has the power to spark new ideas, open
               unexpected doors, and create opportunities that can shape the
               future.
@@ -46,7 +46,7 @@ const ContactSection: React.FC = () => {
             <div className="space-y-8">
               {/* Address */}
               <div>
-                <h4 className="text-[#17569D] font-semibold text-sm uppercase tracking-wide mb-2">
+                <h4 className="text-[#17569D]  font-semibold text-xs md:text-sm uppercase tracking-wide mb-2">
                   Address
                 </h4>
                 <p className="text-[#0F0005] text-lg lg:text-2xl font-medium">
@@ -56,7 +56,7 @@ const ContactSection: React.FC = () => {
 
               {/* Email */}
               <div>
-                <h4 className="text-[#17569D] font-semibold text-sm uppercase tracking-wide mb-2">
+                <h4 className="text-[#17569D] font-semibold text-xs md:text-sm uppercase tracking-wide mb-2">
                   Email:
                 </h4>
                 <p className="text-[#0F0005] text-lg lg:text-2xl font-medium">
@@ -66,7 +66,7 @@ const ContactSection: React.FC = () => {
 
               {/* Phone */}
               <div>
-                <h4 className="text-[#17569D] font-semibold text-sm uppercase tracking-wide mb-2">
+                <h4 className="text-[#17569D] font-semibold text-xs md:text-sm uppercase tracking-wide mb-2">
                   Phone:
                 </h4>
                 <p className="text-[#0F0005] text-lg lg:text-2xl font-medium">
@@ -178,7 +178,7 @@ const ContactSection: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 hover:opacity-90"
+                  className="w-full text-white rounded-full font-medium px-6 py-3 transition-colors duration-200 hover:opacity-90"
                   style={{ backgroundColor: "#17569D" }}
                 >
                   Connect With Us

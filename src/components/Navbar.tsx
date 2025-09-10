@@ -43,12 +43,12 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`w-full px-6 py-4 flex items-center justify-between fixed top-0 left-0 transition-all duration-300 ${
-          isScrolled
-            ? "backdrop-blur-md bg-opacity-95 shadow-lg"
-            : "bg-opacity-100"
-        } ${isMobileMenuOpen ? "z-30" : "z-50"}`}
-        style={{ backgroundColor: "#17569D" }}
+        className={`w-full px-6 py-4 flex items-center justify-between fixed top-0 transition-all duration-300 ${
+          isScrolled ? "backdrop-blur-md shadow-lg" : ""
+        } ${isMobileMenuOpen ? "z-30" : "z-[100]"}`}
+        style={{
+          backgroundColor: isScrolled ? "rgba(23, 86, 157, 0.98)" : "#17569D",
+        }}
       >
         {/* Logo Section */}
         <div className="flex items-center">

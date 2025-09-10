@@ -81,13 +81,13 @@ const ProjectsSection: React.FC = () => {
   ];
 
   return (
-    <section className=" py-16 px-6">
+    <section className="py-6 md:py-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header - Centered */}
         <div className="text-center mb-12">
-          <h3 className="text-green-500 text-lg font-medium mb-2">Projects</h3>
+          <h3 className="text-green-500 text-xs md:text-lg font-medium mb-2">Projects</h3>
           <h2 className="text-2xl md:text-[48px] font-bold text-gray-900 mb-2">
-            Current & Upcoming Projects
+            Current & Upcoming <br className="block md:hidden" /> Projects
           </h2>
           <p className="text-[#0F0005] text-lg max-w-2xl mx-auto">
             Making a Difference in Action

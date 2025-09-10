@@ -1322,7 +1322,7 @@ const JoinMovementSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 px-4 max-w-7xl mx-auto">
+    <section className="py-6 md:py-16 px-4 max-w-7xl mx-auto">
       {/* Header */}
       <div className="text-center mb-12">
         <h3 className="text-[#31B67D] font-medium text-sm mb-2 uppercase tracking-wide">
@@ -1331,7 +1331,7 @@ const JoinMovementSection: React.FC = () => {
         <h2 className="text-2xl lg:text-[48px] font-bold text-[#121212] mb-2">
           Join The Movement
         </h2>
-        <p className="text-gray-700 text-lg max-w-3xl mx-auto">
+        <p className="text-[#0F0005] text-sm md:text-lg max-w-3xl mx-auto">
           We can&apos;t create impact alone — we need people like you! There are
           many ways to get involved with Evolution Impact Initiative CIC
         </p>

@@ -44,7 +44,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
   return (
     <div
       className={`
-        relative px-[60px] pb-8 rounded-[12px] border transition-all duration-300 cursor-pointer group
+        relative px-[40px]  md:px-[60px] pb-8 rounded-[12px] border transition-all duration-300 cursor-pointer group
         ${
           isActive
             ? "bg-[#31B67D] text-white border-[#31B67D]"
@@ -58,7 +58,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
       style={{ touchAction: "manipulation" }}
     >
       {/* Icon */}
-      <div className="flex justify-center mb-8 mt-[64px]">
+      <div className="flex justify-center mb-8 md:mt-[64px] mt-8">
         <div className="relative w-10 h-10">
           {/* Green icon - visible when not active */}
           <Image
@@ -88,7 +88,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
       {/* Content */}
       <div className="text-center">
         <h3
-          className={`text-xl font-semibold mb-2 leading-tight whitespace-pre-line ${
+          className={`text-base md:text-xl font-semibold mb-2 leading-tight md:whitespace-pre-line ${
             isActive ? "text-white" : "text-[#0F0005]"
           }`}
         >
@@ -156,17 +156,17 @@ const OurPillarsSection: React.FC = () => {
   ];
 
   return (
-    <section className="bg-white py-16 px-6">
+    <section className="bg-white py-6 md:py-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-10 text-center">
-          <h3 className="text-[#31B67D] text-lg font-medium mb-2">
+          <h3 className="text-[#31B67D] text-xs md:text-lg font-medium mb-2">
             Our Pillars
           </h3>
           <h2 className="text-2xl md:text-[48px] font-semibold text-[#121212] mb-2">
             Our Areas Of Impact
           </h2>
-          <p className="text-[#0F0005] text-lg mx-auto max-w-3xl">
+          <p className="text-[#0F0005] text-sm md:text-lg mx-auto max-w-3xl">
             We deliver community projects and initiatives across five key areas:
           </p>
         </div>

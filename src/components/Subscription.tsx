@@ -23,10 +23,10 @@ const SubscriptionSection: React.FC = () => {
   };
 
   return (
-    <section className=" py-16 px-4">
+    <section className="py-6 md:py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
         {/* Subscribe Us Header */}
-        <p className="text-[#31B67D] text-sm font-medium mb-4 tracking-wide">
+        <p className="text-[#31B67D] text-sm md:text-lg font-medium mb-4 tracking-wide">
           Subscribe Us
         </p>
 
@@ -38,7 +38,7 @@ const SubscriptionSection: React.FC = () => {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-[#0F0005] text-lg mb-12 max-w-2xl mx-auto">
+        <p className="text-[#0F0005] text-sm md:text-lg mb-12 max-w-2xl mx-auto">
           Be the first to know about our upcoming events, community projects,
           and ways you can get involved.
         </p>
@@ -49,13 +49,13 @@ const SubscriptionSection: React.FC = () => {
           style={{ boxShadow: "0px 0px 160px 0px #12121214" }}
         >
           <div className="space-y-6">
-              {/* Full Name Input */}
+            {/* Full Name Input */}
             <div className="text-left">
               <label
                 htmlFor="fullName"
                 className="block text-gray-700 text-sm font-medium mb-2"
               >
-                 Full name
+                Full name
               </label>
               <input
                 type="text"
@@ -85,8 +85,6 @@ const SubscriptionSection: React.FC = () => {
                 className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none transition-all duration-200"
               />
             </div>
-
-          
 
             {/* Phone Number Input */}
             <div className="text-left">
@@ -136,13 +134,14 @@ const SubscriptionSection: React.FC = () => {
         {/* Feature Cards */}
         <div className="grid md:grid-cols-3 gap-8 lg:mt-[80px] mt-10">
           {/* Card 1 */}
-          <div className="flex items-center gap-[7px] text-left">
+          <div className="flex items-center md:gap-[7px] text-left">
             <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
               <Image
                 src="/assets/notification.svg"
                 alt="Notification icon"
                 width={40}
                 height={40}
+                className="w-6 h-6 md:w-10 md:h-10"
               />
             </div>
             <h3 className="text-[#0F0005]  text-base">
@@ -151,13 +150,14 @@ const SubscriptionSection: React.FC = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="flex items-center gap-[7px] text-left">
+          <div className="flex items-center md:gap-[7px] text-left">
             <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
               <Image
                 src="/assets/community-icon.svg"
                 alt="Community icon"
                 width={40}
                 height={40}
+                className="w-6 h-6 md:w-10 md:h-10"
               />
             </div>
             <h3 className="text-[#0F0005]  text-base">
@@ -166,13 +166,14 @@ const SubscriptionSection: React.FC = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="flex items-center gap-[7px] text-left">
+          <div className="flex items-center md:gap-[7px] text-left">
             <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
               <Image
                 src="/assets/support-icon.svg"
                 alt="Support icon"
                 width={40}
                 height={40}
+                className="w-6 h-6 md:w-10 md:h-10"
               />
             </div>
             <h3 className="text-[#0F0005]  text-base">
