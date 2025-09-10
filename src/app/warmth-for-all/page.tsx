@@ -230,7 +230,7 @@ const WarmthForAll = () => {
 
             {/* Right Sidebar */}
             <div className="w-full lg:w-[427px]">
-              <div className="bg-[#17569D] rounded-2xl p-8 text-white sticky top-4">
+              <div className="bg-[#17569D] rounded-2xl p-8 text-white sticky top-20">
                 {/* Header */}
                 <div className=" mb-5">
                   <h3 className="text-2xl font-bold mb-4">Spread the Word</h3>

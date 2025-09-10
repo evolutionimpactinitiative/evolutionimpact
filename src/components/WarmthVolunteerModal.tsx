@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 // Form data interface
 interface WarmthVolunteerFormData {
   fullName: string;
@@ -36,6 +35,11 @@ const WarmthVolunteerModal: React.FC<{
     agreeToTerms: true,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -64,11 +68,63 @@ const WarmthVolunteerModal: React.FC<{
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Warmth volunteer form submitted:", formData);
-    onClose();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch("/api/warmth-volunteer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        // Reset form
+        setFormData({
+          fullName: "",
+          email: "",
+          phoneNumber: "",
+          emergencyContactName: "",
+          emergencyContactNumber: "",
+          roles: ["Carrying and distributing items"],
+          availableOnEventDay: "Yes",
+          otherRoleSpecify: "",
+          relevantExperience: "",
+          healthConditions: "",
+          additionalComments: "",
+          agreeToTerms: true,
+        });
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          onClose();
+          setSubmitStatus("idle");
+        }, 3000);
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  // Clear error status after 5 seconds
+  useEffect(() => {
+    if (submitStatus === "error") {
+      const timer = setTimeout(() => {
+        setSubmitStatus("idle");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
   if (!isOpen) return null;
 
@@ -83,10 +139,64 @@ const WarmthVolunteerModal: React.FC<{
           <button
             onClick={onClose}
             className="text-gray-400 cursor-pointer hover:text-gray-600 text-2xl"
+            disabled={isSubmitting}
           >
             ×
           </button>
         </div>
+
+        {/* Success/Error Messages */}
+        {submitStatus === "success" && (
+          <div className="bg-green-50 border-l-4 border-green-400 p-4 m-6 mb-0">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg
+                  className="h-5 w-5 text-green-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-green-700">
+                  🎉 Welcome to the team! Your volunteer registration has been
+                  confirmed. Check your email for details about October 18th.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {submitStatus === "error" && (
+          <div className="bg-red-50 border-l-4 border-red-400 p-4 m-6 mb-0">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg
+                  className="h-5 w-5 text-red-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-red-700">
+                  Sorry, there was an error with your registration. Please try
+                  again or contact us directly.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Form - Scrollable Content */}
         <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
@@ -128,6 +238,7 @@ const WarmthVolunteerModal: React.FC<{
                       style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -144,6 +255,7 @@ const WarmthVolunteerModal: React.FC<{
                       style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -160,6 +272,7 @@ const WarmthVolunteerModal: React.FC<{
                       style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -175,6 +288,7 @@ const WarmthVolunteerModal: React.FC<{
                       placeholder="Enter emergency contact name"
                       style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -190,6 +304,7 @@ const WarmthVolunteerModal: React.FC<{
                       placeholder="Enter emergency contact number"
                       style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50 "
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -225,6 +340,7 @@ const WarmthVolunteerModal: React.FC<{
                               checked={formData.roles.includes(role)}
                               onChange={() => handleRoleChange(role)}
                               className="sr-only"
+                              disabled={isSubmitting}
                             />
                             <div
                               className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-color${
@@ -270,6 +386,7 @@ const WarmthVolunteerModal: React.FC<{
                           placeholder="Please specify your role"
                           rows={3}
                           className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
+                          disabled={isSubmitting}
                         />
                       </div>
                     )}
@@ -295,6 +412,7 @@ const WarmthVolunteerModal: React.FC<{
                                 handleRadioChange("availableOnEventDay", option)
                               }
                               className="sr-only"
+                              disabled={isSubmitting}
                             />
                             <div
                               className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
@@ -353,6 +471,7 @@ const WarmthVolunteerModal: React.FC<{
                       placeholder="Enter your relevant experience"
                       rows={4}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -368,12 +487,14 @@ const WarmthVolunteerModal: React.FC<{
                       placeholder="Enter any health conditions or accessibility needs"
                       rows={4}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
+                      disabled={isSubmitting}
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm 2xl:text-base font-medium text-gray-700 mb-2">
-                      Any additional comments or skills you&apos;d like to share?
+                      Any additional comments or skills you&apos;d like to
+                      share?
                     </label>
                     <textarea
                       name="additionalComments"
@@ -382,6 +503,7 @@ const WarmthVolunteerModal: React.FC<{
                       placeholder="Enter any additional comments"
                       rows={4}
                       className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -397,6 +519,7 @@ const WarmthVolunteerModal: React.FC<{
                     onChange={handleInputChange}
                     className="sr-only"
                     required
+                    disabled={isSubmitting}
                   />
                   <div
                     className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors cursor-pointer ${
@@ -431,9 +554,36 @@ const WarmthVolunteerModal: React.FC<{
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-[#17569D] text-white font-medium py-3 2xl:py-4 px-4 rounded-full hover:bg-[#125082] transition-colors duration-200"
+                disabled={isSubmitting}
+                className="w-full bg-[#17569D] cursor-pointer text-white font-medium py-3 2xl:py-4 px-4 rounded-full hover:bg-[#125082] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                Join the Outreach Team
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Joining the Team...
+                  </>
+                ) : (
+                  "Join the Outreach Team"
+                )}
               </button>
             </form>
           </div>
