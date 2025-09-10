@@ -46,10 +46,10 @@ const Navbar: React.FC = () => {
     if (element) {
       const navbarHeight = 80; // Height of your fixed navbar
       const elementPosition = element.offsetTop - navbarHeight;
-      
+
       window.scrollTo({
         top: elementPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
     closeMobileMenu(); // Close mobile menu after clicking
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
     closeMobileMenu();
   };
@@ -91,31 +91,31 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-8">
           <button
             onClick={scrollToTop}
-            className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
+            className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Home
           </button>
           <button
-            onClick={() => scrollToSection('about')}
-            className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
+            onClick={() => scrollToSection("about")}
+            className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             About Us
           </button>
           <button
-            onClick={() => scrollToSection('pillars')}
-            className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
+            onClick={() => scrollToSection("pillars")}
+            className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Our Pillars
           </button>
           <button
-            onClick={() => scrollToSection('projects')}
-            className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
+            onClick={() => scrollToSection("projects")}
+            className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Projects
           </button>
           <button
-            onClick={() => scrollToSection('contact')}
-            className="text-white font-medium hover:text-gray-200 transition-colors duration-200"
+            onClick={() => scrollToSection("contact")}
+            className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Contact Us
           </button>
@@ -223,25 +223,25 @@ const Navbar: React.FC = () => {
                 Home
               </button>
               <button
-                onClick={() => scrollToSection('about')}
+                onClick={() => scrollToSection("about")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 About Us
               </button>
               <button
-                onClick={() => scrollToSection('pillars')}
+                onClick={() => scrollToSection("pillars")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Our Pillars
               </button>
               <button
-                onClick={() => scrollToSection('projects')}
+                onClick={() => scrollToSection("projects")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Projects
               </button>
               <button
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection("contact")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Contact Us
