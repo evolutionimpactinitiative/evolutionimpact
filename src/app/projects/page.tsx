@@ -1,3 +1,5 @@
+"use client";
+
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
@@ -8,41 +10,55 @@ interface ProjectCardProps {
   title: string;
   description: string;
   image: string;
-  learnMoreLink?: string;
+  slug: string;
+  isPastEvent?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   image,
-  learnMoreLink,
+  slug,
+  isPastEvent = false,
 }) => {
   return (
-    <div className="bg-white">
-      {/* Project Image */}
-      <div className="relative h-[500] mb-4">
-        <Image src={image} alt={title} fill className="object-cover" />
-        {/* Community Badge */}
-        <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center space-x-2 shadow-sm">
-          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-          <span className="text-sm font-medium text-[#0F0005]">Community</span>
+    <Link href={`/projects/${slug}`} className="block bg-white cursor-pointer">
+      <div
+       
+      >
+        {/* Project Image */}
+        <div className="relative h-[400px] mb-4">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover rounded-lg"
+          />
+          {/* Community Badge */}
+          <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center space-x-2 shadow-sm">
+            <div
+              className={`w-2 h-2 rounded-full ${
+                isPastEvent ? "bg-gray-400" : "bg-blue-500"
+              }`}
+            ></div>
+            <span className="text-sm font-medium text-[#0F0005]">
+              {isPastEvent ? "Past Event" : "Community"}
+            </span>
+          </div>
         </div>
-      </div>
 
-      {/* Card Content */}
-      <div className="px-2">
-        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight whitespace-pre-line">
-          {title}
-        </h3>
-        <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-          {description}
-        </p>
-        {learnMoreLink && (
-          <Link
-            href={learnMoreLink}
-            className="inline-flex gap-[4px] items-center text-green-500 font-medium border-b border-green-500 pb-0.5 hover:text-green-600 hover:border-green-600 transition-colors duration-200"
+        {/* Card Content */}
+        <div className="px-2">
+          <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight whitespace-pre-line">
+            {title}
+          </h3>
+          <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+            {description}
+          </p>
+          <div
+            className={`inline-flex gap-[4px] items-center font-medium border-b pb-0.5 transition-colors duration-200 text-green-500 border-green-500 hover:text-green-600 hover:border-green-600`}
           >
-            Learn More
+            {isPastEvent ? "View Event" : "Learn More"}
             <Image
               src="/assets/arrow.svg"
               alt="Arrow"
@@ -50,37 +66,36 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               height={16}
               className="w-4 h-4 mr-2"
             />
-          </Link>
-        )}
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 const Projects = () => {
   const upcomingProjects = [
     {
-      title: "Back-to-School Giveaway.\n Sat - 30th August 2025 \n 11:00-14:00",
+      title: "Sip & Paint for Kids.\n 13th September 2025 \n1:00 PM – 3:00 PM",
       description:
-        "Providing free school uniforms and supplies to children in Medway.",
-      image: "/assets/project1.png",
-      learnMoreLink: "/back-to-school",
+        "A creative weekend experience for children in a safe, welcoming environment.",
+      image: "/assets/sipandpaint.jpg",
+      slug: "sip-and-paint",
     },
     {
       title:
-        "Sip & Paint Kids Edition.\n Sat -27th September 2025\n 13:00-15:00",
+        "Free Child Safety Programme.\n 28th September 2025 \n11:00am – 3:00pm",
       description:
-        "An afternoon of creativity and fun with Evaluation Impact Initiative.",
-      image: "/assets/project2.png",
-      learnMoreLink: "/back-to-school",
+        "Essential safety skills training for children aged 5-11 in a fun and supportive environment.",
+      image: "/assets/safety.jpg",
+      slug: "child-safety",
     },
     {
-      title:
-        "Sip & Paint Kids Edition.\n Sat -27th September 2025\n 13:00-15:00",
+      title: "Warmth for all\n 18th October 2025 \n11:00am – 2:00pm",
       description:
-        "Giving Children a taste of mixed martial arts with Evaluation Impact Initiative.",
-      image: "/assets/project3.png",
-      learnMoreLink: "/back-to-school",
+        "Community outreach providing coats, trainers, and sleeping bags to those in need.",
+      image: "/assets/warmth.jpg",
+      slug: "warmth-for-all",
     },
   ];
 
@@ -88,23 +103,27 @@ const Projects = () => {
     {
       title: "Back-to-School Giveaway.\n Sat - 30th August 2025 \n 11:00-14:00",
       description:
-        "Providing free school uniforms and supplies to children in Medway.",
-      image: "/assets/project1.png",
+        "Provided free school uniforms and supplies to children in Medway.",
+      image: "/assets/back-to-school.jpg",
+      slug: "back-to-school",
+      isPastEvent: true,
     },
-
     {
       title:
-        "Sip & Paint Kids Edition.\n Sat -27th September 2025\n 13:00-15:00",
+        "Community Martial Arts Taster.\n Sat - 15th August 2025\n 10:00-12:00",
       description:
-        "Giving Children a taste of mixed martial arts with Evaluation Impact Initiative.",
+        "Gave children a taste of mixed martial arts with Evolution Impact Initiative.",
       image: "/assets/project3.png",
+      slug: "back-to-school", // You can create a separate slug for this if needed
+      isPastEvent: true,
     },
   ];
+
   return (
     <>
       <Navbar />
       <div>
-        <section className=" py-16 px-6">
+        <section className="py-16 px-6">
           <div className="max-w-7xl mx-auto">
             {/* Header - Centered */}
             <div className="text-center mb-[60px] 2xl:mb-[80px]">
@@ -116,7 +135,7 @@ const Projects = () => {
               </h2>
             </div>
 
-            {/* Projects Grid */}
+            {/* Upcoming Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10 lg:mb-20">
               {upcomingProjects.map((project, index) => (
                 <ProjectCard
@@ -124,21 +143,24 @@ const Projects = () => {
                   title={project.title}
                   description={project.description}
                   image={project.image}
-                  learnMoreLink={project.learnMoreLink}
+                  slug={project.slug}
                 />
               ))}
             </div>
           </div>
 
           <div className="max-w-7xl mx-auto">
-            {/* Header - Centered */}
+            {/* Past Events Header */}
             <div className="text-center mb-[60px] 2xl:mb-[80px]">
               <h2 className="text-2xl md:text-[48px] font-bold text-gray-900 mb-2">
                 Past Events
               </h2>
+              <p className="text-gray-600">
+                Celebrating our community impact and successful initiatives
+              </p>
             </div>
 
-            {/* Projects Grid */}
+            {/* Past Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10 lg:mb-20">
               {pastProjects.map((project, index) => (
                 <ProjectCard
@@ -146,6 +168,8 @@ const Projects = () => {
                   title={project.title}
                   description={project.description}
                   image={project.image}
+                  slug={project.slug}
+                  isPastEvent={project.isPastEvent}
                 />
               ))}
             </div>

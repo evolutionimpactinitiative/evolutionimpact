@@ -15,6 +15,7 @@ interface ProjectData {
   title: string;
   subtitle: string;
   bannerImage: string;
+  isPastEvent?: boolean;
   about: {
     title: string;
     content: string[];
@@ -47,7 +48,7 @@ interface ProjectData {
     }>;
     footerMessage: string;
   };
-  modalType: "warmth" | "safety" | "sipPaint";
+  modalType: "warmth" | "safety" | "sipPaint" | "none";
 }
 
 // Project data
@@ -62,13 +63,13 @@ const projectsData: Record<string, ProjectData> = {
       content: [
         "This winter, too many people in our community will be sleeping rough without the basic essentials to stay warm. Warmth for All is our response – a community-led project dedicated to providing coats, trainers, and sleeping bags directly to those who need them most.",
         "On Saturday 18th October, our volunteers will be going out into Medway to meet homeless individuals where they are – on the streets, in parks, and in other public spaces – to offer practical support and a sense of dignity.",
-        "Together, we can bring warmth, comfort, and hope to our neighbours in need."
-      ]
+        "Together, we can bring warmth, comfort, and hope to our neighbours in need.",
+      ],
     },
     eventDetails: {
       venue: "ECA - 86 King Street, Rochester, Kent, ME1 1YD",
       date: "Saturday 18th October 2025",
-      time: "11:00 AM – 3:00 PM"
+      time: "11:00 AM – 3:00 PM",
     },
     sections: [
       {
@@ -77,32 +78,32 @@ const projectsData: Record<string, ProjectData> = {
         list: [
           {
             number: "1.",
-            text: "Volunteer on the day – join our outreach team to hand out items, offer support, and spread kindness."
+            text: "Volunteer on the day – join our outreach team to hand out items, offer support, and spread kindness.",
           },
           {
             number: "2.",
-            text: "Donate items – coats, trainers, and sleeping bags in good condition are especially needed."
+            text: "Donate items – coats, trainers, and sleeping bags in good condition are especially needed.",
           },
           {
             number: "3.",
-            text: "Give financially – every contribution helps us purchase additional supplies and reach more people."
-          }
-        ]
+            text: "Give financially – every contribution helps us purchase additional supplies and reach more people.",
+          },
+        ],
       },
       {
         title: "Volunteer Information",
         content: [],
         list: [
           {
-            text: "All volunteers will meet at Evolution Combat Academy at 11AM for a short briefing before heading out."
+            text: "All volunteers will meet at Evolution Combat Academy at 11AM for a short briefing before heading out.",
           },
           {
-            text: "Roles include distributing items, carrying supplies, talking to those we meet, and supporting with safe transport."
+            text: "Roles include distributing items, carrying supplies, talking to those we meet, and supporting with safe transport.",
           },
           {
-            text: "Please wear comfortable shoes and warm clothing."
-          }
-        ]
+            text: "Please wear comfortable shoes and warm clothing.",
+          },
+        ],
       },
       {
         title: "What to Donate & Drop-Off Times",
@@ -116,54 +117,80 @@ const projectsData: Record<string, ProjectData> = {
           "",
           "Drop-off Days & Times:",
           "- Tuesday: 16:00 – 19:00",
-          "- Friday: 16:00 – 19:00", 
+          "- Friday: 16:00 – 19:00",
           "- Saturday: 12:00 – 17:00",
           "",
-          "Please note: All donated items must be new or fairly used, clean, and if possible, washed and ironed."
-        ]
+          "Please note: All donated items must be new or fairly used, clean, and if possible, washed and ironed.",
+        ],
       },
       {
         title: "Why It Matters",
         content: [
-          "Homelessness is not just about lacking shelter – it's about dignity, safety, and survival. Something as simple as a warm coat or sleeping bag can make the difference between hardship and hope. By coming together as a community, we can ensure no one is forgotten this winter."
-        ]
-      }
+          "Homelessness is not just about lacking shelter – it's about dignity, safety, and survival. Something as simple as a warm coat or sleeping bag can make the difference between hardship and hope. By coming together as a community, we can ensure no one is forgotten this winter.",
+        ],
+      },
     ],
     sidebar: {
       title: "Spread the Word",
-      description: "Help us reach more people by sharing this event with friends, family and colleagues. The more awareness we raise, the bigger impact we can make.",
+      description:
+        "Help us reach more people by sharing this event with friends, family and colleagues. The more awareness we raise, the bigger impact we can make.",
       eventDetails: [
-        { icon: "/assets/calendar-icon-white.svg", label: "Event", value: "Warmth for All – Community Outreach" },
-        { icon: "/assets/date-icon-white.svg", label: "Date", value: "Saturday 18th October 2025" },
-        { icon: "/assets/clock-icon-white.svg", label: "Time", value: "11:00 AM – 3:00 PM" },
-        { icon: "/assets/location-icon-white.svg", label: "Meeting Point", value: "Evolution Combat Academy, Rochester, Kent" },
-        { icon: "/assets/time-icon-white.svg", label: "Drop-off Times", value: "Tues 16:00–19:00 | Fri 16:00–19:00 | Sat 12:00–17:00" },
-        { icon: "/assets/phone-icon-white.svg", label: "Contact", value: "07874 059644" }
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Warmth for All – Community Outreach",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Saturday 18th October 2025",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "11:00 AM – 3:00 PM",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Meeting Point",
+          value: "Evolution Combat Academy, Rochester, Kent",
+        },
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Drop-off Times",
+          value: "Tues 16:00–19:00 | Fri 16:00–19:00 | Sat 12:00–17:00",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Contact",
+          value: "07874 059644",
+        },
       ],
       buttons: [
         { text: "Donate", type: "primary", action: "donate" },
-        { text: "Share Now", type: "secondary", action: "share" }
+        { text: "Share Now", type: "secondary", action: "share" },
       ],
-      footerMessage: "Join us. Donate. Volunteer. Make a difference"
+      footerMessage: "Join us. Donate. Volunteer. Make a difference",
     },
-    modalType: "warmth"
+    modalType: "warmth",
   },
   "child-safety": {
     slug: "child-safety",
     title: "FREE Child Safety Programme",
-    subtitle: "Keeping Your Children Safe – In Partnership with ECA, NEXGEN PROTECTION & Evolution Impact Initiative CIC",
+    subtitle:
+      "Keeping Your Children Safe – In Partnership with ECA, NEXGEN PROTECTION & Evolution Impact Initiative CIC",
     bannerImage: "/assets/safety-banner.jpg",
     about: {
       title: "About the Programme",
       content: [
         "Following the successful Safety Talks delivered at Evolution Combat Academy, NEXGEN PROTECTION is launching the Child Safety Programme — a vital one-day training designed to teach children essential safety skills in a fun and supportive environment.",
-        "This session empowers children with both verbal and physical self-protection skills, giving them the confidence to deal with real-life situations such as travelling to and from school and responding to unwanted stranger interactions."
-      ]
+        "This session empowers children with both verbal and physical self-protection skills, giving them the confidence to deal with real-life situations such as travelling to and from school and responding to unwanted stranger interactions.",
+      ],
     },
     eventDetails: {
       venue: "Evolution Combat Academy, Rochester, Kent, ME1 1YD",
       date: "28th September 2025",
-      time: "11:00am – 3:00pm"
+      time: "11:00am – 3:00pm",
     },
     sections: [
       {
@@ -171,46 +198,75 @@ const projectsData: Record<string, ProjectData> = {
         content: [],
         list: [
           { text: "FREE for this launch event (normally £25–£50 per child)" },
-          { text: "Covers personal safety, travel safety & stranger awareness" },
+          {
+            text: "Covers personal safety, travel safety & stranger awareness",
+          },
           { text: "Practical tools to build confidence and awareness" },
-          { text: "Parents welcome to attend (maximum two children per adult)" },
-          { text: "Designed for children aged 5–11 years old" }
-        ]
+          {
+            text: "Parents welcome to attend (maximum two children per adult)",
+          },
+          { text: "Designed for children aged 5–11 years old" },
+        ],
       },
       {
         title: "What to Bring",
         content: [],
         list: [
           { text: "Comfortable clothes (no skirts/dresses)" },
-          { text: "Light snacks & drinks for short breaks" }
-        ]
+          { text: "Light snacks & drinks for short breaks" },
+        ],
       },
       {
         title: "Delivered in Partnership",
         content: [
           "This event is proudly brought to you by:",
-          "Evolution Combat Academy × NEXGEN PROTECTION × Evolution Impact Initiative CIC"
-        ]
-      }
+          "Evolution Combat Academy × NEXGEN PROTECTION × Evolution Impact Initiative CIC",
+        ],
+      },
     ],
     sidebar: {
       title: "Register Now",
-      description: "LIMITED SPACES – Book Now! ECA students will receive priority booking before spaces open to the public.",
+      description:
+        "LIMITED SPACES – Book Now! ECA students will receive priority booking before spaces open to the public.",
       eventDetails: [
-        { icon: "/assets/calendar-icon-white.svg", label: "Programme", value: "FREE Child Safety Programme" },
-        { icon: "/assets/date-icon-white.svg", label: "Date", value: "28th September 2025" },
-        { icon: "/assets/clock-icon-white.svg", label: "Time", value: "11:00am – 3:00pm" },
-        { icon: "/assets/location-icon-white.svg", label: "Venue", value: "Evolution Combat Academy, Rochester, Kent" },
-        { icon: "/assets/phone-icon-white.svg", label: "Age Group", value: "Children aged 5–11 years" },
-        { icon: "/assets/time-icon-white.svg", label: "Cost", value: "FREE (Launch Event)" }
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Programme",
+          value: "FREE Child Safety Programme",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "28th September 2025",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "11:00am – 3:00pm",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Evolution Combat Academy, Rochester, Kent",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Age Group",
+          value: "Children aged 5–11 years",
+        },
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Cost",
+          value: "FREE (Launch Event)",
+        },
       ],
       buttons: [
         { text: "Register", type: "primary", action: "volunteer" },
-        { text: "Share Event", type: "secondary", action: "share" }
+        { text: "Share Event", type: "secondary", action: "share" },
       ],
-      footerMessage: "Keeping Your Children Safe & Confident"
+      footerMessage: "Keeping Your Children Safe & Confident",
     },
-    modalType: "safety"
+    modalType: "safety",
   },
   "sip-and-paint": {
     slug: "sip-and-paint",
@@ -221,13 +277,14 @@ const projectsData: Record<string, ProjectData> = {
       title: "A Creative Weekend Experience for Children",
       content: [
         "Looking for a fun and inspiring activity for your little ones? Join us for our Sip & Paint Kids Event — a safe, welcoming space where children can explore their creativity, enjoy a refreshing drink, and take home their very own masterpiece!",
-        "This event is all about fun, confidence, and self-expression, giving kids the chance to try something new while parents relax knowing they're in a supportive environment."
-      ]
+        "This event is all about fun, confidence, and self-expression, giving kids the chance to try something new while parents relax knowing they're in a supportive environment.",
+      ],
     },
     eventDetails: {
-      venue: "Gillingham Children & Family Hub, Woodlands Road, Gillingham, Kent, ME7 2BX",
+      venue:
+        "Gillingham Children & Family Hub, Woodlands Road, Gillingham, Kent, ME7 2BX",
       date: "Saturday, 13th September",
-      time: "1:00 PM – 3:00 PM"
+      time: "1:00 PM – 3:00 PM",
     },
     sections: [
       {
@@ -237,36 +294,133 @@ const projectsData: Record<string, ProjectData> = {
           { text: "Free entry (community-supported initiative)" },
           { text: "Children keep the artwork they create" },
           { text: "Fun, social and confidence-building activity" },
-          { text: "All materials provided" }
-        ]
+          { text: "All materials provided" },
+        ],
       },
       {
         title: "Important Information",
         content: [
           "LIMITED SPACES – Book Now!",
-          "Spaces are limited and expected to fill quickly — please register early to avoid disappointment."
-        ]
-      }
+          "Spaces are limited and expected to fill quickly — please register early to avoid disappointment.",
+        ],
+      },
     ],
     sidebar: {
       title: "Register Your Child",
-      description: "Spaces are limited and expected to fill quickly. Register early to secure your child's place in this creative experience.",
+      description:
+        "Spaces are limited and expected to fill quickly. Register early to secure your child's place in this creative experience.",
       eventDetails: [
-        { icon: "/assets/calendar-icon-white.svg", label: "Event", value: "Sip & Paint for Kids" },
-        { icon: "/assets/date-icon-white.svg", label: "Date", value: "Saturday, 13th September" },
-        { icon: "/assets/clock-icon-white.svg", label: "Time", value: "1:00 PM – 3:00 PM" },
-        { icon: "/assets/location-icon-white.svg", label: "Venue", value: "Gillingham Children & Family Hub" },
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Sip & Paint for Kids",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Saturday, 13th September",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "1:00 PM – 3:00 PM",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Gillingham Children & Family Hub",
+        },
         { icon: "/assets/phone-icon-white.svg", label: "Cost", value: "FREE" },
-        { icon: "/assets/time-icon-white.svg", label: "Materials", value: "All Provided" }
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Materials",
+          value: "All Provided",
+        },
       ],
       buttons: [
         { text: "Register", type: "primary", action: "volunteer" },
-        { text: "Share Event", type: "secondary", action: "share" }
+        { text: "Share Event", type: "secondary", action: "share" },
       ],
-      footerMessage: "Creativity • Fun • Community"
+      footerMessage: "Creativity • Fun • Community",
     },
-    modalType: "sipPaint"
-  }
+    modalType: "sipPaint",
+  },
+  "back-to-school": {
+    slug: "back-to-school",
+    title: "Back to School Giveaway",
+    subtitle: "August 2025",
+    bannerImage: "/assets/back-to-school-web.jpg",
+    isPastEvent: true,
+    about: {
+      title: "About the Event",
+      content: [
+        "Get ready for a fresh start to the school year! Evolution Impact Initiatives presented the Back-To-School Giveaway (August 2025) – a special community event providing free school uniforms and supplies to children in Medway. Our mission was to ensure every child had the essentials they needed to step into the new academic year with confidence.",
+        "This family-friendly event was open to children aged 5–11 years and featured backpacks filled with school essentials, uniforms, and more—all at no cost. Parents and guardians were warmly invited to join and pick up supplies for their kids.",
+      ],
+    },
+    eventDetails: {
+      venue:
+        "Evolution Combat Academy (ECA), 84 King Street, Rochester, ME1 1YS",
+      date: "Saturday, 30th August 2025",
+      time: "11:00 AM – 2:00 PM",
+    },
+    sections: [
+      {
+        title: "Event Highlights",
+        content: [
+          "This successful community event provided essential school supplies to families in Medway, helping children start their academic year with confidence and all the tools they needed for success.",
+        ],
+        list: [
+          { text: "Free school uniforms for children aged 5-11" },
+          { text: "Backpacks filled with school essentials" },
+          { text: "Community support and family-friendly atmosphere" },
+          { text: "No cost to families - completely free event" },
+        ],
+      },
+      {
+        title: "Impact",
+        content: [
+          "The event successfully supported numerous families in the Medway area, ensuring children had the resources they needed for a strong start to the school year. Together, we built a supportive community for Medway's future.",
+        ],
+      },
+    ],
+    sidebar: {
+      title: "Past Event",
+      description:
+        "This event has already taken place. Thank you to everyone who participated and made this community initiative a success!",
+      eventDetails: [
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Back to School Giveaway",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Saturday, 30th August 2025",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "11:00 AM – 2:00 PM",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Evolution Combat Academy, Rochester",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Age Group",
+          value: "Children aged 5-11 years",
+        },
+        { icon: "/assets/time-icon-white.svg", label: "Cost", value: "FREE" },
+      ],
+      buttons: [],
+      footerMessage: "Thank you for making this event a success!",
+    },
+    modalType: "none",
+  },
 };
 
 interface ProjectPageProps {
@@ -278,9 +432,9 @@ interface ProjectPageProps {
 const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const resolvedParams = React.use(params);
-  
+
   const project = projectsData[resolvedParams.slug];
-  
+
   if (!project) {
     notFound();
   }
@@ -396,9 +550,12 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
                   <h2 className="text-xl 2xl:text-2xl font-bold text-black mb-3">
                     {section.title}
                   </h2>
-                  
+
                   {section.content.map((content, contentIndex) => (
-                    <p key={contentIndex} className="text-[#0F0005] mb-4 2xl:text-xl">
+                    <p
+                      key={contentIndex}
+                      className="text-[#0F0005] mb-4 2xl:text-xl"
+                    >
                       {content}
                     </p>
                   ))}
@@ -436,11 +593,23 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
 
             {/* Right Sidebar */}
             <div className="w-full lg:w-[427px]">
-              <div className="bg-[#17569D] rounded-2xl p-8 text-white sticky top-20">
+              <div
+                className={`rounded-2xl p-8 text-white sticky top-20 ${
+                  project.isPastEvent
+                    ? "bg-gray-400 cursor-not-allowed opacity-75"
+                    : "bg-[#17569D]"
+                }`}
+              >
                 {/* Header */}
                 <div className="mb-5">
-                  <h3 className="text-2xl font-bold mb-4">{project.sidebar.title}</h3>
-                  <p className="text-blue-100 leading-relaxed">
+                  <h3 className="text-2xl font-bold mb-4">
+                    {project.sidebar.title}
+                  </h3>
+                  <p
+                    className={`leading-relaxed ${
+                      project.isPastEvent ? "text-gray-100" : "text-blue-100"
+                    }`}
+                  >
                     {project.sidebar.description}
                   </p>
                 </div>
@@ -458,38 +627,48 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
                           className="w-full h-full"
                         />
                       </div>
-                      <span>{detail.label}: {detail.value}</span>
+                      <span>
+                        {detail.label}: {detail.value}
+                      </span>
                     </div>
                   ))}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="gap-3 flex md:flex-row flex-col">
-                  {project.sidebar.buttons.map((button, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleButtonClick(button.action)}
-                      className={`w-full font-semibold py-[10px] px-6 rounded-full transition-colors duration-200 ${
-                        button.type === "primary"
-                          ? "bg-white text-[#17569D] hover:bg-gray-50"
-                          : "border-2 border-white text-white hover:bg-white hover:text-[#17569D]"
-                      } ${
-                        button.action === "share" ? "flex items-center justify-center gap-2" : ""
-                      }`}
-                    >
-                      {button.text}
-                      {button.action === "share" && (
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fillRule="evenodd"
-                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                    </button>
-                  ))}
-                </div>
+                {/* Action Buttons - Only show for upcoming events */}
+                {!project.isPastEvent && project.sidebar.buttons.length > 0 && (
+                  <div className="gap-3 flex md:flex-row flex-col">
+                    {project.sidebar.buttons.map((button, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleButtonClick(button.action)}
+                        className={`w-full font-semibold py-[10px] px-6 rounded-full transition-colors duration-200 ${
+                          button.type === "primary"
+                            ? "bg-white text-[#17569D] hover:bg-gray-50"
+                            : "border-2 border-white text-white hover:bg-white hover:text-[#17569D]"
+                        } ${
+                          button.action === "share"
+                            ? "flex items-center justify-center gap-2"
+                            : ""
+                        }`}
+                      >
+                        {button.text}
+                        {button.action === "share" && (
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 {/* Footer Message */}
                 <div className="mt-8 text-center font-medium text-sm text-white">

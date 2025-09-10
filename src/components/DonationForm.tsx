@@ -11,11 +11,13 @@ const stripePromise = loadStripe(
 interface DonationFormProps {
   campaignId?: string;
   campaignTitle?: string;
+  onSuccess?: () => void; // Optional callback when donation is successful
 }
 
 const DonationForm: React.FC<DonationFormProps> = ({
   campaignId = "warmth-for-all",
   campaignTitle = "Warmth For All",
+  onSuccess,
 }) => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState<string>("");
@@ -90,6 +92,11 @@ const DonationForm: React.FC<DonationFormProps> = ({
 
       const { sessionId } = await response.json();
 
+      // Call onSuccess callback if provided (before redirect)
+      if (onSuccess) {
+        onSuccess();
+      }
+
       // Redirect to Stripe Checkout
       const { error } = await stripe.redirectToCheckout({
         sessionId,
@@ -107,9 +114,18 @@ const DonationForm: React.FC<DonationFormProps> = ({
 
   return (
     <div className="bg-white rounded-2xl lg:rounded-4xl overflow-hidden px-3 py-3 md:px-[16px] md:py-[12px] max-w-[480px]">
-
       {/* Card Content */}
       <div className="pt-2 md:pt-[12px]">
+        {/* Header */}
+        <div className="mb-4 text-center">
+          <h2 className="text-xl font-bold text-[#0F0005] mb-1">
+            Support {campaignTitle}
+          </h2>
+          <p className="text-sm text-[#0F0005]/60">
+            Your donation helps create positive change in our community
+          </p>
+        </div>
+
         {/* Donation Amount Selection */}
         <div className="mb-4">
           <p className="text-sm font-medium text-[#0F0005] mb-3">
@@ -187,7 +203,11 @@ const DonationForm: React.FC<DonationFormProps> = ({
         </button>
 
         {/* Security Notice */}
-      
+        <div className="mt-3 text-center">
+          <p className="text-xs text-gray-500">
+            🔒 Secure payment powered by Stripe
+          </p>
+        </div>
       </div>
     </div>
   );

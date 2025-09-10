@@ -29,7 +29,7 @@ function DonationSuccessContent() {
     }
 
     // Fetch donation details from your API
-    fetch("/api/donation-details", {
+    fetch("/api/donation-success", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

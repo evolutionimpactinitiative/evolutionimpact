@@ -30,7 +30,7 @@ const AboutUsSection: React.FC = () => {
             <div className="w-full">
               <div className="relative w-full aspect-[9/7] rounded-lg overflow-hidden bg-gray-200">
                 <Image
-                  src="/assets/about-left.png"
+                  src="/assets/about-left.jpg"
                   alt="Evolution Impact Initiative team group photo"
                   fill
                   className="object-cover"
@@ -63,7 +63,7 @@ const AboutUsSection: React.FC = () => {
             <div className="w-full mt-8 lg:mt-0 order-2 lg:order-1">
               <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-200">
                 <Image
-                  src="/assets/about-right.png"
+                  src="/assets/about-right.jpg"
                   alt="Team members at Evolution Impact Initiative"
                   fill
                   className="object-cover"

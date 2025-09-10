@@ -1,14 +1,89 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DonationForm from "./DonationForm";
+
+interface CampaignStats {
+  campaignId: string;
+  campaignTitle: string;
+  totalRaised: number;
+  totalDonations: number;
+  goal: number;
+  progressPercentage: number;
+  lastUpdated: string;
+}
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [campaignStats, setCampaignStats] = useState<CampaignStats | null>(
+    null
+  );
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  // Fetch campaign statistics
+  useEffect(() => {
+    const fetchCampaignStats = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/campaigns/warmth-for-all");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch campaign stats");
+        }
+
+        const data: CampaignStats = await response.json();
+        setCampaignStats(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching campaign stats:", err);
+        setError(
+          err instanceof Error ? err.message : "Failed to load campaign data"
+        );
+        // Set fallback data
+        setCampaignStats({
+          campaignId: "warmth-for-all",
+          campaignTitle: "Warmth For All",
+          totalRaised: 0,
+          totalDonations: 0,
+          goal: 10000, // Set to 10,000 as requested
+          progressPercentage: 0,
+          lastUpdated: new Date().toISOString(),
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCampaignStats();
+  }, []);
+
+  // Format currency
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-GB", {
+      style: "currency",
+      currency: "GBP",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  // Function to refresh campaign data (can be called after donation)
+  const refreshCampaignData = async () => {
+    try {
+      const response = await fetch("/api/campaigns/warmth-for-all");
+      if (response.ok) {
+        const data: CampaignStats = await response.json();
+        setCampaignStats(data);
+      }
+    } catch (err) {
+      console.error("Error refreshing campaign data:", err);
+    }
+  };
 
   return (
     <>
@@ -175,7 +250,7 @@ const Hero = () => {
                           Or Make One Time Donation
                         </p>
                         <h3 className="text-lg md:text-xl font-bold text-[#0F0005] my-1 md:my-2">
-                          Warmth For All
+                          {campaignStats?.campaignTitle || "Warmth For All"}
                         </h3>
                         <p className="text-[10px] md:text-xs text-[#0F0005]/50">
                           Together, We Can Keep Medway Warm
@@ -185,16 +260,43 @@ const Hero = () => {
 
                     {/* Progress Bar */}
                     <div className="mb-3 md:mb-4">
-                      <div className="flex justify-between text-[9px] md:text-[10px] font-medium text-[#0F0005] mb-1">
-                        <span>Raised: £63,162</span>
-                        <span>Goal: £88,000</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-[#31B67D] h-2 rounded-full transition-all duration-500"
-                          style={{ width: "72%" }}
-                        ></div>
-                      </div>
+                      {loading ? (
+                        <div className="animate-pulse">
+                          <div className="flex justify-between text-[9px] md:text-[10px] font-medium text-[#0F0005] mb-1">
+                            <div className="h-3 bg-gray-200 rounded w-20"></div>
+                            <div className="h-3 bg-gray-200 rounded w-16"></div>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="bg-gray-300 h-2 rounded-full w-1/2"></div>
+                          </div>
+                        </div>
+                      ) : error ? (
+                        <div className="text-red-500 text-xs mb-2">
+                          Unable to load current data
+                        </div>
+                      ) : null}
+
+                      {campaignStats && (
+                        <>
+                          <div className="flex justify-between text-[9px] md:text-[10px] font-medium text-[#0F0005] mb-1">
+                            <span>
+                              Raised:{" "}
+                              {formatCurrency(campaignStats.totalRaised)}
+                            </span>
+                            <span>
+                              Goal: {formatCurrency(campaignStats.goal)}
+                            </span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-[#31B67D] h-2 rounded-full transition-all duration-500"
+                              style={{
+                                width: `${campaignStats.progressPercentage}%`,
+                              }}
+                            ></div>
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     {/* Donate Button */}
@@ -207,6 +309,7 @@ const Hero = () => {
                   </div>
                 </div>
 
+                {/* Mobile Cards */}
                 <div className="flex justify-between md:hidden gap-2 mt-[24px]">
                   {/* Volunteer Card */}
                   <div
@@ -318,6 +421,7 @@ const Hero = () => {
               <DonationForm
                 campaignId="warmth-for-all"
                 campaignTitle="Warmth For All"
+                onSuccess={refreshCampaignData}
               />
             </div>
           </div>

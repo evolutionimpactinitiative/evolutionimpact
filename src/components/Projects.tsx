@@ -8,7 +8,7 @@ interface ProjectCardProps {
   title: string;
   description: string;
   image: string;
-  slug: string; // Changed from learnMoreLink to slug
+  slug: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -58,11 +58,12 @@ const ProjectsSection: React.FC = () => {
       title: "Sip & Paint for Kids.\n 13th September 2025 \n1:00 PM – 3:00 PM",
       description:
         "A creative weekend experience for children in a safe, welcoming environment.",
-      image: "/assets/sip-and-paint.jpg",
+      image: "/assets/sipandpaint.jpg",
       slug: "sip-and-paint",
     },
     {
-      title: "Free Child Safety Programme.\n 28th September 2025 \n11:00am – 3:00pm",
+      title:
+        "Free Child Safety Programme.\n 28th September 2025 \n11:00am – 3:00pm",
       description:
         "Essential safety skills training for children aged 5-11 in a fun and supportive environment.",
       image: "/assets/safety.jpg",
