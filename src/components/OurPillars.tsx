@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 interface PillarCardProps {
@@ -9,6 +9,8 @@ interface PillarCardProps {
   iconGreen: string;
   iconWhite: string;
   isHighlighted?: boolean;
+  isClicked?: boolean;
+  onCardClick?: () => void;
 }
 
 const PillarCard: React.FC<PillarCardProps> = ({
@@ -17,35 +19,48 @@ const PillarCard: React.FC<PillarCardProps> = ({
   iconGreen,
   iconWhite,
   isHighlighted = false,
+  isClicked = false,
+  onCardClick,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Determine if card should show active state (green background)
+  const isActive = isHighlighted || isHovered || isClicked;
+
+  const handleClick = () => {
+    if (onCardClick) {
+      onCardClick();
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <div
       className={`
         relative px-[60px] pb-8 rounded-[12px] border transition-all duration-300 cursor-pointer group
         ${
-          isHighlighted
+          isActive
             ? "bg-[#31B67D] text-white border-[#31B67D]"
-            : "bg-white text-gray-900 border-[#D4D4D4] hover:text-white"
+            : "bg-white text-gray-900 border-[#D4D4D4]"
         }
       `}
-      style={{
-        backgroundColor: isHighlighted ? "#31B67D" : undefined,
-      }}
-      onMouseEnter={(e) => {
-        if (!isHighlighted) {
-          e.currentTarget.style.backgroundColor = "#31B67D";
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isHighlighted) {
-          e.currentTarget.style.backgroundColor = "white";
-        }
-      }}
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      // Add touch-action for better mobile interaction
+      style={{ touchAction: "manipulation" }}
     >
       {/* Icon */}
       <div className="flex justify-center mb-8 mt-[64px]">
         <div className="relative w-10 h-10">
-          {/* Green icon - visible by default, hidden on hover for non-highlighted cards */}
+          {/* Green icon - visible when not active */}
           <Image
             src={iconGreen}
             alt={`${title} icon`}
@@ -53,14 +68,10 @@ const PillarCard: React.FC<PillarCardProps> = ({
             height={40}
             className={`
               absolute inset-0 w-full h-full transition-opacity duration-300
-              ${
-                isHighlighted
-                  ? "opacity-0"
-                  : "opacity-100 group-hover:opacity-0"
-              }
+              ${isActive ? "opacity-0" : "opacity-100"}
             `}
           />
-          {/* White icon - hidden by default, visible on hover or when highlighted */}
+          {/* White icon - visible when active */}
           <Image
             src={iconWhite}
             alt={`${title} icon`}
@@ -68,23 +79,17 @@ const PillarCard: React.FC<PillarCardProps> = ({
             height={40}
             className={`
               absolute inset-0 w-full h-full transition-opacity duration-300
-              ${
-                isHighlighted
-                  ? "opacity-100"
-                  : "opacity-0 group-hover:opacity-100"
-              }
+              ${isActive ? "opacity-100" : "opacity-0"}
             `}
           />
         </div>
       </div>
 
       {/* Content */}
-      <div className="text-center ">
+      <div className="text-center">
         <h3
-          className={`text-xl font-semibold mb-2 leading-tight whitespace-pre-line   ${
-            isHighlighted
-              ? "text-white"
-              : "text-[#0F0005] group-hover:text-white"
+          className={`text-xl font-semibold mb-2 leading-tight whitespace-pre-line ${
+            isActive ? "text-white" : "text-[#0F0005]"
           }`}
         >
           {title}
@@ -92,11 +97,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
         <p
           className={`
           text-sm leading-relaxed
-          ${
-            isHighlighted
-              ? "text-white"
-              : "text-[#0F0005] group-hover:text-white"
-          }
+          ${isActive ? "text-white" : "text-[#0F0005]"}
         `}
         >
           {description}
@@ -107,6 +108,8 @@ const PillarCard: React.FC<PillarCardProps> = ({
 };
 
 const OurPillarsSection: React.FC = () => {
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+
   const pillars = [
     {
       title: "Youth Empowerment &\nEducation",
@@ -178,6 +181,11 @@ const OurPillarsSection: React.FC = () => {
               iconGreen={pillar.iconGreen}
               iconWhite={pillar.iconWhite}
               isHighlighted={pillar.isHighlighted}
+              isClicked={activeCardIndex === index}
+              onCardClick={() => {
+                // If clicking the same card, toggle it off, otherwise set it as active
+                setActiveCardIndex(activeCardIndex === index ? null : index);
+              }}
             />
           ))}
         </div>

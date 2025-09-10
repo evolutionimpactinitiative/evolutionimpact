@@ -13,7 +13,7 @@ export default function About() {
           {/* Background decorative elements */}
           <div className="absolute top-0 left-0">
             <Image
-              src="/assets/about-overlay.png" 
+              src="/assets/about-overlay.png"
               alt=""
               width={195}
               height={200}
@@ -23,7 +23,7 @@ export default function About() {
 
           <div className="absolute -bottom-8 right-0 ">
             <Image
-              src="/assets/about-overlay.png" 
+              src="/assets/about-overlay.png"
               alt=""
               width={195}
               height={200}
@@ -398,7 +398,7 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/macram-ramba.png"
+                  src="/assets/Macram-Ramba.jpg"
                   alt="Macram Ramba"
                   width={96}
                   height={96}
@@ -408,10 +408,11 @@ export default function About() {
               <h3 className="text-lg font-semibold text-[#0F0005]">
                 Macram Ramba
               </h3>
-              <p className="text-[#17569D] text-sm mb-2">Founder & CEO</p>
+              <p className="text-[#17569D] text-sm mb-2">
+                Co-founder & Managing Director
+              </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                Former co-founder of Opendoor. Early staff at Spotify and
-                Clearbit.
+                Driving strategy, partnerships, and mission alignment
               </p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-blue-500 hover:text-blue-600">
@@ -448,17 +449,20 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/frank-g.png"
+                  src="/assets/Frank.jpg"
                   alt="Frank G"
                   width={96}
                   height={96}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-semibold text-[#0F0005]">Frank. G</h3>
-              <p className="text-[#17569D] text-sm mb-2">Engineering Manager</p>
+              <h3 className="text-lg font-semibold text-[#0F0005]">Frank S</h3>
+              <p className="text-[#17569D] text-sm mb-2">
+                Co-founder & Managing Director
+              </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                Lead engineering teams at Figma, Pitch, and Protocol Labs.
+                Driving partnerships, networking, facilities, and content
+                creation.
               </p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-blue-500 hover:text-blue-600">
@@ -495,19 +499,21 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/luke-rogers.png"
-                  alt="Luke Rogers"
+                  src="/assets/Blessing-Emuchay.jpg"
+                  alt="Blessing Emuchay"
                   width={96}
                   height={96}
                   className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-lg font-semibold text-[#0F0005]">
-                Luke Rogers
+                Blessing Emuchay
               </h3>
-              <p className="text-[#17569D] text-sm mb-2">Product Manager</p>
+              <p className="text-[#17569D] text-sm mb-2">
+                Finance & Funding Lead (Treasurer)
+              </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                Former PM for Linear, Lambda School, and On Deck.
+                managing budgets, funding applications, and financial reporting{" "}
               </p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-blue-500 hover:text-blue-600">
@@ -544,7 +550,7 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/blessing-emuchay.png"
+                  src="/assets/Fumni.A.jpg"
                   alt="Blessing Emuchay"
                   width={96}
                   height={96}
@@ -552,11 +558,14 @@ export default function About() {
                 />
               </div>
               <h3 className="text-lg font-semibold text-[#0F0005]">
-                Blessing Emuchay
+                Fumni Ayeni{" "}
               </h3>
-              <p className="text-[#17569D] text-sm mb-2">Product Designer</p>
+              <p className="text-[#17569D] text-sm mb-2">
+                Partnerships & Outreach Lead
+              </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                Founding design team at Figma. Former Pleo, Stripe, and Tile.
+                building collaborations with schools, councils, charities, and
+                the wider community.{" "}
               </p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-blue-500 hover:text-blue-600">
@@ -593,7 +602,7 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/nevien-ramba.png"
+                  src="/assets/Luke-Rogers.jpg"
                   alt="Nevien Ramba"
                   width={96}
                   height={96}
@@ -601,12 +610,14 @@ export default function About() {
                 />
               </div>
               <h3 className="text-lg font-semibold text-[#0F0005]">
-                Nevien Ramba
+                Luke Rogers{" "}
               </h3>
-              <p className="text-[#17569D] text-sm mb-2">UX Researcher</p>
+              <p className="text-[#17569D] text-sm mb-2">
+                Communications & Marketing Lead
+              </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                Lead user research for Slack. Contractor for Netflix and
-                Udacity.
+                Managing social media, branding, and PR to grow visibility and
+                community engagement.
               </p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-blue-500 hover:text-blue-600">
@@ -650,10 +661,15 @@ export default function About() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-semibold text-[#0F0005]">Fumi A</h3>
-              <p className="text-[#17569D] text-sm mb-2">Customer Success</p>
+              <h3 className="text-lg font-semibold text-[#0F0005]">
+                Nevien Ramba
+              </h3>
+              <p className="text-[#17569D] text-sm mb-2">
+                Operations & Compliance Lead
+              </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                Lead CX at Wealthsimple. Former PagerDuty and Screen.
+                Overseeing daily operations, safeguarding, compliance, and CIC
+                reporting.{" "}
               </p>
               <div className="flex justify-center space-x-3">
                 <a href="#" className="text-blue-500 hover:text-blue-600">

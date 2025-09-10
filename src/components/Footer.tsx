@@ -29,26 +29,27 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#17569D] text-white py-12">
+    <footer className="bg-[#17569D] text-white py-12  rounded-tl-[24px] rounded-tr-[24px] sm:rounded-none">
       <div className="max-w-7xl mx-auto px-4">
         {/* Logo */}
-        <div className="flex justify-center mb-12">
+        <div className="flex items-center justify-center mb-12">
           <Image
             src="/assets/evolution-logo-footer.svg"
             alt="Evolution Impact Initiative"
             width={200}
             height={60}
+            className=" w-[131px] h-[36px] md:w-[200px] md:h-[60px]"
           />
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex justify-center mb-12">
-          <ul className="flex flex-wrap justify-center gap-8 lg:gap-30">
+        <nav className="flex justify-center md:mb-12 mb-8">
+          <ul className="flex flex-wrap justify-center gap-[22px] lg:gap-30">
             {navigationLinks.map((link, index) => (
               <li key={index}>
                 <a
                   href={link.href}
-                  className="text-white hover:text-gray-200 transition-colors duration-300 font-medium"
+                  className="text-white text-sm hover:text-gray-200 transition-colors duration-300 font-medium"
                 >
                   {link.name}
                 </a>
@@ -58,7 +59,7 @@ const Footer = () => {
         </nav>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center gap-6 mb-12">
+        <div className="flex justify-center gap-6 md:mb-12 mb-8 ">
           {socialLinks.map((social, index) => (
             <a
               key={index}
@@ -73,6 +74,7 @@ const Footer = () => {
                 alt={`${social.name} icon`}
                 width={32}
                 height={32}
+                className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
               />
             </a>
           ))}

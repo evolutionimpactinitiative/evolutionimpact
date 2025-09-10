@@ -49,8 +49,8 @@ const ContactSection: React.FC = () => {
                 <h4 className="text-[#17569D] font-semibold text-sm uppercase tracking-wide mb-2">
                   Address
                 </h4>
-                <p className="text-[#0F0005] text-xl lg:text-[28px] font-medium">
-                  86 King Street, Rochester, Kent , ME7 1DT
+                <p className="text-[#0F0005] text-lg lg:text-2xl font-medium">
+                  86 King Street, Rochester, Kent , ME1 1YD
                 </p>
               </div>
 
@@ -59,7 +59,7 @@ const ContactSection: React.FC = () => {
                 <h4 className="text-[#17569D] font-semibold text-sm uppercase tracking-wide mb-2">
                   Email:
                 </h4>
-                <p className="text-[#0F0005] text-xl lg:text-[28px] font-medium">
+                <p className="text-[#0F0005] text-lg lg:text-2xl font-medium">
                   Info@evolutionimpactinitiative.co.uk
                 </p>
               </div>
@@ -69,7 +69,7 @@ const ContactSection: React.FC = () => {
                 <h4 className="text-[#17569D] font-semibold text-sm uppercase tracking-wide mb-2">
                   Phone:
                 </h4>
-                <p className="text-[#0F0005] text-xl lg:text-[28px] font-medium">
+                <p className="text-[#0F0005] text-lg lg:text-2xl font-medium">
                   5195256691
                 </p>
               </div>

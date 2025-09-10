@@ -1,8 +1,17 @@
+"use client";
+
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function BackToSchoolGiveaway() {
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back();
+  };
+
   return (
     <>
       <Navbar />
@@ -26,8 +35,32 @@ export default function BackToSchoolGiveaway() {
             className="w-[195px] h-[200px] sm:w-32 sm:h-32"
           />
         </div>
-        <div className=" py-22 px-4 sm:px-6 lg:px-8">
+        
+        <div className="py-22 px-4 sm:px-6 lg:px-8">
           <div className="relative w-full mx-auto text-center">
+            {/* Back Button */}
+            <div className="absolute top-4 left-4 cursor-pointer z-20">
+              <button
+                onClick={handleBackClick}
+                className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-gray-800 font-medium px-4 py-2 rounded-full shadow-lg hover:bg-white hover:shadow-xl transition-all duration-200 border border-gray-200"
+              >
+                <svg 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="rotate-0"
+                >
+                  <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+                Back
+              </button>
+            </div>
+
             {/* Evolution Impact Initiative Logo */}
             <div className="w-full">
               <Image
@@ -58,7 +91,7 @@ export default function BackToSchoolGiveaway() {
                 </div>
 
                 {/* Event Description */}
-                <div className="space-y-3 text-[#0F0005] font-medium text-base 2xl:text-xl  leading-relaxed">
+                <div className="space-y-3 text-[#0F0005] font-medium text-base 2xl:text-xl leading-relaxed">
                   <p>
                     Evolution Impact Initiatives is excited to present the
                     Back-To-School Giveaway (August 2025) – a special community
@@ -112,7 +145,7 @@ export default function BackToSchoolGiveaway() {
 
                 {/* Call to Action */}
                 <div className="mt-5 font-medium text-[#0F0005] text-base 2xl:text-2xl">
-                  <p className="text-[#0F0005] ">
+                  <p className="text-[#0F0005]">
                     Come along, collect your child&apos;s school essentials, and give
                     them a strong start to the school year. Together, we&apos;re
                     building a supportive community for Medway&apos;s future!
@@ -124,18 +157,18 @@ export default function BackToSchoolGiveaway() {
               <div className="w-full lg:w-[427px]">
                 <div className="bg-[#17569D] rounded-2xl p-6 text-white sticky top-8">
                   {/* Header */}
-                  <div className=" mb-5">
+                  <div className="mb-5">
                     <h3 className="text-2xl font-bold mb-5">
                       Get in to the Event
                     </h3>
-                    <p className=" leading-relaxed">
+                    <p className="leading-relaxed">
                       Enjoy the event with fullest with our get back to school
                       event & get back to learning with us
                     </p>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className=" gap-[12px] flex">
+                  <div className="gap-[12px] flex">
                     <button className="w-full bg-white text-[#17569D] font-semibold py-[10px] px-6 rounded-full hover:bg-gray-50 transition-colors duration-200">
                       Buy Ticket $5
                     </button>

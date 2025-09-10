@@ -49,13 +49,31 @@ const SubscriptionSection: React.FC = () => {
           style={{ boxShadow: "0px 0px 160px 0px #12121214" }}
         >
           <div className="space-y-6">
+              {/* Full Name Input */}
+            <div className="text-left">
+              <label
+                htmlFor="fullName"
+                className="block text-gray-700 text-sm font-medium mb-2"
+              >
+                 Full name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                placeholder="Enter your full name"
+                className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none transition-all duration-200"
+              />
+            </div>
             {/* Email Input */}
             <div className="text-left">
               <label
                 htmlFor="email"
                 className="block text-gray-700 text-sm font-medium mb-2"
               >
-                Enter your email address
+                Email address
               </label>
               <input
                 type="email"
@@ -68,24 +86,7 @@ const SubscriptionSection: React.FC = () => {
               />
             </div>
 
-            {/* Full Name Input */}
-            <div className="text-left">
-              <label
-                htmlFor="fullName"
-                className="block text-gray-700 text-sm font-medium mb-2"
-              >
-                Enter your Full name
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                placeholder="Enter your full name"
-                className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none transition-all duration-200"
-              />
-            </div>
+          
 
             {/* Phone Number Input */}
             <div className="text-left">
@@ -93,7 +94,7 @@ const SubscriptionSection: React.FC = () => {
                 htmlFor="phone"
                 className="block text-gray-700 text-sm font-medium mb-2"
               >
-                Enter your phone number
+                Phone number
               </label>
               <input
                 type="tel"
@@ -117,7 +118,7 @@ const SubscriptionSection: React.FC = () => {
 
           {/* Mail Icon and Text */}
           <div className="flex items-center mt-[24px] justify-center gap-3 ">
-            <div className="w-6 h-6 flex items-center justify-center">
+            <div className="w-6 h-6 hidden md:flex items-center justify-center">
               <Image
                 src="/assets/mail-icon.svg"
                 alt="Mail icon"
