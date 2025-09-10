@@ -311,7 +311,7 @@ const SafetyModal: React.FC<{
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
-                      Child's Full Name <span className="text-[#31B67D]">*</span>
+                      Child&apos;s Full Name <span className="text-[#31B67D]">*</span>
                     </label>
                     <input
                       type="text"
@@ -328,7 +328,7 @@ const SafetyModal: React.FC<{
 
                   <div>
                     <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
-                      Child's Age <span className="text-[#31B67D]">*</span>
+                      Child&apos;s Age <span className="text-[#31B67D]">*</span>
                     </label>
                     <input
                       type="text"
@@ -345,7 +345,7 @@ const SafetyModal: React.FC<{
 
                   <div>
                     <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
-                      Second Child's Name & Age (if applicable)
+                      Second Child&apos;s Name & Age (if applicable)
                     </label>
                     <input
                       type="text"
