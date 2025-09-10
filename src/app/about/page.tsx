@@ -6,9 +6,8 @@ export default function About() {
   return (
     <>
       <Navbar />
-      <section className="relative min-h-screen bg-white py-[40px]   overflow-hidden">
+      <section className="relative min-h-screen bg-white py-[24px] md:py-[40px]   overflow-hidden">
         {/* Main content */}
-
         <div className="relative ">
           {/* Background decorative elements */}
           <div className="absolute top-0 left-0">
@@ -30,7 +29,7 @@ export default function About() {
               className="w-[195px] h-[200px] sm:w-40 sm:h-40"
             />
           </div>
-          <div className=" max-w-7xl mx-auto text-center py-[96px] px-4 sm:px-6 lg:px-8">
+          <div className=" max-w-7xl mx-auto text-center py-6 md:py-[96px] px-4 sm:px-6 lg:px-8">
             {/* About us label */}
             <div className="mb-[12px]">
               <span className="inline-block text-[#31B67D] text-sm 2xl:text-base font-semibold">
@@ -99,11 +98,11 @@ export default function About() {
             <span className="inline-block text-[#31B67D] text-sm  2xl:text-base font-semibold  mb-[12px]">
               Our Impact
             </span>
-            <div className="flex gap-8 items-start">
-              <h2 className="text-2xl   2xl:text-[48px] lg:text-[44px] font-semibold text-[#101828] ">
+            <div className="flex flex-col md:flex-row md:gap-8 gap-6 items-start">
+              <h2 className="text-xl md:text-2xl  2xl:text-[48px] lg:text-[44px] font-semibold text-[#101828] ">
                 Our Impact in people making and their life
               </h2>
-              <p className="text-[#475467]  text-lg 2xl:text-xl max-w-[480px] leading-relaxed">
+              <p className="text-[#475467] text-sm md:text-lg 2xl:text-xl max-w-[480px] leading-relaxed">
                 Since our founding, Evolution Impact Initiative CIC has been
                 dedicated to creating real change in Medway and beyond. We
                 measure success not just in numbers, but in the stories of
@@ -115,7 +114,7 @@ export default function About() {
 
           {/* Impact Stats */}
           <div className="rounded-2xl bg-[#31B67D1A] px-8 py-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[16px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-[16px] gap-6">
               {/* Stat 1 */}
               <div className="text-center">
                 <div className="text-3xl md:text-4xl lg:text-5xl 2xl:text-[60px] font-bold text-[#31B67D] mb-3">
@@ -164,16 +163,16 @@ export default function About() {
         </div>
 
         {/* Our Values Section */}
-        <div className="max-w-7xl mx-auto mt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto md:mt-24 mt-6 pb-16 px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
             <span className="inline-block text-[#31B67D] text-sm  2xl:text-base font-semibold  mb-[12px]">
               Our values
             </span>
-            <h2 className="text-2xl mb-5  2xl:text-[48px] lg:text-[44px] font-semibold text-[#101828] ">
+            <h2 className="text-xl md:text-2xl mb-5  2xl:text-[48px] lg:text-[44px] font-semibold text-[#101828] ">
               Our Values
             </h2>
-            <p className="text-[#475467] 2xl:text-xl text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#475467] 2xl:text-xl text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
               We are guided by values that ensure everything we do creates
               genuine and lasting change
             </p>
@@ -376,16 +375,16 @@ export default function About() {
         </div>
 
         {/* Meet Our Team Section */}
-        <div className="max-w-7xl mx-auto mt-20 pb-16  px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mt-6 md:mt-20 pb-16  px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
             <span className="inline-block text-[#31B67D] text-sm  2xl:text-base font-semibold  mb-[12px]">
               Our team
             </span>
-            <h2 className="text-2xl mb-5  2xl:text-[48px] lg:text-[44px] font-semibold text-[#101828] ">
+            <h2 className="text-xl md:text-2xl mb-5  2xl:text-[48px] lg:text-[44px] font-semibold text-[#101828] ">
               Meet our team
             </h2>
-            <p className="text-[#475467] 2xl:text-xl text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#475467] 2xl:text-xl text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
               Our philosophy is simple — hire a team of diverse, passionate
               people and foster a culture that empowers you to do your best
               work.
