@@ -74,7 +74,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const Projects = () => {
   const upcomingProjects = [
     {
-      title: "Sip & Paint for Kids.\n 13th September 2025 \n1:00 PM – 3:00 PM",
+      title: "Sip & Paint for Kids.\n 27th September 2025 \n1:00 PM – 3:00 PM",
       description:
         "A creative weekend experience for children in a safe, welcoming environment.",
       image: "/assets/sip-and-paint.jpg",

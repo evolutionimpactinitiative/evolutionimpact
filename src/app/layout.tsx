@@ -21,7 +21,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Evolution Imapact Initiative",
+  title: "Evolution Impact Initiative",
   description: "Empowering Communities Inspiring Change",
 };
 

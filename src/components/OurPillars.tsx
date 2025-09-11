@@ -167,7 +167,7 @@ const OurPillarsSection: React.FC = () => {
             Our Areas Of Impact
           </h2>
           <p className="text-[#0F0005] text-sm md:text-lg mx-auto max-w-3xl">
-            We deliver community projects and initiatives across five key areas:
+            We deliver community projects and initiatives across six key areas:
           </p>
         </div>
 

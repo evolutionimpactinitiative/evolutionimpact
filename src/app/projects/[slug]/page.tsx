@@ -386,7 +386,7 @@ const projectsData: Record<string, ProjectData> = {
     eventDetails: {
       venue:
         "Gillingham Children & Family Hub, Woodlands Road, Gillingham, Kent, ME7 2BX",
-      date: "Saturday, 13th September",
+      date: "Saturday, 27th September",
       time: "1:00 PM – 3:00 PM",
     },
     sections: [
@@ -421,7 +421,7 @@ const projectsData: Record<string, ProjectData> = {
         {
           icon: "/assets/date-icon-white.svg",
           label: "Date",
-          value: "Saturday, 13th September",
+          value: "Saturday, 27th September",
         },
         {
           icon: "/assets/clock-icon-white.svg",
