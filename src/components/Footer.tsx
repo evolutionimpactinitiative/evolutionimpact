@@ -60,7 +60,7 @@ const Footer = () => {
   const socialLinks = [
     {
       name: "LinkedIn",
-      icon: "/assets/linkedin.svg",
+      icon: "/assets/linkedin-icon.svg",
       href: "https://www.linkedin.com/company/evolution-impact-initiative-cic/",
     },
     {
