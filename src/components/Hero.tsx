@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import DonationForm from "./DonationForm";
 
-interface CampaignStats {
+export interface CampaignStats {
   campaignId: string;
   campaignTitle: string;
   totalRaised: number;

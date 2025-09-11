@@ -109,7 +109,7 @@ const SubscriptionSection: React.FC = () => {
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none"
                   required
                   disabled={isSubmitting}
                 />
@@ -129,7 +129,7 @@ const SubscriptionSection: React.FC = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Enter your email address"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg  placeholder:text-sm placeholder:text-[#1E1E24] outline-none"
                   required
                   disabled={isSubmitting}
                 />
@@ -150,7 +150,7 @@ const SubscriptionSection: React.FC = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="Enter your phone number"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg placeholder:text-sm placeholder:text-[#1E1E24]  outline-none transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg placeholder:text-sm placeholder:text-[#1E1E24]  outline-none"
                   disabled={isSubmitting}
                 />
               </div>

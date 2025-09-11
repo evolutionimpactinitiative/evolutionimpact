@@ -8,7 +8,7 @@ const AboutUsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex md:flex-row flex-col items-center lg:items-start justify-center gap-8 lg:gap-12">
           {/* Left Column - More flexible width, slightly wider than right */}
-          <div className="w-full lg:flex-1 lg:max-w-[60%] space-y-8">
+          <div className="w-full lg:flex-1 lg:max-w-[60%] space-y-8 order-2 md:order-1">
             {/* About Us Header and Text */}
             <div>
               <h3 className="text-green-500 font-medium text-sm mb-4 uppercase tracking-wide">
@@ -41,7 +41,7 @@ const AboutUsSection: React.FC = () => {
           </div>
 
           {/* Right Column - Smaller, more proportional */}
-          <div className="w-full lg:flex-1 lg:max-w-[40%] flex flex-col">
+          <div className="w-full lg:flex-1 lg:max-w-[40%] flex flex-col order-1 md:order-2">
             {/* Mission Statement - Shows first on mobile */}
             <div className="bg-white rounded-lg order-1 lg:order-2 lg:mt-8">
               <p className="text-gray-800 text-lg leading-relaxed">

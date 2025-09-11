@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import PartnerModal from "./PartnerModal";
 import VolunteerModal from "./VolunteerModal";
+import DonationForm from "./DonationForm";
 
 interface GetInvolvedCardProps {
   icon: string;
@@ -91,7 +92,7 @@ const GetInvolvedCard: React.FC<GetInvolvedCardProps> = ({
 const JoinMovementSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
-
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const getInvolvedOptions: GetInvolvedOption[] = [
     {
       icon: "/assets/time.svg",
@@ -168,6 +169,45 @@ const JoinMovementSection: React.FC = () => {
         isOpen={isPartnerModalOpen}
         onClose={() => setIsPartnerModalOpen(false)}
       />
+
+      {/* Donation Modal */}
+      {isDonationModalOpen && (
+        <div className="fixed inset-0 backdrop-blur-sm bg-black/50 bg-opacity-50 z-[1000] flex items-center justify-center p-4">
+          <div className="relative bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsDonationModalOpen(false)}
+              className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors"
+            >
+              <svg
+                className="w-5 h-5 text-gray-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            {/* Modal Content */}
+            <div className="p-4">
+              <DonationForm
+                campaignId="warmth-for-all"
+                campaignTitle="Warmth For All"
+                onSuccess={() => {
+                  // Optional: Add any callback logic here
+                  console.log("Donation successful");
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

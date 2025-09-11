@@ -142,7 +142,7 @@ const ContactSection: React.FC = () => {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder="First name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg   outline-none "
                       required
                       disabled={isSubmitting}
                     />
@@ -161,7 +161,7 @@ const ContactSection: React.FC = () => {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       placeholder="Last name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg   outline-none "
                       required
                       disabled={isSubmitting}
                     />
@@ -183,7 +183,7 @@ const ContactSection: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="you@company.com"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg   outline-none "
                     required
                     disabled={isSubmitting}
                   />
@@ -204,7 +204,7 @@ const ContactSection: React.FC = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+44 7874 059644"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg   outline-none "
                     disabled={isSubmitting}
                   />
                 </div>
@@ -224,7 +224,7 @@ const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Leave us a message..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 resize-vertical"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg   outline-none  resize-vertical"
                     required
                     disabled={isSubmitting}
                   />
