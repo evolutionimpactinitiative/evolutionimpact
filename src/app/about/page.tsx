@@ -601,7 +601,7 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/Luke-Rogers.jpg"
+                  src="/assets/Nevien-Ramba.jpg"
                   alt="Nevien Ramba"
                   width={96}
                   height={96}

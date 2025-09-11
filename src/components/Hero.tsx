@@ -15,12 +15,23 @@ export interface CampaignStats {
 }
 
 const Hero = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [campaignStats, setCampaignStats] = useState<CampaignStats | null>(
     null
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -70,6 +81,24 @@ const Hero = () => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    // Add a small delay to ensure the DOM is ready
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbarHeight = 80; // Height of your fixed navbar
+        const elementPosition = element.offsetTop - navbarHeight;
+
+        window.scrollTo({
+          top: elementPosition,
+          behavior: "smooth",
+        });
+      } else {
+        console.warn(`Element with id "${sectionId}" not found`);
+      }
+    }, 100);
   };
 
   // Function to refresh campaign data (can be called after donation)
@@ -139,10 +168,16 @@ const Hero = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-row gap-3 md:gap-4  lg:justify-start pt-2">
-                <button className="bg-[#17569D] z-10 text-white font-medium px-6 py-2 md:py-[10px] rounded-full hover:bg-[#125082] transition-colors duration-200 text-sm md:text-base">
+                <button
+                  onClick={() => scrollToSection("movement")}
+                  className="bg-[#17569D] cursor-pointer z-10 text-white font-medium px-6 py-2 md:py-[10px] rounded-full hover:bg-[#125082] transition-colors duration-200 text-sm md:text-base"
+                >
                   Get Involved
                 </button>
-                <button className="bg-white text-[#17569D] border-2 border-[#17569D] font-medium px-6 py-2 md:py-[10px] rounded-full hover:bg-[#17569D] hover:text-white transition-colors duration-200 text-sm md:text-base">
+                <button
+                  onClick={() => scrollToSection("movement")}
+                  className="bg-white cursor-pointer text-[#17569D] border-2 border-[#17569D] font-medium px-6 py-2 md:py-[10px] rounded-full hover:bg-[#17569D] hover:text-white transition-colors duration-200 text-sm md:text-base"
+                >
                   Support Us
                 </button>
               </div>

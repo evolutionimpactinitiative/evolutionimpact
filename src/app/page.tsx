@@ -25,7 +25,10 @@ export default function Home() {
       </div>
       <SubscriptionSection />
       <DonationSection />
-      <JoinMovementSection />
+      <div id="movement">
+        <JoinMovementSection />
+      </div>
+
       <div id="contact">
         <ContactSection />
       </div>

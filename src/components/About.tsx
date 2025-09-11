@@ -8,7 +8,7 @@ const AboutUsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex md:flex-row flex-col items-center lg:items-start justify-center gap-8 lg:gap-12">
           {/* Left Column - More flexible width, slightly wider than right */}
-          <div className="w-full lg:flex-1 lg:max-w-[60%] space-y-8 order-2 md:order-1">
+          <div className="w-full lg:flex-1 lg:max-w-[60%] space-y-8">
             {/* About Us Header and Text */}
             <div>
               <h3 className="text-green-500 font-medium text-sm mb-4 uppercase tracking-wide">
@@ -28,7 +28,16 @@ const AboutUsSection: React.FC = () => {
 
             {/* Large Group Photo */}
             <div className="w-full">
-              <div className="relative w-full aspect-[9/7] rounded-lg overflow-hidden bg-gray-200">
+              <div className="relative block md:hidden w-full aspect-square rounded-lg overflow-hidden bg-gray-200">
+                <Image
+                  src="/assets/about-right.jpg"
+                  alt="Team members at Evolution Impact Initiative"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 40vw"
+                />
+              </div>
+              <div className="relative hidden md:block  w-full aspect-[9/7] rounded-lg overflow-hidden bg-gray-200">
                 <Image
                   src="/assets/about-left.jpg"
                   alt="Evolution Impact Initiative team group photo"
@@ -41,7 +50,7 @@ const AboutUsSection: React.FC = () => {
           </div>
 
           {/* Right Column - Smaller, more proportional */}
-          <div className="w-full lg:flex-1 lg:max-w-[40%] flex flex-col order-1 md:order-2">
+          <div className="w-full lg:flex-1 lg:max-w-[40%] flex flex-col">
             {/* Mission Statement - Shows first on mobile */}
             <div className="bg-white rounded-lg order-1 lg:order-2 lg:mt-8">
               <p className="text-gray-800 text-lg leading-relaxed">
@@ -61,7 +70,16 @@ const AboutUsSection: React.FC = () => {
             </div>
 
             <div className="w-full mt-8 lg:mt-0 order-2 lg:order-1">
-              <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-200">
+              <div className="relative w-full md:hidden block aspect-[9/7] rounded-lg overflow-hidden bg-gray-200">
+                <Image
+                  src="/assets/about-left.jpg"
+                  alt="Evolution Impact Initiative team group photo"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 60vw"
+                />
+              </div>
+              <div className="relative w-full hidden md:block aspect-square rounded-lg overflow-hidden bg-gray-200">
                 <Image
                   src="/assets/about-right.jpg"
                   alt="Team members at Evolution Impact Initiative"
