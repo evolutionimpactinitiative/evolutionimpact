@@ -3,6 +3,8 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface DonationDetails {
   amount: number;
@@ -99,103 +101,108 @@ function DonationSuccessContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-        {/* Success Icon */}
-        <div className="bg-[#17569D] px-6 py-8">
-          <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-10 w-10 rounded-full bg-white bg-opacity-20 mb-4">
-              <svg
-                className="h-6 w-6 text-[#17569D]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-bold text-white mb-2">Thank You!</h1>
-            <p className="text-white text-opacity-90">
-              Your donation was successful
-            </p>
-          </div>
-        </div>
-
-        {/* Donation Details */}
-        <div className="px-6 py-6">
-          {donationDetails && (
-            <div className="space-y-4">
-              <div className="text-center mb-6">
-                <div className="text-3xl font-bold text-gray-900">
-                  £{donationDetails.amount.toFixed(2)}
-                </div>
-                <div className="text-sm text-gray-500 mt-1">
-                  One-time Donation
-                </div>
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-white px-4 py-12">
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+          {/* Success Icon */}
+          <div className="bg-[#17569D] px-6 py-8">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-10 w-10 rounded-full bg-white bg-opacity-20 mb-4">
+                <svg
+                  className="h-6 w-6 text-[#17569D]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
               </div>
+              <h1 className="text-2xl font-bold text-white mb-2">Thank You!</h1>
+              <p className="text-white text-opacity-90">
+                Your donation was successful
+              </p>
+            </div>
+          </div>
 
-              <div className="border-t border-gray-200 pt-4 space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Campaign:</span>
-                  <span className="font-medium">
-                    {donationDetails.campaignTitle || "General Fund"}
-                  </span>
+          {/* Donation Details */}
+          <div className="px-6 py-6">
+            {donationDetails && (
+              <div className="space-y-4">
+                <div className="text-center mb-6">
+                  <div className="text-3xl font-bold text-gray-900">
+                    £{donationDetails.amount.toFixed(2)}
+                  </div>
+                  <div className="text-sm text-gray-500 mt-1">
+                    One-time Donation
+                  </div>
                 </div>
 
-                {donationDetails.customerEmail && (
+                <div className="border-t border-gray-200 pt-4 space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Email:</span>
+                    <span className="text-gray-600">Campaign:</span>
                     <span className="font-medium">
-                      {donationDetails.customerEmail}
+                      {donationDetails.campaignTitle || "General Fund"}
                     </span>
                   </div>
-                )}
 
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Date:</span>
-                  <span className="font-medium">
-                    {new Date().toLocaleDateString()}
-                  </span>
+                  {donationDetails.customerEmail && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Email:</span>
+                      <span className="font-medium">
+                        {donationDetails.customerEmail}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Date:</span>
+                    <span className="font-medium">
+                      {new Date().toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+
+                <div className=" border border-gray rounded-lg p-4 mt-4">
+                  <h3 className="font-medium text-green-900 mb-1">
+                    🌟 Your Impact
+                  </h3>
+                  <p className="text-sm ">
+                    Your generous donation of £
+                    {donationDetails.amount.toFixed(2)} will directly support
+                    our sport, education, and community projects. Every pound
+                    makes a difference!
+                  </p>
                 </div>
               </div>
+            )}
 
-              <div className=" border border-gray rounded-lg p-4 mt-4">
-                <h3 className="font-medium text-green-900 mb-1">
-                  🌟 Your Impact
-                </h3>
-                <p className="text-sm ">
-                  Your generous donation of £{donationDetails.amount.toFixed(2)}{" "}
-                  will directly support our sport, education, and community
-                  projects. Every pound makes a difference!
-                </p>
-              </div>
+            {/* Action Buttons */}
+            <div className="mt-6 space-y-3">
+              <Link
+                href="/"
+                className="w-full bg-[#17569D] text-white text-center font-medium py-3 px-4 rounded-full  transition-colors block"
+              >
+                Return Home
+              </Link>
             </div>
-          )}
 
-          {/* Action Buttons */}
-          <div className="mt-6 space-y-3">
-            <Link
-              href="/"
-              className="w-full bg-[#17569D] text-white text-center font-medium py-3 px-4 rounded-full  transition-colors block"
-            >
-              Return Home
-            </Link>
-          </div>
-
-          {/* Receipt Notice */}
-          <div className="mt-6 text-center">
-            <p className="text-xs text-gray-500">
-              📧 A receipt has been sent to your email address
-            </p>
+            {/* Receipt Notice */}
+            <div className="mt-6 text-center">
+              <p className="text-xs text-gray-500">
+                📧 A receipt has been sent to your email address
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

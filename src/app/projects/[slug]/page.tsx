@@ -9,6 +9,108 @@ import React from "react";
 import { useState } from "react";
 import { notFound, useRouter } from "next/navigation";
 
+// Share Modal Component
+const ShareModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  projectTitle: string;
+}> = ({ isOpen, onClose, projectTitle }) => {
+  const [copied, setCopied] = useState(false);
+
+  if (!isOpen) return null;
+
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(currentUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy link:", err);
+      // Fallback for browsers that don't support clipboard API
+      const textArea = document.createElement("textarea");
+      textArea.value = currentUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4">
+      <div className="bg-white rounded-lg w-full max-w-md overflow-hidden shadow-xl">
+        <div className="p-6">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Share Event</h3>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Event Title */}
+          <div className="mb-4">
+            <p className="text-sm text-gray-600 mb-2">Sharing:</p>
+            <p className="font-medium text-gray-900">{projectTitle}</p>
+          </div>
+
+          {/* URL Display and Copy Button */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Event Link
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={currentUrl}
+                readOnly
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-sm text-gray-600 focus:outline-none"
+              />
+              <button
+                onClick={handleCopyLink}
+                className={`px-4 py-2 rounded-md font-medium text-sm transition-colors ${
+                  copied
+                    ? "bg-green-500 text-white"
+                    : "bg-[#17569D] text-white hover:bg-[#125082]"
+                }`}
+              >
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            </div>
+          </div>
+
+          {/* Share Message */}
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Share this link with friends and family to spread the word about
+              this event!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Project data structure
 interface ProjectData {
   slug: string;
@@ -531,6 +633,7 @@ interface ProjectPageProps {
 
 const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const resolvedParams = React.use(params);
 
   const project = projectsData[resolvedParams.slug];
@@ -583,8 +686,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
         console.log("Donate clicked");
         break;
       case "share":
-        // Handle share action
-        console.log("Share clicked");
+        setIsShareModalOpen(true);
         break;
     }
   };
@@ -786,11 +888,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                              clipRule="evenodd"
-                            />
+                            <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
                           </svg>
                         )}
                       </button>
@@ -808,7 +906,16 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
         </div>
       </div>
 
+      {/* Modals */}
       {renderModal()}
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        projectTitle={project.title}
+      />
+
       <Footer />
     </>
   );

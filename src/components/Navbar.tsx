@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import DonationForm from "./DonationForm";
 
 const Navbar: React.FC = () => {
@@ -9,8 +10,14 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  // Check if we're on the home page
+  const isHomePage = pathname === "/";
 
   // Handle scroll effect for sticky navbar
   useEffect(() => {
@@ -40,6 +47,21 @@ const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Enhanced navigation function
+  const navigateToSection = (sectionId: string) => {
+    closeMobileMenu();
+
+    if (isHomePage) {
+      // If on home page, just scroll to section
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
+    } else {
+      // If not on home page, navigate to home with section hash
+      router.push(`/#${sectionId}`);
+    }
+  };
+
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -52,16 +74,30 @@ const Navbar: React.FC = () => {
         behavior: "smooth",
       });
     }
-    closeMobileMenu(); // Close mobile menu after clicking
   };
 
+  // Handle navigation on page load if there's a hash
+  useEffect(() => {
+    if (isHomePage && window.location.hash) {
+      const sectionId = window.location.hash.substring(1);
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 500); // Longer delay to ensure page is fully loaded
+    }
+  }, [isHomePage]);
+
   // Scroll to top for home
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  const navigateToHome = () => {
     closeMobileMenu();
+
+    if (isHomePage) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -76,13 +112,13 @@ const Navbar: React.FC = () => {
       >
         {/* Logo Section */}
         <div className="flex items-center">
-          <button onClick={scrollToTop} className="flex items-center">
+          <button onClick={navigateToHome} className="flex items-center">
             <Image
-              src="/assets/logo.png"
+              src="/assets/evolution.svg"
               alt="Evolution Impact Initiative"
               width={161}
               height={44}
-              className="h-11 w-auto"
+              className="md:h-11 md:[161px] w-[102px] h-[28px] "
             />
           </button>
         </div>
@@ -90,31 +126,31 @@ const Navbar: React.FC = () => {
         {/* Desktop Navigation Menu */}
         <div className="hidden md:flex items-center space-x-8">
           <button
-            onClick={scrollToTop}
+            onClick={navigateToHome}
             className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Home
           </button>
           <button
-            onClick={() => scrollToSection("about")}
+            onClick={() => navigateToSection("about")}
             className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             About Us
           </button>
           <button
-            onClick={() => scrollToSection("pillars")}
+            onClick={() => navigateToSection("pillars")}
             className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Our Pillars
           </button>
           <button
-            onClick={() => scrollToSection("projects")}
+            onClick={() => navigateToSection("projects")}
             className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Projects
           </button>
           <button
-            onClick={() => scrollToSection("contact")}
+            onClick={() => navigateToSection("contact")}
             className="text-white cursor-pointer font-medium hover:text-gray-200 transition-colors duration-200"
           >
             Contact Us
@@ -184,7 +220,7 @@ const Navbar: React.FC = () => {
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-white border-opacity-20">
-            <button onClick={scrollToTop}>
+            <button onClick={navigateToHome}>
               <Image
                 src="/assets/logo.png"
                 alt="Evolution Impact Initiative"
@@ -217,31 +253,31 @@ const Navbar: React.FC = () => {
           <div className="flex-1 px-6 py-8">
             <div className="space-y-6">
               <button
-                onClick={scrollToTop}
+                onClick={navigateToHome}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Home
               </button>
               <button
-                onClick={() => scrollToSection("about")}
+                onClick={() => navigateToSection("about")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 About Us
               </button>
               <button
-                onClick={() => scrollToSection("pillars")}
+                onClick={() => navigateToSection("pillars")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Our Pillars
               </button>
               <button
-                onClick={() => scrollToSection("projects")}
+                onClick={() => navigateToSection("projects")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Projects
               </button>
               <button
-                onClick={() => scrollToSection("contact")}
+                onClick={() => navigateToSection("contact")}
                 className="block text-white text-lg font-medium hover:text-gray-200 transition-colors duration-200 py-2 w-full text-left"
               >
                 Contact Us
