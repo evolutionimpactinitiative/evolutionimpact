@@ -115,15 +115,14 @@ const Footer = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity duration-300"
+              className="hover:opacity-80 transition-opacity duration-300 flex items-center justify-center w-8 h-8 md:w-10 md:h-10"
               aria-label={social.name}
             >
               <Image
                 src={social.icon}
                 alt={`${social.name} icon`}
-                width={32}
-                height={32}
-                className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
+                fill
+                className="object-contain"
               />
             </a>
           ))}
