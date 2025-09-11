@@ -697,7 +697,7 @@ const SipPaintModal: React.FC<{
                     <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
                       Confirm Booking <span className="text-[#31B67D]">*</span>
                     </label>
-                    <div className="flex items-center space-x-2">
+                    <label className="flex items-center space-x-2 cursor-pointer">
                       <div className="relative">
                         <input
                           type="radio"
@@ -707,22 +707,13 @@ const SipPaintModal: React.FC<{
                             formData.confirmBooking ===
                             "Yes, I confirm my child's place."
                           }
-                          onChange={() =>
-                            handleRadioChange(
-                              "confirmBooking",
-                              "Yes, I confirm my child's place."
-                            )
-                          }
+                          onChange={handleInputChange}
                           className="sr-only"
                           required
                           disabled={isSubmitting}
-                          aria-checked={
-                            formData.confirmBooking ===
-                            "Yes, I confirm my child's place."
-                          }
                         />
                         <div
-                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors cursor-pointer ${
                             formData.confirmBooking ===
                             "Yes, I confirm my child's place."
                               ? "border-[#17569D] bg-[#17569D]"
@@ -746,7 +737,7 @@ const SipPaintModal: React.FC<{
                         </div>
                       </div>
                       <span
-                        className={`text-sm transition-colors ${
+                        className={`text-sm transition-colors cursor-pointer ${
                           formData.confirmBooking ===
                           "Yes, I confirm my child's place."
                             ? "text-[#17569D] font-medium"
@@ -755,7 +746,7 @@ const SipPaintModal: React.FC<{
                       >
                         Yes, I confirm my child&apos;s place.
                       </span>
-                    </div>
+                    </label>
                     <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400">
                       <p className="text-sm text-yellow-800">
                         ⚠️ <strong>Note:</strong> Spaces are limited. We will

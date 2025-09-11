@@ -114,11 +114,11 @@ const Navbar: React.FC = () => {
         <div className="flex items-center">
           <button onClick={navigateToHome} className="flex items-center">
             <Image
-              src="/assets/evolution.svg"
+              src="/assets/logo.png"
               alt="Evolution Impact Initiative"
               width={161}
               height={44}
-              className="md:h-11 md:[161px] w-[102px] h-[28px] "
+              className="h-11 w-auto"
             />
           </button>
         </div>
