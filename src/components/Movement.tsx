@@ -93,6 +93,7 @@ const JoinMovementSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+
   const getInvolvedOptions: GetInvolvedOption[] = [
     {
       icon: "/assets/time.svg",
@@ -117,6 +118,20 @@ const JoinMovementSection: React.FC = () => {
       href: "/donate",
     },
   ];
+
+  // Function to get the appropriate onClick handler for each card
+  const getOnClickHandler = (index: number) => {
+    switch (index) {
+      case 0: // Volunteer
+        return () => setIsModalOpen(true);
+      case 1: // Partner
+        return () => setIsPartnerModalOpen(true);
+      case 2: // Donate
+        return () => setIsDonationModalOpen(true);
+      default:
+        return undefined;
+    }
+  };
 
   return (
     <section className="py-6 md:py-16 px-4 max-w-7xl mx-auto">
@@ -145,7 +160,7 @@ const JoinMovementSection: React.FC = () => {
             linkText={option.linkText}
             setIsPartnerModalOpen={setIsPartnerModalOpen}
             href={option.href}
-            onClick={index === 0 ? () => setIsModalOpen(true) : undefined}
+            onClick={getOnClickHandler(index)}
           />
         ))}
       </div>
@@ -165,6 +180,8 @@ const JoinMovementSection: React.FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      {/* Partner Modal */}
       <PartnerModal
         isOpen={isPartnerModalOpen}
         onClose={() => setIsPartnerModalOpen(false)}

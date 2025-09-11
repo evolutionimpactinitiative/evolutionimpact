@@ -455,7 +455,7 @@ export default function About() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-semibold text-[#0F0005]">Frank S</h3>
+              <h3 className="text-lg font-semibold text-[#0F0005]">Frank G</h3>
               <p className="text-[#17569D] text-sm mb-2">
                 Co-founder & Managing Director
               </p>
@@ -557,7 +557,7 @@ export default function About() {
                 />
               </div>
               <h3 className="text-lg font-semibold text-[#0F0005]">
-                Fumni Ayeni{" "}
+                Funmi Ayeni{" "}
               </h3>
               <p className="text-[#17569D] text-sm mb-2">
                 Partnerships & Outreach Lead
@@ -601,7 +601,7 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/Nevien-Ramba.jpg"
+                  src="/assets/Luke-Rogers.jpg"
                   alt="Nevien Ramba"
                   width={96}
                   height={96}
@@ -653,7 +653,7 @@ export default function About() {
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
-                  src="/assets/fumi-a.png"
+                  src="/assets/Nevien-Ramba.jpg"
                   alt="Fumi A"
                   width={96}
                   height={96}

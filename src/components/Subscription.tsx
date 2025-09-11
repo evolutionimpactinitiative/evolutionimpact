@@ -218,10 +218,10 @@ const SubscriptionSection: React.FC = () => {
                   alt="Notification icon"
                   width={40}
                   height={40}
-                  className="w-6 h-6 md:w-10 md:h-10"
+                  className="w-6 h-6 md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-[#0F0005]  text-base">
+              <h3 className="text-[#0F0005]  text-sm">
                 Receive updates on events and programs
               </h3>
             </div>
@@ -234,10 +234,10 @@ const SubscriptionSection: React.FC = () => {
                   alt="Community icon"
                   width={40}
                   height={40}
-                  className="w-6 h-6 md:w-10 md:h-10"
+                  className="w-6 h-6 md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-[#0F0005]  text-base">
+              <h3 className="text-[#0F0005]  text-sm">
                 Hear inspiring stories from our community
               </h3>
             </div>
@@ -248,12 +248,12 @@ const SubscriptionSection: React.FC = () => {
                 <Image
                   src="/assets/support-icon.svg"
                   alt="Support icon"
-                  width={40}
-                  height={40}
-                  className="w-6 h-6 md:w-10 md:h-10"
+                  width={30}
+                  height={30}
+                  className="w-6 h-6 md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-[#0F0005]  text-base">
+              <h3 className="text-[#0F0005]  text-sm">
                 Find out how you can support or get involved
               </h3>
             </div>
