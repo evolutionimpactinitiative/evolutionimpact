@@ -59,19 +59,19 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      name: "Twitter",
-      icon: "/assets/twitter.svg",
-      href: "https://twitter.com/evolutionimpact",
+      name: "LinkedIn",
+      icon: "/assets/linkedin.svg",
+      href: "https://www.linkedin.com/company/evolution-impact-initiative-cic/",
     },
     {
       name: "Instagram",
       icon: "/assets/instagram.svg",
-      href: "https://instagram.com/evolutionimpact",
+      href: "https://www.instagram.com/evolutionimpactinitiative?igsh=cmh5OTVwbHN2cTQ2",
     },
     {
       name: "Facebook",
       icon: "/assets/facebook.svg",
-      href: "https://facebook.com/evolutionimpact",
+      href: "https://www.facebook.com/share/1ZkG6NcKTm/?mibextid=wwXIfr",
     },
   ];
 

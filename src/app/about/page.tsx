@@ -393,7 +393,6 @@ export default function About() {
 
           {/* Team Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Team Member 1 - Macram Ramba */}
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
@@ -414,16 +413,27 @@ export default function About() {
                 Driving strategy, partnerships, and mission alignment
               </p>
               <div className="flex justify-center space-x-3">
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/twitter-icon.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
+                <a
+                  href="mailto:macram@evolutionimpactinitiative.co.uk"
+                  className="text-blue-500 hover:text-blue-600"
+                  aria-label="Email Macram Ramba"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
+                <a
+                  href="https://www.linkedin.com/in/macram-ramba-42a814184?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  className="text-blue-500 hover:text-blue-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Macram Ramba LinkedIn"
+                >
                   <Image
                     src="/assets/linkedin-icon.svg"
                     alt="LinkedIn"
@@ -432,19 +442,9 @@ export default function About() {
                     className="w-5 h-5"
                   />
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/dribble-icon.svg"
-                    alt="dribble"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
-                </a>
               </div>
             </div>
 
-            {/* Team Member 2 - Frank. G */}
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
@@ -464,14 +464,19 @@ export default function About() {
                 creation.
               </p>
               <div className="flex justify-center space-x-3">
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/twitter-icon.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
+                <a
+                  href="mailto:frank@evolutionimpactinitiative.co.uk"
+                  className="text-blue-500 hover:text-blue-600"
+                  aria-label="Email Frank G"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
                 </a>
                 <a href="#" className="text-blue-500 hover:text-blue-600">
                   <Image
@@ -482,19 +487,9 @@ export default function About() {
                     className="w-5 h-5"
                   />
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/dribble-icon.svg"
-                    alt="dribble"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
-                </a>
               </div>
             </div>
 
-            {/* Team Member 3 - Luke Rogers */}
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
@@ -512,19 +507,30 @@ export default function About() {
                 Finance & Funding Lead (Treasurer)
               </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                managing budgets, funding applications, and financial reporting{" "}
+                Managing budgets, funding applications, and financial reporting{" "}
               </p>
               <div className="flex justify-center space-x-3">
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/twitter-icon.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
+                <a
+                  href="mailto:blessing@evolutionimpactinitiative.co.uk"
+                  className="text-blue-500 hover:text-blue-600"
+                  aria-label="Email Blessing Emuchay"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
+                <a
+                  href="https://www.linkedin.com/in/blessing-emuchay8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  className="text-blue-500 hover:text-blue-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Blessing Emuchay LinkedIn"
+                >
                   <Image
                     src="/assets/linkedin-icon.svg"
                     alt="LinkedIn"
@@ -533,24 +539,14 @@ export default function About() {
                     className="w-5 h-5"
                   />
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/dribble-icon.svg"
-                    alt="dribble"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
-                </a>
               </div>
             </div>
 
-            {/* Team Member 4 - Blessing Emuchay */}
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
                   src="/assets/Fumni.A.jpg"
-                  alt="Blessing Emuchay"
+                  alt="Funmi Ayeni"
                   width={96}
                   height={96}
                   className="w-full h-full object-cover"
@@ -563,20 +559,31 @@ export default function About() {
                 Partnerships & Outreach Lead
               </p>
               <p className="text-[#475467] text-sm leading-relaxed mb-4">
-                building collaborations with schools, councils, charities, and
+                Building collaborations with schools, councils, charities, and
                 the wider community.{" "}
               </p>
               <div className="flex justify-center space-x-3">
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/twitter-icon.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
+                <a
+                  href="mailto:funmi@evolutionimpactinitiative.co.uk"
+                  className="text-blue-500 hover:text-blue-600"
+                  aria-label="Email Funmi Ayeni"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
+                <a
+                  href="https://www.linkedin.com/in/funmi-a-7b973a383?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  className="text-blue-500 hover:text-blue-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Funmi Ayeni LinkedIn"
+                >
                   <Image
                     src="/assets/linkedin-icon.svg"
                     alt="LinkedIn"
@@ -585,24 +592,14 @@ export default function About() {
                     className="w-5 h-5"
                   />
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/dribble-icon.svg"
-                    alt="dribble"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
-                </a>
               </div>
             </div>
 
-            {/* Team Member 5 - Nevien Ramba */}
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
                   src="/assets/Luke-Rogers.jpg"
-                  alt="Nevien Ramba"
+                  alt="Luke Rogers"
                   width={96}
                   height={96}
                   className="w-full h-full object-cover"
@@ -619,14 +616,19 @@ export default function About() {
                 community engagement.
               </p>
               <div className="flex justify-center space-x-3">
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/twitter-icon.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
+                <a
+                  href="mailto:luke@evolutionimpactinitiative.co.uk"
+                  className="text-blue-500 hover:text-blue-600"
+                  aria-label="Email Luke Rogers"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
                 </a>
                 <a href="#" className="text-blue-500 hover:text-blue-600">
                   <Image
@@ -637,24 +639,14 @@ export default function About() {
                     className="w-5 h-5"
                   />
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/dribble-icon.svg"
-                    alt="dribble"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
-                </a>
               </div>
             </div>
 
-            {/* Team Member 6 - Fumi A */}
             <div className="text-center bg-[#F9FAFB] pt-6 pb-12 px-6">
               <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden">
                 <Image
                   src="/assets/Nevien-Ramba.jpg"
-                  alt="Fumi A"
+                  alt="Nevien Ramba"
                   width={96}
                   height={96}
                   className="w-full h-full object-cover"
@@ -671,28 +663,30 @@ export default function About() {
                 reporting.{" "}
               </p>
               <div className="flex justify-center space-x-3">
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/twitter-icon.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
+                <a
+                  href="mailto:nevien@evolutionimpactinitiative.co.uk"
+                  className="text-blue-500 hover:text-blue-600"
+                  aria-label="Email Nevien Ramba"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
                 </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
+                <a
+                  href="https://www.linkedin.com/in/nevien-ramba-a4b21397?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  className="text-blue-500 hover:text-blue-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Nevien Ramba LinkedIn"
+                >
                   <Image
                     src="/assets/linkedin-icon.svg"
                     alt="LinkedIn"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                  />
-                </a>
-                <a href="#" className="text-blue-500 hover:text-blue-600">
-                  <Image
-                    src="/assets/dribble-icon.svg"
-                    alt="dribble"
                     width={20}
                     height={20}
                     className="w-5 h-5"
