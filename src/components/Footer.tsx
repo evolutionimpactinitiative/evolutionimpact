@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
+import { FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   const router = useRouter();
@@ -60,7 +61,7 @@ const Footer = () => {
   const socialLinks = [
     {
       name: "LinkedIn",
-      icon: "/assets/linkedin.svg",
+      reactIcon: FaLinkedin,
       href: "https://www.linkedin.com/company/evolution-impact-initiative-cic/",
     },
     {
@@ -106,27 +107,35 @@ const Footer = () => {
             ))}
           </ul>
         </nav>
+        <div className="flex justify-center gap-6 md:mb-12 mb-8">
+          {socialLinks.map((social, index) => {
+            const Icon = social.reactIcon; // check if it's a react-icon
+            return (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity duration-300 flex items-center justify-center w-8 h-8 md:w-10 md:h-10"
+                aria-label={social.name}
+              >
+                {Icon ? (
+                  <Icon className="w-5 h-5 md:w-7 md:h-7" />
+                ) : (
+                  <Image
+                    src={social.icon}
+                    alt={`${social.name} icon`}
+                    width={32}
+                    height={32}
+                    className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]"
+                  />
+                )}
+              </a>
+            );
+          })}
+        </div>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center gap-6 md:mb-12 mb-8">
-          {socialLinks.map((social, index) => (
-            <a
-              key={index}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity duration-300 flex items-center justify-center w-8 h-8 md:w-10 md:h-10"
-              aria-label={social.name}
-            >
-              <Image
-                src={social.icon}
-                alt={`${social.name} icon`}
-                fill
-                className="object-contain"
-              />
-            </a>
-          ))}
-        </div>
 
         {/* Copyright */}
         <div className="text-center">
