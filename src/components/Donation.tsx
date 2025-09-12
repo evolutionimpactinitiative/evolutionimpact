@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import DonationForm from "./DonationForm";
@@ -90,7 +90,7 @@ const DonationSection = () => {
               />
             </div>
 
-            <div className="absolute bottom-28 left-78">
+            <div className="absolute hidden lg:block bottom-28 left-78">
               <Image
                 src="/assets/curly-arrow.png"
                 alt=""
@@ -101,14 +101,26 @@ const DonationSection = () => {
             </div>
           </div>
 
-          <div className="relative z-10 flex flex-col lg:flex-row items-center">
+          <div className="relative z-10 flex-col-reverse flex justify-between lg:flex-row items-center">
+            {/* Mobile Image - Shows at top on mobile, hidden on desktop */}
+            <div className="lg:hidden flex-shrink-0 px-4 pt-6 pb-2">
+              <div className="relative w-full max-w-[320px] sm:max-w-[400px] mx-auto aspect-[457/400] rounded-2xl overflow-hidden">
+                <Image
+                  src="/assets/donate.png"
+                  alt="Mother holding child - community impact"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
             {/* Left Content */}
-            <div className="flex-1 p-8 lg:p-12 lg:pr-6">
-              <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-6 leading-tight">
+            <div className="flex-1 p-6 sm:p-8 lg:p-12 lg:pr-6 lg:max-w-[597px]">
+              <h2 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 leading-tight">
                 Every Contribution Counts
               </h2>
 
-              <p className="text-white text-base md:text-lg leading-relaxed mb-8 opacity-95">
+              <p className="text-white text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 opacity-95">
                 Your support helps us provide essential resources, run impactful
                 programs, and reach more people in need. Together, we can
                 transform lives and build stronger communities.
@@ -117,7 +129,7 @@ const DonationSection = () => {
               {/* Donation Button */}
               <button
                 onClick={openModal}
-                className="bg-white text-[#31B67D] font-semibold px-7 py-4 rounded-full hover:bg-gray-50 transition-colors duration-300 flex items-center gap-3 group"
+                className="bg-white text-[#31B67D] font-semibold px-6 sm:px-7 py-3 sm:py-4 rounded-full hover:bg-gray-50 transition-colors duration-300 flex items-center gap-3 group text-sm sm:text-base"
               >
                 <span>Make a Donation</span>
                 <Image
@@ -130,9 +142,9 @@ const DonationSection = () => {
               </button>
             </div>
 
-            {/* Right Image */}
-            <div className="flex-shrink-0 p-6 lg:p-8">
-              <div className="relative w-80 lg:w-[553] h-64 lg:h-80 rounded-2xl overflow-hidden">
+            {/* Desktop Image - Shows on right on desktop, hidden on mobile */}
+            <div className=" flex-shrink-0 p-6 lg:p-8">
+              <div className="relative w-[457px] h-[400px] rounded-2xl overflow-hidden">
                 <Image
                   src="/assets/donate.png"
                   alt="Mother holding child - community impact"
