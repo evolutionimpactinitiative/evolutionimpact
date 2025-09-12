@@ -96,7 +96,7 @@ const getUserEmailTemplate = (formData: SipPaintFormData): string => `
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600; width: 40%;">Date:</td>
-                        <td style="padding: 8px 0; color: #334155;">Saturday, 13th September</td>
+                        <td style="padding: 8px 0; color: #334155;">Saturday, 27th September</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Time:</td>
