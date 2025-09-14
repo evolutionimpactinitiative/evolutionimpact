@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StatusModal from "./StatusModal";
 
 // Form data interface
@@ -58,6 +58,17 @@ const SafetyModal: React.FC<{
     "idle" | "success" | "error"
   >("idle");
   const [showStatusModal, setShowStatusModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  // Debug state changes
+  useEffect(() => {
+    console.log("Safety Modal - State change - errorMessage:", errorMessage);
+    console.log(
+      "Safety Modal - State change - showStatusModal:",
+      showStatusModal
+    );
+    console.log("Safety Modal - State change - submitStatus:", submitStatus);
+  }, [errorMessage, showStatusModal, submitStatus]);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -84,12 +95,85 @@ const SafetyModal: React.FC<{
     }));
   };
 
+  const validateForm = (): boolean => {
+    console.log("Safety Modal - validateForm called");
+    try {
+      // Check required fields
+      if (
+        !formData.fullName ||
+        !formData.contactNumber ||
+        !formData.email ||
+        !formData.relationshipToChild ||
+        !formData.childFullName ||
+        !formData.childAge ||
+        !formData.medicalConditions ||
+        !formData.isECAStudent ||
+        !formData.emergencyContactInfo ||
+        !formData.photoVideoConsent
+      ) {
+        setErrorMessage("Please fill out all required fields.");
+        return false;
+      }
+
+      // Check if "Other" is selected for relationship but no specification provided
+      if (
+        formData.relationshipToChild === "Other (please specify)" &&
+        !formData.relationshipOther
+      ) {
+        setErrorMessage("Please specify your relationship to the child.");
+        return false;
+      }
+
+      // Check if "Other" is selected for how they heard but no specification provided
+      if (
+        formData.howDidYouHear === "Other (please specify)" &&
+        !formData.howDidYouHearOther
+      ) {
+        setErrorMessage("Please specify how you heard about this event.");
+        return false;
+      }
+
+      // Check required consent
+      if (!formData.permissionConsent) {
+        setErrorMessage(
+          "Permission consent is required for programme participation."
+        );
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Error in validateForm:", error);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log("Safety Modal - FORM SUBMIT TRIGGERED!");
+    console.log("Safety Modal - Event:", e);
+    console.log("Safety Modal - Form data:", formData);
+
     e.preventDefault();
+    e.stopPropagation();
+
+    console.log("Safety Modal - Form validation starting...");
+    if (!validateForm()) {
+      console.log("Safety Modal - Form validation failed");
+      setSubmitStatus("error");
+      setShowStatusModal(true);
+      return;
+    }
+
+    console.log(
+      "Safety Modal - Form validation passed, proceeding with submission..."
+    );
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setErrorMessage("");
 
     try {
+      console.log("Safety Modal - Submitting to:", "/api/safety-registration");
+
       const response = await fetch("/api/safety-registration", {
         method: "POST",
         headers: {
@@ -98,7 +182,12 @@ const SafetyModal: React.FC<{
         body: JSON.stringify(formData),
       });
 
+      console.log("Safety Modal - Response status:", response.status);
+      console.log("Safety Modal - Response ok:", response.ok);
+
       if (response.ok) {
+        const responseData = await response.json();
+        console.log("Safety Modal - Success response:", responseData);
         setSubmitStatus("success");
         setShowStatusModal(true);
         // Reset form
@@ -121,13 +210,51 @@ const SafetyModal: React.FC<{
           additionalComments: "",
         });
       } else {
-        const errorData = await response.json();
-        console.error("Registration error:", errorData);
+        console.error(
+          "Safety Modal - Response not ok:",
+          response.status,
+          response.statusText
+        );
+
+        let errorData;
+        try {
+          errorData = await response.json();
+          console.error("Safety Modal - Error data:", errorData);
+        } catch (parseError) {
+          console.error(
+            "Safety Modal - Could not parse error response:",
+            parseError
+          );
+          const textResponse = await response.text();
+          console.error("Safety Modal - Raw error response:", textResponse);
+        }
+
+        setErrorMessage(
+          errorData?.message ||
+            `Server error: ${response.status} ${response.statusText}. Please try again.`
+        );
         setSubmitStatus("error");
         setShowStatusModal(true);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Safety Modal - Fetch error:", error);
+
+      const errorMessage =
+        error instanceof Error ? error.message : "An unknown error occurred";
+
+      if (
+        error instanceof TypeError &&
+        (error as TypeError).message.includes("fetch")
+      ) {
+        setErrorMessage(
+          "Network error - please check your connection and try again."
+        );
+      } else {
+        setErrorMessage(
+          `An unexpected error occurred: ${errorMessage}. Please try again later.`
+        );
+      }
+
       setSubmitStatus("error");
       setShowStatusModal(true);
     } finally {
@@ -137,10 +264,17 @@ const SafetyModal: React.FC<{
 
   const handleStatusModalClose = () => {
     setShowStatusModal(false);
+    setErrorMessage("");
     if (submitStatus === "success") {
-      onClose(); // Close main modal on success
+      onClose();
     }
     setSubmitStatus("idle");
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    console.log("Safety Modal - Button clicked!");
+    console.log("Safety Modal - Event:", e);
+    console.log("Safety Modal - Form data at click:", formData);
   };
 
   if (!isOpen) return null;
@@ -166,7 +300,18 @@ const SafetyModal: React.FC<{
           {/* Form - Scrollable Content */}
           <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
             <div className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {errorMessage && (
+                <div className="mb-4 p-3 bg-red-50 border-l-4 border-red-400">
+                  <p className="text-sm text-red-800">{errorMessage}</p>
+                </div>
+              )}
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+                onSubmitCapture={(e) =>
+                  console.log("Safety Modal - Form submit captured:", e)
+                }
+              >
                 {/* Section 1: Parent / Guardian Details */}
                 <div>
                   <h3 className="text-lg 2xl:text-xl font-semibold text-[#000000] mb-4">
@@ -258,13 +403,13 @@ const SafetyModal: React.FC<{
                                 <div
                                   className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
                                     formData.relationshipToChild === option
-                                      ? "border-[#17569D]"
+                                      ? "border-[#17569D] bg-[#17569D]"
                                       : "border-black bg-white"
                                   }`}
                                 >
                                   {formData.relationshipToChild === option && (
                                     <svg
-                                      className="w-3 h-3 text-[#17569D]"
+                                      className="w-3 h-3 text-white"
                                       fill="currentColor"
                                       viewBox="0 0 20 20"
                                     >
@@ -302,6 +447,7 @@ const SafetyModal: React.FC<{
                             placeholder="Please specify relationship"
                             className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                             disabled={isSubmitting}
+                            required
                           />
                         </div>
                       )}
@@ -378,7 +524,7 @@ const SafetyModal: React.FC<{
                         name="medicalConditions"
                         value={formData.medicalConditions}
                         onChange={handleInputChange}
-                        placeholder="Please provide any relevant medical information"
+                        placeholder="Please provide any relevant medical information, or write 'None' if not applicable"
                         rows={4}
                         className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                         required
@@ -421,13 +567,13 @@ const SafetyModal: React.FC<{
                               <div
                                 className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
                                   formData.isECAStudent === option
-                                    ? "border-[#17569D]"
+                                    ? "border-[#17569D] bg-[#17569D]"
                                     : "border-black bg-white"
                                 }`}
                               >
                                 {formData.isECAStudent === option && (
                                   <svg
-                                    className="w-3 h-3 text-[#17569D]"
+                                    className="w-3 h-3 text-white"
                                     fill="currentColor"
                                     viewBox="0 0 20 20"
                                   >
@@ -486,13 +632,13 @@ const SafetyModal: React.FC<{
                               <div
                                 className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
                                   formData.howDidYouHear === option
-                                    ? "border-[#17569D]"
+                                    ? "border-[#17569D] bg-[#17569D]"
                                     : "border-black bg-white"
                                 }`}
                               >
                                 {formData.howDidYouHear === option && (
                                   <svg
-                                    className="w-3 h-3 text-[#17569D]"
+                                    className="w-3 h-3 text-white"
                                     fill="currentColor"
                                     viewBox="0 0 20 20"
                                   >
@@ -528,6 +674,7 @@ const SafetyModal: React.FC<{
                             placeholder="Please specify how you heard about this event"
                             className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                             disabled={isSubmitting}
+                            required
                           />
                         </div>
                       )}
@@ -553,7 +700,7 @@ const SafetyModal: React.FC<{
                         name="emergencyContactInfo"
                         value={formData.emergencyContactInfo}
                         onChange={handleInputChange}
-                        placeholder="Enter emergency contact name and number"
+                        placeholder="Enter emergency contact name and number, or write 'Same as above' if no different contact"
                         style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                         className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                         required
@@ -561,9 +708,9 @@ const SafetyModal: React.FC<{
                       />
                     </div>
 
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-start space-x-3">
                       <div
-                        className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors cursor-pointer ${
+                        className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors cursor-pointer mt-0.5 ${
                           formData.permissionConsent
                             ? "bg-[#17569D] border-[#17569D]"
                             : "border-gray-300 bg-white"
@@ -588,7 +735,7 @@ const SafetyModal: React.FC<{
                         )}
                       </div>
                       <label
-                        className="text-sm 2xl:text-base text-[#000000] cursor-pointer"
+                        className="text-sm 2xl:text-base text-[#000000] cursor-pointer flex-1"
                         onClick={() =>
                           !isSubmitting &&
                           handleCheckboxChange("permissionConsent")
@@ -634,13 +781,13 @@ const SafetyModal: React.FC<{
                                 <div
                                   className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
                                     formData.photoVideoConsent === option
-                                      ? "border-[#17569D]"
+                                      ? "border-[#17569D] bg-[#17569D]"
                                       : "border-black bg-white"
                                   }`}
                                 >
                                   {formData.photoVideoConsent === option && (
                                     <svg
-                                      className="w-3 h-3 text-[#17569D]"
+                                      className="w-3 h-3 text-white"
                                       fill="currentColor"
                                       viewBox="0 0 20 20"
                                     >
@@ -695,6 +842,7 @@ const SafetyModal: React.FC<{
                 {/* Submit Button */}
                 <button
                   type="submit"
+                  onClick={handleButtonClick}
                   disabled={isSubmitting}
                   className="w-full bg-[#17569D] cursor-pointer text-white font-medium py-3 2xl:py-4 px-4 rounded-full hover:bg-[#125082] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
@@ -735,8 +883,9 @@ const SafetyModal: React.FC<{
       {/* Status Modal */}
       <StatusModal
         isOpen={showStatusModal}
-        status={submitStatus === "success" ? "success" : "error"}
         onClose={handleStatusModalClose}
+        status={submitStatus === "success" ? "success" : "error"}
+        message={submitStatus === "error" ? errorMessage : undefined}
       />
     </>
   );

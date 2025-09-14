@@ -54,7 +54,7 @@ interface SafetyDataWithMetadata extends SafetyFormData {
   source: string;
 }
 
-// Email templates
+// Email templates (keeping the same as before)
 const getUserEmailTemplate = (formData: SafetyFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
@@ -423,38 +423,93 @@ const getAdminEmailTemplate = (formData: SafetyFormData): string => `
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("Safety API: POST request received");
     const formData: SafetyFormData = await request.json();
+    console.log("Safety API: Form data received:", formData);
 
-    // Validate required fields
-    const requiredFields: (keyof SafetyFormData)[] = [
-      "fullName",
-      "contactNumber",
-      "email",
-      "relationshipToChild",
-      "childFullName",
-      "childAge",
-      "medicalConditions",
-      "isECAStudent",
-      "emergencyContactInfo",
-      "photoVideoConsent",
+    // Enhanced validation with detailed error messages
+    const requiredFields: { field: keyof SafetyFormData; label: string }[] = [
+      { field: "fullName", label: "Full Name" },
+      { field: "contactNumber", label: "Contact Number" },
+      { field: "email", label: "Email Address" },
+      { field: "relationshipToChild", label: "Relationship to Child" },
+      { field: "childFullName", label: "Child's Full Name" },
+      { field: "childAge", label: "Child's Age" },
+      { field: "medicalConditions", label: "Medical Conditions/Allergies" },
+      { field: "isECAStudent", label: "ECA Student Status" },
+      { field: "emergencyContactInfo", label: "Emergency Contact Information" },
+      { field: "photoVideoConsent", label: "Photo/Video Consent" },
     ];
 
-    for (const field of requiredFields) {
+    for (const { field, label } of requiredFields) {
       if (!formData[field]) {
+        console.log(`Safety API: Missing required field: ${field}`);
         return NextResponse.json(
-          { error: `${field} is required` },
+          {
+            error: `${label} is required`,
+            message: `Please fill in the ${label} field.`,
+          },
           { status: 400 }
         );
       }
     }
 
-    // Validate permission consent (must be true)
-    if (!formData.permissionConsent) {
+    // Validate conditional required fields
+    if (
+      formData.relationshipToChild === "Other (please specify)" &&
+      !formData.relationshipOther
+    ) {
+      console.log("Safety API: Missing relationship specification");
       return NextResponse.json(
-        { error: "Permission consent is required for programme participation" },
+        {
+          error: "Relationship specification required",
+          message: "Please specify your relationship to the child.",
+        },
         { status: 400 }
       );
     }
+
+    if (
+      formData.howDidYouHear === "Other (please specify)" &&
+      !formData.howDidYouHearOther
+    ) {
+      console.log("Safety API: Missing how did you hear specification");
+      return NextResponse.json(
+        {
+          error: "How did you hear specification required",
+          message: "Please specify how you heard about this event.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validate permission consent (must be true)
+    if (!formData.permissionConsent) {
+      console.log("Safety API: Missing required permission consent");
+      return NextResponse.json(
+        {
+          error: "Permission consent is required",
+          message:
+            "Permission consent is required for programme participation. Please check the consent checkbox.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      console.log("Safety API: Invalid email format");
+      return NextResponse.json(
+        {
+          error: "Invalid email format",
+          message: "Please enter a valid email address.",
+        },
+        { status: 400 }
+      );
+    }
+
+    console.log("Safety API: Validation passed, connecting to MongoDB");
 
     // Save to MongoDB
     const client = await connectToMongoDB();
@@ -468,9 +523,12 @@ export async function POST(request: NextRequest) {
       source: "website_form",
     };
 
+    console.log("Safety API: Saving to database");
     const result = await collection.insertOne(registrationData);
+    console.log("Safety API: Database save successful, ID:", result.insertedId);
 
     // Send confirmation email to user
+    console.log("Safety API: Sending user confirmation email");
     await postmarkClient.sendEmail({
       From: process.env.POSTMARK_FROM_EMAIL!,
       To: formData.email,
@@ -535,7 +593,10 @@ This email was sent because you registered for our Child Safety Programme.
       MessageStream: "outbound",
     });
 
+    console.log("Safety API: User email sent successfully");
+
     // Send notification email to admin
+    console.log("Safety API: Sending admin notification email");
     await postmarkClient.sendEmail({
       From: process.env.POSTMARK_FROM_EMAIL!,
       To: "evolutionimpactinitiative@gmail.com",
@@ -603,6 +664,8 @@ Call: ${formData.contactNumber}
       MessageStream: "outbound",
     });
 
+    console.log("Safety API: Admin email sent successfully");
+
     return NextResponse.json(
       {
         message: "Registration submitted successfully",
@@ -611,9 +674,16 @@ Call: ${formData.contactNumber}
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error processing Safety Programme registration:", error);
+    console.error(
+      "Safety API: Error processing Safety Programme registration:",
+      error
+    );
     return NextResponse.json(
-      { error: "Failed to submit registration" },
+      {
+        error: "Failed to submit registration",
+        message: "An unexpected error occurred. Please try again later.",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     );
   }

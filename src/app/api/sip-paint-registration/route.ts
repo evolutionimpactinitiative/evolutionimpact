@@ -19,7 +19,7 @@ async function connectToMongoDB() {
   return client;
 }
 
-// TypeScript interfaces
+// Updated TypeScript interface to match form
 interface SipPaintFormData {
   // Parent/Guardian Details
   fullName: string;
@@ -31,8 +31,8 @@ interface SipPaintFormData {
   childAge: string;
   registeringMoreChildren: string;
   additionalChildrenCount: string;
-  child2Details: string;
-  child3Details: string;
+  child2NameAge: string;
+  child3NameAge: string;
 
   // Event Information
   emergencyContactName: string;
@@ -55,7 +55,7 @@ interface SipPaintDataWithMetadata extends SipPaintFormData {
   source: string;
 }
 
-// Email templates
+// Updated email templates
 const getUserEmailTemplate = (formData: SipPaintFormData): string => `
 <!DOCTYPE html>
 <html lang="en">
@@ -74,14 +74,10 @@ const getUserEmailTemplate = (formData: SipPaintFormData): string => `
         
         <!-- Content -->
         <div style="padding: 40px 30px;">
-            <h2 style="color: #17569D; margin: 0 0 20px 0; font-size: 24px;">Hello ${
-              formData.fullName
-            },</h2>
+            <h2 style="color: #17569D; margin: 0 0 20px 0; font-size: 24px;">Hello ${formData.fullName},</h2>
             
             <p style="color: #334155; line-height: 1.6; margin: 0 0 20px 0; font-size: 16px;">
-                Thank you for registering your child for our Sip & Paint Kids Event! We're excited to have ${
-                  formData.childFullName
-                } join us for a creative and fun experience.
+                Thank you for registering your child for our Sip & Paint Kids Event! We're excited to have ${formData.childFullName} join us for a creative and fun experience.
             </p>
             
             <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
@@ -118,31 +114,21 @@ const getUserEmailTemplate = (formData: SipPaintFormData): string => `
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600; width: 40%;">Child's Name:</td>
-                        <td style="padding: 8px 0; color: #334155;">${
-                          formData.childFullName
-                        }</td>
+                        <td style="padding: 8px 0; color: #334155;">${formData.childFullName}</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Age:</td>
-                        <td style="padding: 8px 0; color: #334155;">${
-                          formData.childAge
-                        }</td>
+                        <td style="padding: 8px 0; color: #334155;">${formData.childAge}</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Parent/Guardian:</td>
-                        <td style="padding: 8px 0; color: #334155;">${
-                          formData.fullName
-                        }</td>
+                        <td style="padding: 8px 0; color: #334155;">${formData.fullName}</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Contact:</td>
-                        <td style="padding: 8px 0; color: #334155;">${
-                          formData.contactNumber
-                        }</td>
+                        <td style="padding: 8px 0; color: #334155;">${formData.contactNumber}</td>
                     </tr>
-                    ${
-                      formData.registeringMoreChildren === "Yes" &&
-                      formData.additionalChildrenCount
+                    ${formData.registeringMoreChildren === "Yes" && formData.additionalChildrenCount
                         ? `
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Additional Children:</td>
@@ -219,28 +205,18 @@ const getAdminEmailTemplate = (formData: SipPaintFormData): string => `
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
                 <tr style="background-color: #f8fafc;">
                     <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb; width: 30%;">Full Name</td>
-                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${
-                      formData.fullName
-                    }</td>
+                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.fullName}</td>
                 </tr>
                 <tr>
                     <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Email</td>
                     <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">
-                        <a href="mailto:${
-                          formData.email
-                        }" style="color: #17569D; text-decoration: none;">${
-  formData.email
-}</a>
+                        <a href="mailto:${formData.email}" style="color: #17569D; text-decoration: none;">${formData.email}</a>
                     </td>
                 </tr>
                 <tr style="background-color: #f8fafc;">
                     <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Phone</td>
                     <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">
-                        <a href="tel:${
-                          formData.contactNumber
-                        }" style="color: #17569D; text-decoration: none;">${
-  formData.contactNumber
-}</a>
+                        <a href="tel:${formData.contactNumber}" style="color: #17569D; text-decoration: none;">${formData.contactNumber}</a>
                     </td>
                 </tr>
             </table>
@@ -250,15 +226,11 @@ const getAdminEmailTemplate = (formData: SipPaintFormData): string => `
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
                 <tr style="background-color: #f8fafc;">
                     <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb; width: 30%;">Child's Name</td>
-                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${
-                      formData.childFullName
-                    }</td>
+                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.childFullName}</td>
                 </tr>
                 <tr>
                     <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Age</td>
-                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${
-                      formData.childAge
-                    }</td>
+                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.childAge}</td>
                 </tr>
                 <tr style="background-color: #f8fafc;">
                     <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Additional Children</td>
@@ -270,22 +242,22 @@ const getAdminEmailTemplate = (formData: SipPaintFormData): string => `
                 </tr>
                 ${
                   formData.registeringMoreChildren === "Yes" &&
-                  formData.child2Details
+                  formData.child2NameAge
                     ? `
                 <tr>
-                    <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Child 2 Details</td>
-                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.child2Details}</td>
+                    <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Child 2 Name & Age</td>
+                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.child2NameAge}</td>
                 </tr>
                 `
                     : ""
                 }
                 ${
                   formData.registeringMoreChildren === "Yes" &&
-                  formData.child3Details
+                  formData.child3NameAge
                     ? `
                 <tr style="background-color: #f8fafc;">
-                    <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Child 3 Details</td>
-                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.child3Details}</td>
+                    <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Child 3 Name & Age</td>
+                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">${formData.child3NameAge}</td>
                 </tr>
                 `
                     : ""
@@ -383,9 +355,7 @@ const getAdminEmailTemplate = (formData: SipPaintFormData): string => `
             </table>
             
             <div style="text-align: center; margin: 40px 0 20px 0;">
-                <a href="mailto:${
-                  formData.email
-                }?subject=Re: Sip & Paint Registration Confirmation" 
+                <a href="mailto:${formData.email}?subject=Re: Sip & Paint Registration Confirmation" 
                    style="background: linear-gradient(135deg, #17569D 0%, #125082 100%); color: #ffffff; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; margin-right: 15px; font-size: 14px;">
                     Confirm Registration
                 </a>
@@ -416,7 +386,9 @@ const getAdminEmailTemplate = (formData: SipPaintFormData): string => `
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("API: POST request received");
     const formData: SipPaintFormData = await request.json();
+    console.log("API: Form data received:", formData);
 
     // Validate required fields
     const requiredFields: (keyof SipPaintFormData)[] = [
@@ -430,6 +402,7 @@ export async function POST(request: NextRequest) {
 
     for (const field of requiredFields) {
       if (!formData[field]) {
+        console.log(`API: Missing required field: ${field}`);
         return NextResponse.json(
           { error: `${field} is required` },
           { status: 400 }
@@ -439,12 +412,15 @@ export async function POST(request: NextRequest) {
 
     // Validate consent fields (must be true)
     if (!formData.eventConsent || !formData.responsibilityConsent) {
+      console.log("API: Missing required consent");
       return NextResponse.json(
         { error: "Event and responsibility consent are required" },
         { status: 400 }
       );
     }
 
+    console.log("API: Validation passed, connecting to MongoDB");
+    
     // Save to MongoDB
     const client = await connectToMongoDB();
     const db = client.db(process.env.MONGODB_DB_NAME || "evolutionimpact");
@@ -457,14 +433,16 @@ export async function POST(request: NextRequest) {
       source: "website_form",
     };
 
+    console.log("API: Saving to database");
     const result = await collection.insertOne(registrationData);
+    console.log("API: Database save successful, ID:", result.insertedId);
 
     // Send confirmation email to user
+    console.log("API: Sending user confirmation email");
     await postmarkClient.sendEmail({
       From: process.env.POSTMARK_FROM_EMAIL!,
       To: formData.email,
-      Subject:
-        "Sip & Paint Registration Received - Evolution Impact Initiative",
+      Subject: "Sip & Paint Registration Received - Evolution Impact Initiative",
       HtmlBody: getUserEmailTemplate(formData),
       TextBody: `
 Hello ${formData.fullName},
@@ -503,7 +481,10 @@ This email was sent because you registered for our Sip & Paint Kids Event.
       MessageStream: "outbound",
     });
 
+    console.log("API: User email sent successfully");
+
     // Send notification email to admin
+    console.log("API: Sending admin notification email");
     await postmarkClient.sendEmail({
       From: process.env.POSTMARK_FROM_EMAIL!,
       To: "evolutionimpactinitiative@gmail.com",
@@ -526,8 +507,8 @@ Child Information:
           : "No"
       }
 
-${formData.child2Details ? `Child 2: ${formData.child2Details}` : ""}
-${formData.child3Details ? `Child 3: ${formData.child3Details}` : ""}
+${formData.child2NameAge ? `Child 2: ${formData.child2NameAge}` : ""}
+${formData.child3NameAge ? `Child 3: ${formData.child3NameAge}` : ""}
 
 Emergency Contact:
 ${formData.emergencyContactName ? `Name: ${formData.emergencyContactName}` : ""}
@@ -564,6 +545,8 @@ Call: ${formData.contactNumber}
       MessageStream: "outbound",
     });
 
+    console.log("API: Admin email sent successfully");
+
     return NextResponse.json(
       {
         message: "Registration submitted successfully",
@@ -572,10 +555,14 @@ Call: ${formData.contactNumber}
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error processing Sip & Paint registration:", error);
+    console.error("API: Error processing Sip & Paint registration:", error);
     return NextResponse.json(
-      { error: "Failed to submit registration" },
+      { 
+        error: "Failed to submit registration",
+        details: error instanceof Error ? error.message : "Unknown error"
+      },
       { status: 500 }
     );
   }
 }
+      

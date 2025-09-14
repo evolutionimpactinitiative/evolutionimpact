@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StatusModal from "./StatusModal";
 
 // Form data interface
@@ -10,8 +10,8 @@ interface SipPaintFormData {
   childAge: string;
   registeringMoreChildren: "Yes" | "No" | "";
   additionalChildrenCount: string;
-  child2Details: string;
-  child3Details: string;
+  child2NameAge: string;
+  child3NameAge: string;
   emergencyContactName: string;
   emergencyContactNumber: string;
   hasAllergiesOrNeeds: "Yes" | "No" | "";
@@ -34,8 +34,8 @@ const SipPaintModal: React.FC<{
     childAge: "",
     registeringMoreChildren: "",
     additionalChildrenCount: "",
-    child2Details: "",
-    child3Details: "",
+    child2NameAge: "",
+    child3NameAge: "",
     emergencyContactName: "",
     emergencyContactNumber: "",
     hasAllergiesOrNeeds: "",
@@ -79,6 +79,7 @@ const SipPaintModal: React.FC<{
   };
 
   const validateForm = (): boolean => {
+    console.log("validateForm called");
     if (
       !formData.fullName ||
       !formData.contactNumber ||
@@ -104,21 +105,45 @@ const SipPaintModal: React.FC<{
       setErrorMessage("Please specify the number of additional children.");
       return false;
     }
+    // Validate additional children fields
+    if (formData.registeringMoreChildren === "Yes") {
+      const count = parseInt(formData.additionalChildrenCount) || 0;
+      if (count >= 1 && !formData.child2NameAge) {
+        setErrorMessage("Please provide details for the second child.");
+        return false;
+      }
+      if (count >= 2 && !formData.child3NameAge) {
+        setErrorMessage("Please provide details for the third child.");
+        return false;
+      }
+    }
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log("FORM SUBMIT TRIGGERED!");
+    console.log("Event:", e);
+    console.log("Form data:", formData);
+
     e.preventDefault();
+    e.stopPropagation();
+
+    console.log("Form validation starting...");
     if (!validateForm()) {
+      console.log("Form validation failed");
       setSubmitStatus("error");
       setShowStatusModal(true);
       return;
     }
 
+    console.log("Form validation passed, proceeding with submission...");
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setErrorMessage("");
 
     try {
+      console.log("Submitting to:", "/api/sip-paint-registration");
+
       const response = await fetch("/api/sip-paint-registration", {
         method: "POST",
         headers: {
@@ -127,7 +152,12 @@ const SipPaintModal: React.FC<{
         body: JSON.stringify(formData),
       });
 
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
+
       if (response.ok) {
+        const responseData = await response.json();
+        console.log("Success response:", responseData);
         setSubmitStatus("success");
         setShowStatusModal(true);
         setFormData({
@@ -138,8 +168,8 @@ const SipPaintModal: React.FC<{
           childAge: "",
           registeringMoreChildren: "",
           additionalChildrenCount: "",
-          child2Details: "",
-          child3Details: "",
+          child2NameAge: "",
+          child3NameAge: "",
           emergencyContactName: "",
           emergencyContactNumber: "",
           hasAllergiesOrNeeds: "",
@@ -150,17 +180,39 @@ const SipPaintModal: React.FC<{
           confirmBooking: "",
         });
       } else {
-        const errorData = await response.json();
-        console.error("Registration error:", errorData);
+        console.error("Response not ok:", response.status, response.statusText);
+
+        let errorData;
+        try {
+          errorData = await response.json();
+          console.error("Error data:", errorData);
+        } catch (parseError) {
+          console.error("Could not parse error response:", parseError);
+          const textResponse = await response.text();
+          console.error("Raw error response:", textResponse);
+        }
+
         setErrorMessage(
-          errorData.message || "Failed to register. Please try again."
+          errorData?.message ||
+            `Server error: ${response.status} ${response.statusText}. Please try again.`
         );
         setSubmitStatus("error");
         setShowStatusModal(true);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      setErrorMessage("An unexpected error occurred. Please try again later.");
+      console.error("Fetch error:", error);
+
+      const errorMsg =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        setErrorMessage(
+          "Network error - please check your connection and try again."
+        );
+      } else {
+        setErrorMessage(`${errorMsg}. Please try again later.`);
+      }
+
       setSubmitStatus("error");
       setShowStatusModal(true);
     } finally {
@@ -177,8 +229,6 @@ const SipPaintModal: React.FC<{
     setSubmitStatus("idle");
   };
 
-  if (!isOpen) return null;
-
   const renderAdditionalChildrenFields = () => {
     if (formData.registeringMoreChildren !== "Yes") return null;
 
@@ -187,28 +237,31 @@ const SipPaintModal: React.FC<{
 
     const fields = [];
     for (let i = 2; i <= Math.min(count + 1, 3); i++) {
+      const fieldName = `child${i}NameAge` as keyof SipPaintFormData;
       fields.push(
         <div key={i}>
           <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
-            Child {i} Name & Age
+            Child {i} Name & Age <span className="text-[#31B67D]">*</span>
           </label>
           <input
             type="text"
-            name={`child${i}Details`}
-            value={
-              formData[`child${i}Details` as keyof SipPaintFormData] as string
-            }
+            name={fieldName}
+            value={formData[fieldName] as string}
             onChange={handleInputChange}
             placeholder={`Enter child ${i}'s name and age`}
             style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
             className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
             disabled={isSubmitting}
+            required
+            aria-required="true"
           />
         </div>
       );
     }
     return fields;
   };
+
+  if (!isOpen) return null;
 
   return (
     <>
@@ -233,7 +286,11 @@ const SipPaintModal: React.FC<{
           <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
             <div className="p-6">
               {errorMessage && (
-                <div className="mb-4 p-3 bg-red-50 border-l-4 border-red-400">
+                <div
+                  id="error-message"
+                  className="mb-4 p-3 bg-red-50 border-l-4 border-red-400"
+                  role="alert"
+                >
                   <p className="text-sm text-red-800">{errorMessage}</p>
                 </div>
               )}
@@ -260,6 +317,9 @@ const SipPaintModal: React.FC<{
                         required
                         disabled={isSubmitting}
                         aria-required="true"
+                        aria-describedby={
+                          errorMessage ? "error-message" : undefined
+                        }
                       />
                     </div>
                     <div>
@@ -277,6 +337,9 @@ const SipPaintModal: React.FC<{
                         required
                         disabled={isSubmitting}
                         aria-required="true"
+                        aria-describedby={
+                          errorMessage ? "error-message" : undefined
+                        }
                       />
                     </div>
                     <div>
@@ -294,6 +357,9 @@ const SipPaintModal: React.FC<{
                         required
                         disabled={isSubmitting}
                         aria-required="true"
+                        aria-describedby={
+                          errorMessage ? "error-message" : undefined
+                        }
                       />
                     </div>
                   </div>
@@ -321,6 +387,9 @@ const SipPaintModal: React.FC<{
                         required
                         disabled={isSubmitting}
                         aria-required="true"
+                        aria-describedby={
+                          errorMessage ? "error-message" : undefined
+                        }
                       />
                     </div>
                     <div>
@@ -339,6 +408,9 @@ const SipPaintModal: React.FC<{
                         required
                         disabled={isSubmitting}
                         aria-required="true"
+                        aria-describedby={
+                          errorMessage ? "error-message" : undefined
+                        }
                       />
                     </div>
                     <div>
@@ -370,6 +442,7 @@ const SipPaintModal: React.FC<{
                                 aria-checked={
                                   formData.registeringMoreChildren === option
                                 }
+                                aria-label={`Registering more children: ${option}`}
                               />
                               <div
                                 className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
@@ -422,6 +495,9 @@ const SipPaintModal: React.FC<{
                               className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none"
                               disabled={isSubmitting}
                               aria-required="true"
+                              aria-describedby={
+                                errorMessage ? "error-message" : undefined
+                              }
                             >
                               <option value="">Select number</option>
                               <option value="1">1 more child</option>
@@ -455,6 +531,9 @@ const SipPaintModal: React.FC<{
                           style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                           className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                           disabled={isSubmitting}
+                          aria-describedby={
+                            errorMessage ? "error-message" : undefined
+                          }
                         />
                       </div>
                       <div>
@@ -470,6 +549,9 @@ const SipPaintModal: React.FC<{
                           style={{ boxShadow: "0px 1px 2px 0px #1018280D" }}
                           className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                           disabled={isSubmitting}
+                          aria-describedby={
+                            errorMessage ? "error-message" : undefined
+                          }
                         />
                       </div>
                     </div>
@@ -503,6 +585,7 @@ const SipPaintModal: React.FC<{
                                 aria-checked={
                                   formData.hasAllergiesOrNeeds === option
                                 }
+                                aria-label={`Allergies or needs: ${option}`}
                               />
                               <div
                                 className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
@@ -547,6 +630,9 @@ const SipPaintModal: React.FC<{
                           rows={4}
                           className="w-full px-3 py-2 border border-[#1E1E2433] rounded-lg focus:outline-none placeholder:text-xs 2xl:text-sm placeholder:text-[#1E1E24]/50"
                           disabled={isSubmitting}
+                          aria-describedby={
+                            errorMessage ? "error-message" : undefined
+                          }
                         />
                       )}
                     </div>
@@ -578,6 +664,7 @@ const SipPaintModal: React.FC<{
                             }
                             role="checkbox"
                             aria-checked={formData.eventConsent}
+                            aria-label="Consent for child to participate in event"
                           >
                             {formData.eventConsent && (
                               <svg
@@ -617,6 +704,7 @@ const SipPaintModal: React.FC<{
                             }
                             role="checkbox"
                             aria-checked={formData.responsibilityConsent}
+                            aria-label="Responsibility for child during event"
                           >
                             {formData.responsibilityConsent && (
                               <svg
@@ -656,6 +744,7 @@ const SipPaintModal: React.FC<{
                             }
                             role="checkbox"
                             aria-checked={formData.mediaConsent}
+                            aria-label="Consent for media use"
                           >
                             {formData.mediaConsent && (
                               <svg
@@ -678,81 +767,80 @@ const SipPaintModal: React.FC<{
                               handleCheckboxChange("mediaConsent")
                             }
                           >
-                            I give permission for photographs/videos of the
-                            event to be taken and possibly used for community
-                            promotion (optional).
+                            I consent to my child being photographed or filmed
+                            for event-related media.
                           </label>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Final Step */}
-                <div>
-                  <h3 className="text-lg 2xl:text-xl font-semibold text-[#000000] mb-4">
-                    Final Step
-                  </h3>
-                  <div>
-                    <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
-                      Confirm Booking <span className="text-[#31B67D]">*</span>
-                    </label>
-                    <label className="flex items-center space-x-2 cursor-pointer">
-                      <div className="relative">
-                        <input
-                          type="radio"
-                          name="confirmBooking"
-                          value="Yes, I confirm my child's place."
-                          checked={
-                            formData.confirmBooking ===
-                            "Yes, I confirm my child's place."
-                          }
-                          onChange={handleInputChange}
-                          className="sr-only"
-                          required
-                          disabled={isSubmitting}
-                        />
-                        <div
-                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors cursor-pointer ${
-                            formData.confirmBooking ===
-                            "Yes, I confirm my child's place."
-                              ? "border-[#17569D] bg-[#17569D]"
-                              : "border-black bg-white"
-                          }`}
-                        >
-                          {formData.confirmBooking ===
-                            "Yes, I confirm my child's place." && (
-                            <svg
-                              className="w-3 h-3 text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
+                    <div>
+                      <h3 className="text-lg 2xl:text-xl font-semibold text-[#000000] mb-4">
+                        Final Step
+                      </h3>
+                      <div>
+                        <label className="block text-sm 2xl:text-base font-medium text-[#0F0005] mb-2">
+                          Confirm Booking{" "}
+                          <span className="text-[#31B67D]">*</span>
+                        </label>
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                          <div className="relative">
+                            <input
+                              type="radio"
+                              name="confirmBooking"
+                              value="Yes, I confirm my child's place."
+                              checked={
+                                formData.confirmBooking ===
+                                "Yes, I confirm my child's place."
+                              }
+                              onChange={handleInputChange}
+                              className="sr-only"
+                              required
+                              disabled={isSubmitting}
+                              aria-label="Confirm booking"
+                            />
+                            <div
+                              className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors cursor-pointer ${
+                                formData.confirmBooking ===
+                                "Yes, I confirm my child's place."
+                                  ? "border-[#17569D] bg-[#17569D]"
+                                  : "border-black bg-white"
+                              }`}
                             >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          )}
+                              {formData.confirmBooking ===
+                                "Yes, I confirm my child's place." && (
+                                <svg
+                                  className="w-3 h-3 text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              )}
+                            </div>
+                          </div>
+                          <span
+                            className={`text-sm transition-colors cursor-pointer ${
+                              formData.confirmBooking ===
+                              "Yes, I confirm my child's place."
+                                ? "text-[#17569D] font-medium"
+                                : "text-gray-700"
+                            }`}
+                          >
+                            Yes, I confirm my child&apos;s place.
+                          </span>
+                        </label>
+                        <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400">
+                          <p className="text-sm text-yellow-800">
+                            ⚠️ <strong>Note:</strong> Spaces are limited. We
+                            will confirm your booking via email/text once your
+                            registration has been processed.
+                          </p>
                         </div>
                       </div>
-                      <span
-                        className={`text-sm transition-colors cursor-pointer ${
-                          formData.confirmBooking ===
-                          "Yes, I confirm my child's place."
-                            ? "text-[#17569D] font-medium"
-                            : "text-gray-700"
-                        }`}
-                      >
-                        Yes, I confirm my child&apos;s place.
-                      </span>
-                    </label>
-                    <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400">
-                      <p className="text-sm text-yellow-800">
-                        ⚠️ <strong>Note:</strong> Spaces are limited. We will
-                        confirm your booking via email/text once your
-                        registration has been processed.
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -800,8 +888,13 @@ const SipPaintModal: React.FC<{
       {/* Status Modal */}
       <StatusModal
         isOpen={showStatusModal}
-        status={submitStatus === "success" ? "success" : "error"}
         onClose={handleStatusModalClose}
+        status={submitStatus}
+        message={
+          submitStatus === "success"
+            ? "Registration successful!"
+            : errorMessage || "An error occurred. Please try again."
+        }
       />
     </>
   );
