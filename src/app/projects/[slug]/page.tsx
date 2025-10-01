@@ -248,7 +248,7 @@ const projectsData: Record<string, ProjectData> = {
           label: "Date",
           value: "Saturday 22nd November 2025",
         },
-       
+
         {
           icon: "/assets/location-icon-white.svg",
           label: "Meeting Point",
@@ -758,11 +758,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
                     📅 Date: {project.eventDetails.date}
                   </p>
                 </div>
-                <div className="flex items-start gap-3">
-                  <p className="2xl:text-2xl text-[#0F0005] font-semibold">
-                    ⏰ Time: {project.eventDetails.time}
-                  </p>
-                </div>
+                {project.eventDetails.time && (
+                  <div className="flex items-start gap-3">
+                    <p className="2xl:text-2xl text-[#0F0005] font-semibold">
+                      ⏰ Time: {project.eventDetails.time}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Dynamic Sections */}
