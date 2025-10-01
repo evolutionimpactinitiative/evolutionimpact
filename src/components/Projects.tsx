@@ -55,7 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsSection: React.FC = () => {
   const projects = [
     {
-      title: "Warmth for all\n 18th October 2025 \n11:00am – 2:00pm",
+      title: "Warmth for all\n 22nd November 2025",
       description:
         "Community outreach providing coats, trainers, and sleeping bags to those in need.",
       image: "/assets/warmth.jpg",

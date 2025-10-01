@@ -48,7 +48,7 @@ const WarmthForAll = () => {
                     directly to those who need them most.
                   </p>
                   <p>
-                    On Saturday 18th October, our volunteers will be going out
+                    On Saturday 22nd November, our volunteers will be going out
                     into Medway to meet homeless individuals where they are – on
                     the streets, in parks, and in other public spaces – to offer
                     practical support and a sense of dignity.
@@ -70,13 +70,7 @@ const WarmthForAll = () => {
 
                 <div className="flex items-start gap-3">
                   <p className="2xl:text-2xl text-[#0F0005] font-semibold">
-                    📅 Date: Saturday 18th October 2025
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <p className="2xl:text-2xl text-[#0F0005] font-semibold">
-                    ⏰ Time: 11:00 AM – 3:00 PM
+                    📅 Date: Saturday 22nd November 2025
                   </p>
                 </div>
               </div>
@@ -219,11 +213,11 @@ const WarmthForAll = () => {
                   Why It Matters
                 </h2>
                 <p className=" 2xl:text-xl">
-                  Homelessness is not just about lacking shelter – it&apos;s about
-                  dignity, safety, and survival. Something as simple as a warm
-                  coat or sleeping bag can make the difference between hardship
-                  and hope. By coming together as a community, we can ensure no
-                  one is forgotten this winter.
+                  Homelessness is not just about lacking shelter – it&apos;s
+                  about dignity, safety, and survival. Something as simple as a
+                  warm coat or sleeping bag can make the difference between
+                  hardship and hope. By coming together as a community, we can
+                  ensure no one is forgotten this winter.
                 </p>
               </div>
             </div>
@@ -266,20 +260,7 @@ const WarmthForAll = () => {
                         className="w-full h-full"
                       />
                     </div>
-                    <span>Date: Saturday 18th October 2025</span>
-                  </div>
-
-                  <div className="flex  items-center gap-3 ">
-                    <div className="w-5 h-5">
-                      <Image
-                        src="/assets/clock-icon-white.svg"
-                        alt="Time"
-                        width={20}
-                        height={20}
-                        className="w-full h-full"
-                      />
-                    </div>
-                    <span>Time: 11:00 AM – 3:00 PM</span>
+                    <span>Date: Saturday 22nd November 2025</span>
                   </div>
 
                   <div className="flex items-start gap-3">

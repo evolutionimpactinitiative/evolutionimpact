@@ -127,7 +127,7 @@ interface ProjectData {
   eventDetails: {
     venue: string;
     date: string;
-    time: string;
+    time?: string;
   };
   sections: Array<{
     title: string;
@@ -166,14 +166,13 @@ const projectsData: Record<string, ProjectData> = {
       title: "About the Event",
       content: [
         "This winter, too many people in our community will be sleeping rough without the basic essentials to stay warm. Warmth for All is our response – a community-led project dedicated to providing coats, trainers, and sleeping bags directly to those who need them most.",
-        "On Saturday 18th October, our volunteers will be going out into Medway to meet homeless individuals where they are – on the streets, in parks, and in other public spaces – to offer practical support and a sense of dignity.",
+        "On Saturday 22nd November, our volunteers will be going out into Medway to meet homeless individuals where they are – on the streets, in parks, and in other public spaces – to offer practical support and a sense of dignity.",
         "Together, we can bring warmth, comfort, and hope to our neighbours in need.",
       ],
     },
     eventDetails: {
       venue: "ECA - 86 King Street, Rochester, Kent, ME1 1YD",
-      date: "Saturday 18th October 2025",
-      time: "11:00 AM – 3:00 PM",
+      date: "Saturday 22nd November 2025",
     },
     sections: [
       {
@@ -247,13 +246,9 @@ const projectsData: Record<string, ProjectData> = {
         {
           icon: "/assets/date-icon-white.svg",
           label: "Date",
-          value: "Saturday 18th October 2025",
+          value: "Saturday 22nd November 2025",
         },
-        {
-          icon: "/assets/clock-icon-white.svg",
-          label: "Time",
-          value: "11:00 AM – 3:00 PM",
-        },
+       
         {
           icon: "/assets/location-icon-white.svg",
           label: "Meeting Point",

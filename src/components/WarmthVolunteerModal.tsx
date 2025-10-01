@@ -350,7 +350,8 @@ const WarmthVolunteerModal: React.FC<{
 
                     <div>
                       <label className="block text-sm 2xl:text-base font-medium text-gray-700 mb-2">
-                        Are you available on Saturday 18th October (11AM – 3PM)?
+                        Are you available on Saturday 22nd November (11AM –
+                        3PM)?
                       </label>
                       <div className="flex space-x-6">
                         {["Yes", "No"].map((option) => (
