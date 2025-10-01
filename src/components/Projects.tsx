@@ -55,21 +55,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsSection: React.FC = () => {
   const projects = [
     {
-      title: "Sip & Paint for Kids.\n 27th September 2025 \n1:00 PM – 3:00 PM",
-      description:
-        "A creative weekend experience for children in a safe, welcoming environment.",
-      image: "/assets/sip-and-paint.jpg",
-      slug: "sip-and-paint",
-    },
-    {
-      title:
-        "Free Child Safety Programme.\n 28th September 2025 \n11:00am – 3:00pm",
-      description:
-        "Essential safety skills training for children aged 5-11 in a fun and supportive environment.",
-      image: "/assets/safety.jpg",
-      slug: "child-safety",
-    },
-    {
       title: "Warmth for all\n 18th October 2025 \n11:00am – 2:00pm",
       description:
         "Community outreach providing coats, trainers, and sleeping bags to those in need.",

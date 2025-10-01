@@ -284,6 +284,8 @@ const projectsData: Record<string, ProjectData> = {
     subtitle:
       "Keeping Your Children Safe – In Partnership with ECA, NEXGEN PROTECTION & Evolution Impact Initiative CIC",
     bannerImage: "/assets/safety-banner.jpg",
+    isPastEvent: true,
+
     about: {
       title: "About the Programme",
       content: [
@@ -377,7 +379,8 @@ const projectsData: Record<string, ProjectData> = {
     title: "Sip & Paint for Kids!",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/sipandpaint.jpg",
-    disabled: true,
+    isPastEvent: true,
+
     about: {
       title: "A Creative Weekend Experience for Children",
       content: [
