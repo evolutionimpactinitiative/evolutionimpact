@@ -173,7 +173,7 @@ const JewelleryMakingModal: React.FC<{
           {/* Header */}
           <div className="flex items-center justify-between p-6 shadow">
             <h2 className="text-xl font-semibold text-[#17569D]">
-              Kids' Jewellery Making – Registration Form
+              Kids&apos; Jewellery Making – Registration Form
             </h2>
             <button
               onClick={onClose}
