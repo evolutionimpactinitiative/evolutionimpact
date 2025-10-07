@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import WarmthVolunteerModal from "@/components/WarmthVolunteerModal";
 import SipPaintModal from "@/components/SipPaintModal";
+import JewelleryMakingModal from "@/components/JewelleryMakingModal";
 import SafetyModal from "@/components/SafetyModal";
 import DonationForm from "@/components/DonationForm";
 import Image from "next/image";
@@ -152,11 +153,106 @@ interface ProjectData {
     }>;
     footerMessage?: string;
   };
-  modalType: "warmth" | "safety" | "sipPaint" | "none";
+  modalType: "warmth" | "safety" | "sipPaint" | "jewellery" | "none";
 }
 
 // Project data
 const projectsData: Record<string, ProjectData> = {
+   "jewellery-making": {
+    slug: "jewellery-making",
+    title: "Kids' Jewellery Making Workshop",
+    subtitle: "Hosted by Evolution Impact Initiative CIC",
+    bannerImage: "/assets/jewellery-making-banner.jpg",
+    about: {
+      title: "A Creative & Confidence-Building Experience for Children",
+      content: [
+        "Looking for a fun, hands-on activity that helps children explore creativity and self-expression? Join us for our Kids' Jewellery Making Workshop — a free, community event where young creators will design and make their own bracelets, necklaces, and keychains to take home! 💎",
+        "This event promotes creativity, focus, and fine motor skills — while encouraging teamwork and confidence. Children will have the freedom to create their own designs, learn basic crafting techniques, and proudly showcase their work at the end of the session.",
+      ],
+    },
+    eventDetails: {
+      venue:
+        "Gillingham Children & Family Hub, Woodlands Road, Gillingham, Kent, ME7 2BX",
+      date: "Saturday, 25th October 2025",
+      // time: "1:00 PM – 3:00 PM",
+    },
+    sections: [
+      {
+        title: "Event Highlights",
+        content: [],
+        list: [
+          { text: "Free entry – supported by Evolution Impact Initiative CIC" },
+          {
+            text: "All materials provided – children take home what they make",
+          },
+          { text: "Boosts creativity, confidence, and social skills" },
+          { text: "Safe, supervised and inclusive environment" },
+          { text: "Great weekend activity for local families" },
+          { text: "Light refreshments available" },
+        ],
+      },
+      {
+        title: "Why It Matters",
+        content: [
+          "Our workshops are designed to inspire creativity while supporting children's wellbeing and emotional growth.",
+          "Jewellery making encourages focus, patience, and self-expression — key skills that improve confidence and mental wellbeing in a fun, engaging way.",
+        ],
+      },
+      {
+        title: "What Your Child Will Create",
+        content: [],
+        list: [
+          { text: "Custom bracelets with colorful beads and charms" },
+          { text: "Personalized necklaces they can design themselves" },
+          { text: "Fun keychains to keep or gift to friends and family" },
+          { text: "All items are theirs to take home and treasure!" },
+        ],
+      },
+    ],
+    sidebar: {
+      title: "Register Your Child",
+      description:
+        "Spaces are limited to ensure every child gets individual attention and a great experience. Register now to secure your child's place!",
+      eventDetails: [
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Kids' Jewellery Making Workshop",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Saturday, 25th October 2025",
+        },
+        // {
+        //   icon: "/assets/clock-icon-white.svg",
+        //   label: "Time",
+        //   value: "1:00 PM – 3:00 PM",
+        // },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Gillingham Children & Family Hub",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Age Group",
+          value: "Children aged 5–12 years",
+        },
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Cost",
+          value: "FREE (Community-supported event)",
+        },
+      ],
+      buttons: [
+        { text: "Register Now", type: "primary", action: "volunteer" },
+        { text: "Share Event", type: "secondary", action: "share" },
+      ],
+      footerMessage: "Creativity • Confidence • Community",
+    },
+    modalType: "jewellery",
+  },
   "warmth-for-all": {
     slug: "warmth-for-all",
     title: "Warmth for All – Community Outreach Event",
@@ -273,6 +369,7 @@ const projectsData: Record<string, ProjectData> = {
     },
     modalType: "warmth",
   },
+ 
   "child-safety": {
     slug: "child-safety",
     title: "FREE Child Safety Programme",
@@ -659,6 +756,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
       case "sipPaint":
         return (
           <SipPaintModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        );
+      case "jewellery":
+        return (
+          <JewelleryMakingModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
           />

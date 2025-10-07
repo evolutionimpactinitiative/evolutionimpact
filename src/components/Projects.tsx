@@ -55,6 +55,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsSection: React.FC = () => {
   const projects = [
     {
+      title: "Kids' Jewellery Making\n 25th October 2025",
+      description:
+        "A creative workshop where children design and make their own bracelets, necklaces, and keychains.",
+      image: "/assets/jewellery-making.jpg",
+      slug: "jewellery-making",
+    },
+    {
       title: "Warmth for all\n 22nd November 2025",
       description:
         "Community outreach providing coats, trainers, and sleeping bags to those in need.",

@@ -451,7 +451,7 @@ Thank you for registering ${formData.childFullName} for our Sip & Paint Kids Eve
 
 Event Details:
 - Date: Saturday, 27th September
-- Time: 1:00 PM – 3:00 PM  
+// - Time: 1:00 PM – 3:00 PM  
 - Venue: Gillingham Children & Family Hub, Woodlands Road, Gillingham, Kent, ME7 2BX
 - Cost: FREE
 
