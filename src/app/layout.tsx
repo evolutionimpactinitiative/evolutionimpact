@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: "Evolution Impact Initiative",
     images: [
       {
-        url: "https://www.evolutionimpactinitiative.co.uk/assets/thumbnail.png",
+        url: "https://www.evolutionimpactinitiative.co.uk/assets/thumbnail.jpeg",
         width: 1200,
         height: 630,
         alt: "Evolution Impact Initiative",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "Evolution Impact Initiative",
     description: "Empowering Communities Inspiring Change",
     images: [
-      "https://www.evolutionimpactinitiative.co.uk/assets/thumbnail.jpg",
+      "https://www.evolutionimpactinitiative.co.uk/assets/thumbnail.jpeg",
     ],
   },
 };
