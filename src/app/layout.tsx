@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.evolutionimpactinitiative.co.uk/assets/thumbnail.jpeg",
-        width: 1200,
+        width: 880,
         height: 630,
         alt: "Evolution Impact Initiative",
       },
