@@ -158,7 +158,7 @@ interface ProjectData {
 
 // Project data
 const projectsData: Record<string, ProjectData> = {
-   "jewellery-making": {
+  "jewellery-making": {
     slug: "jewellery-making",
     title: "Kids' Jewellery Making Workshop",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
@@ -245,10 +245,7 @@ const projectsData: Record<string, ProjectData> = {
           value: "FREE (Community-supported event)",
         },
       ],
-      buttons: [
-        { text: "Register Now", type: "primary", action: "volunteer" },
-        { text: "Share Event", type: "secondary", action: "share" },
-      ],
+      buttons: [{ text: "Sold Out", type: "disabled", action: "soldout" }],
       footerMessage: "Creativity • Confidence • Community",
     },
     modalType: "jewellery",
@@ -369,7 +366,7 @@ const projectsData: Record<string, ProjectData> = {
     },
     modalType: "warmth",
   },
- 
+
   "child-safety": {
     slug: "child-safety",
     title: "FREE Child Safety Programme",
