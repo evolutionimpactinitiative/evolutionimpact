@@ -94,7 +94,7 @@ const Projects = () => {
       title: "Kids' Jewellery Making\n 25th October 2025 ",
       description:
         "A creative workshop where children design and make their own bracelets, necklaces, and keychains.",
-      image: "/assets/bake.jpg",
+      image: "/assets/jewellery-making.jpg",
       slug: "jewellery-making",
       isPastEvent: true,
     },
