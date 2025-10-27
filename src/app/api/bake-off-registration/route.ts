@@ -98,7 +98,7 @@ const getUserEmailTemplate = (formData: BakeOffFormData): string => `
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600; width: 40%;">Date:</td>
-                        <td style="padding: 8px 0; color: #334155;">Friday 13th December 2025</td>
+                        <td style="padding: 8px 0; color: #334155;">Saturday 13th December 2025</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Time:</td>
@@ -521,7 +521,7 @@ Thank you for registering your child${
       } join us for a festive baking adventure.
 
 Event Details:
-- Date: Friday 13th December 2025
+- Date: Saturday 13th December 2025
 - Time: 1:00 PM – 3:00 PM
 - Venue: Gillingham Family Hub, ME7 2BX
 - Age Group: 5-12 years

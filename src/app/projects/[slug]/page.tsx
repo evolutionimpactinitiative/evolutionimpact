@@ -389,7 +389,7 @@ const projectsData: Record<string, ProjectData> = {
     },
     eventDetails: {
       venue: "Gillingham Family Hub, ME7 2BX",
-      date: "Friday 13th December 2025",
+      date: "Saturday 13th December 2025",
       // time: "1:00 PM – 3:00 PM",
     },
     sections: [
@@ -445,7 +445,7 @@ const projectsData: Record<string, ProjectData> = {
         {
           icon: "/assets/date-icon-white.svg",
           label: "Date",
-          value: "Friday 13th December 2025",
+          value: "Saturday 13th December 2025",
         },
         {
           icon: "/assets/clock-icon-white.svg",
