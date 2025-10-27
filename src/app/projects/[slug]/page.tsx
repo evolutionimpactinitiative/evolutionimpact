@@ -468,14 +468,8 @@ const projectsData: Record<string, ProjectData> = {
           value: "FREE (Community-supported event)",
         },
       ],
-      buttons: [
-        { text: "Register", type: "primary", action: "volunteer" },
-        {
-          text: "Donate ",
-          type: "secondary",
-          action: "donate",
-        },
-      ],
+      buttons: [{ text: "Sold Out", type: "disabled", action: "soldout" }],
+
       footerMessage: "Creativity • Teamwork • Holiday Fun",
     },
     modalType: "bakeOff",
