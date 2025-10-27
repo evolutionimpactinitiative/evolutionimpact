@@ -10,6 +10,7 @@ import Image from "next/image";
 import React from "react";
 import { useState } from "react";
 import { notFound, useRouter } from "next/navigation";
+import BakeOffModal from "@/components/BakeOffModal";
 
 // Share Modal Component
 const ShareModal: React.FC<{
@@ -153,7 +154,13 @@ interface ProjectData {
     }>;
     footerMessage?: string;
   };
-  modalType: "warmth" | "safety" | "sipPaint" | "jewellery" | "none";
+  modalType:
+    | "warmth"
+    | "safety"
+    | "sipPaint"
+    | "jewellery"
+    | "bakeOff"
+    | "none";
 }
 
 // Project data
@@ -163,6 +170,7 @@ const projectsData: Record<string, ProjectData> = {
     title: "Kids' Jewellery Making Workshop",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/jewellery-making-banner.jpg",
+    isPastEvent: true,
     about: {
       title: "A Creative & Confidence-Building Experience for Children",
       content: [
@@ -365,6 +373,112 @@ const projectsData: Record<string, ProjectData> = {
       footerMessage: "Join us. Donate. Volunteer. Make a difference",
     },
     modalType: "warmth",
+  },
+  "the-big-bake-off": {
+    slug: "the-big-bake-off",
+    title: "🎄 The Big Bake Off – Christmas Edition",
+    subtitle: "Hosted by Evolution Impact Initiative CIC",
+    bannerImage: "/assets/bake-off-web.jpg",
+    about: {
+      title: "A Festive Baking Challenge for Young Creators!",
+      content: [
+        "Get ready for a festive afternoon full of fun, flour, and friendly competition!",
+        "Join us for The Big Bake Off – Christmas Edition — a joyful, team-based baking challenge where kids will compete to create, decorate, and present their best Christmas cupcakes! 🧁✨",
+        "Working in teams, each child will take on a role, collaborate with others, and showcase their creativity through baking. The event ends with a judging round where cupcakes are scored for taste, design, texture, and teamwork — and the winning team walks away with a special prize!",
+      ],
+    },
+    eventDetails: {
+      venue: "Gillingham Family Hub, ME7 2BX",
+      date: "Friday 13th December 2025",
+      time: "1:00 PM – 3:00 PM",
+    },
+    sections: [
+      {
+        title: "🌟 Event Highlights",
+        content: [],
+        list: [
+          {
+            text: "Free to attend – supported by Evolution Impact Initiative CIC",
+          },
+          { text: "All ingredients and materials provided" },
+          { text: "Children work in teams of 4 with a team leader" },
+          { text: "Judging based on creativity, teamwork, taste, and design" },
+          { text: "Prizes for the winning team – baking kits to take home!" },
+          { text: "Safe, inclusive, and supervised environment" },
+        ],
+      },
+      {
+        title: "🧁 What the Kids Will Do",
+        content: [],
+        list: [
+          { text: "Bake festive cupcakes in small teams" },
+          {
+            text: "Decorate and present their baked goods to a panel of judges",
+          },
+          { text: "Learn basic baking and presentation skills" },
+          { text: "Gain confidence through teamwork and creativity" },
+        ],
+      },
+      {
+        title: "❤️ Why It Matters",
+        content: ["This festive event is more than just baking — it's about:"],
+        list: [
+          { text: "Building teamwork and communication skills" },
+          { text: "Encouraging creativity and confidence" },
+          {
+            text: "Bringing children and families together for a joyful experience",
+          },
+          { text: "Spreading holiday cheer in a meaningful, hands-on way" },
+        ],
+      },
+    ],
+    sidebar: {
+      title: " Register Your Child",
+      description:
+        "Spots are limited to ensure a fun and engaging experience for every child. Register now and let your child shine in the kitchen!",
+      eventDetails: [
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "The Big Bake Off – Christmas Edition",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Friday 13th December 2025",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "1:00 PM – 3:00 PM",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Gillingham Family Hub",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Age Group",
+          value: "Children aged 5–12",
+        },
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Cost",
+          value: "FREE (Community-supported event)",
+        },
+      ],
+      buttons: [
+        { text: "Register", type: "primary", action: "volunteer" },
+        {
+          text: "Donate ",
+          type: "secondary",
+          action: "donate",
+        },
+      ],
+      footerMessage: "Creativity • Teamwork • Holiday Fun",
+    },
+    modalType: "bakeOff",
   },
 
   "child-safety": {
@@ -760,6 +874,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
       case "jewellery":
         return (
           <JewelleryMakingModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        );
+      case "bakeOff":
+        return (
+          <BakeOffModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
           />

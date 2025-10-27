@@ -74,22 +74,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const Projects = () => {
   const upcomingProjects = [
     {
-      title: "Kids' Jewellery Making\n 25th October 2025 ",
-      description:
-        "A creative workshop where children design and make their own bracelets, necklaces, and keychains.",
-      image: "/assets/jewellery-making.jpg",
-      slug: "jewellery-making",
-    },
-    {
       title: "Warmth for all\n 18th October 2025 ",
       description:
         "Community outreach providing coats, trainers, and sleeping bags to those in need.",
       image: "/assets/warmth.jpg",
       slug: "warmth-for-all",
     },
+    {
+      title: "The Big Bake Off – Christmas Edition 13th December 2025",
+      description:
+        "Join us for The Big Bake Off – Christmas Edition — a joyful, team-based baking challenge where...",
+      image: "/assets/bake.jpg",
+      slug: "the-big-bake-off",
+    },
   ];
 
   const pastProjects = [
+    {
+      title: "Kids' Jewellery Making\n 25th October 2025 ",
+      description:
+        "A creative workshop where children design and make their own bracelets, necklaces, and keychains.",
+      image: "/assets/bake.jpg",
+      slug: "jewellery-making",
+      isPastEvent: true,
+    },
     {
       title:
         "Free Child Safety Programme.\n 28th September 2025 \n11:00am – 3:00pm",
