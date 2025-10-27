@@ -376,7 +376,7 @@ const projectsData: Record<string, ProjectData> = {
   },
   "the-big-bake-off": {
     slug: "the-big-bake-off",
-    title: "🎄 The Big Bake Off – Christmas Edition",
+    title: "The Big Bake Off – Christmas Edition",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/bake-off-web.jpg",
     about: {
@@ -390,11 +390,11 @@ const projectsData: Record<string, ProjectData> = {
     eventDetails: {
       venue: "Gillingham Family Hub, ME7 2BX",
       date: "Friday 13th December 2025",
-      time: "1:00 PM – 3:00 PM",
+      // time: "1:00 PM – 3:00 PM",
     },
     sections: [
       {
-        title: "🌟 Event Highlights",
+        title: "Event Highlights",
         content: [],
         list: [
           {
@@ -408,7 +408,7 @@ const projectsData: Record<string, ProjectData> = {
         ],
       },
       {
-        title: "🧁 What the Kids Will Do",
+        title: "What the Kids Will Do",
         content: [],
         list: [
           { text: "Bake festive cupcakes in small teams" },
@@ -420,7 +420,7 @@ const projectsData: Record<string, ProjectData> = {
         ],
       },
       {
-        title: "❤️ Why It Matters",
+        title: "Why It Matters",
         content: ["This festive event is more than just baking — it's about:"],
         list: [
           { text: "Building teamwork and communication skills" },
