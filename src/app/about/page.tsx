@@ -1,10 +1,79 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import { Metadata } from "next";
+import Script from "next/script";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about Evolution Impact Initiative CIC - a community-driven organisation in Medway supporting young people, families, and vulnerable groups. Discover our mission, vision, values, impact, and team.",
+  openGraph: {
+    title: "About Evolution Impact Initiative | Our Mission & Team",
+    description:
+      "CIC empowering communities in Medway through sport, education, and social support. Meet our team and discover our impact.",
+    url: "https://www.evolutionimpactinitiative.co.uk/about",
+  },
+  alternates: {
+    canonical: "https://www.evolutionimpactinitiative.co.uk/about",
+  },
+};
 
 export default function About() {
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About Evolution Impact Initiative CIC",
+    description:
+      "Community-driven organisation supporting young people, families, and vulnerable groups through programs that build skills, improve wellbeing, and strengthen community bonds.",
+    url: "https://www.evolutionimpactinitiative.co.uk/about",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Evolution Impact Initiative CIC",
+      mission:
+        "To empower individuals and communities through inclusive programs that foster personal growth, resilience, and opportunities for a better future.",
+      vision:
+        "A society where every young person and family has the support, resources, and confidence to thrive, and where strong, united communities work together to break cycles of disadvantage.",
+    },
+  };
+
+  // Breadcrumb Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.evolutionimpactinitiative.co.uk",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "About Us",
+        item: "https://www.evolutionimpactinitiative.co.uk/about",
+      },
+    ],
+  };
+
   return (
     <>
+      <Script
+        id="about-page-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(aboutPageSchema),
+        }}
+      />
+      <Script
+        id="about-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       <Navbar />
       <section className="relative min-h-screen bg-white py-[24px] md:py-[40px]   overflow-hidden">
         {/* Main content */}
