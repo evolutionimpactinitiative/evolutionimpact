@@ -159,8 +159,9 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Donate Button */}
         <div className="hidden md:flex items-center">
-          <button
-            onClick={openModal}
+          <Link
+            href="/donate"
+            // onClick={openModal}
             className="bg-green-500 cursor-pointer hover:bg-green-600 text-white font-medium px-6 py-2.5 rounded-full flex items-center space-x-2 transition-colors duration-200"
           >
             <span>Donate Us</span>
@@ -171,7 +172,7 @@ const Navbar: React.FC = () => {
               height={16}
               className="w-4 h-4"
             />
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button - Hidden when sidebar is open */}
@@ -287,9 +288,9 @@ const Navbar: React.FC = () => {
 
           {/* Sidebar Footer with Donate Button */}
           <div className="px-4 py-4 border-t border-white border-opacity-20">
-            <button
+            <Link
+              href="/donate"
               onClick={() => {
-                openModal();
                 closeMobileMenu();
               }}
               className="w-full bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-3 rounded-full flex items-center justify-center space-x-2 transition-colors duration-200"
@@ -302,7 +303,7 @@ const Navbar: React.FC = () => {
                 height={16}
                 className="w-4 h-4"
               />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -337,8 +338,8 @@ const Navbar: React.FC = () => {
             {/* Modal Content */}
             <div className="p-4">
               <DonationForm
-                campaignId="warmth-for-all"
-                campaignTitle="Warmth For All"
+                campaignId="christmas-turkey-giveaway"
+                campaignTitle="Christmas Turkey Giveaway"
               />
             </div>
           </div>

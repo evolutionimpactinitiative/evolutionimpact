@@ -15,8 +15,8 @@ interface DonationFormProps {
 }
 
 const DonationForm: React.FC<DonationFormProps> = ({
-  campaignId = "warmth-for-all",
-  campaignTitle = "Warmth For All",
+  campaignId = "christmas-turkey-giveaway",
+  campaignTitle = "Christmas Turkey Giveaway",
   onSuccess,
 }) => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -119,10 +119,14 @@ const DonationForm: React.FC<DonationFormProps> = ({
         {/* Header */}
         <div className="mb-4 text-center">
           <h2 className="text-xl font-bold text-[#0F0005] mb-1">
-            Support {campaignTitle}
+            {campaignTitle === "Christmas Turkey Giveaway"
+              ? "Sponsor a Turkey"
+              : `Support ${campaignTitle}`}
           </h2>
           <p className="text-sm text-[#0F0005]/60">
-            Your donation helps create positive change in our community
+            {campaignTitle === "Christmas Turkey Giveaway"
+              ? "Help provide a Christmas meal for a family in need"
+              : "Your donation helps create positive change in our community"}
           </p>
         </div>
 

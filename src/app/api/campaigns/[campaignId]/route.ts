@@ -42,6 +42,30 @@ interface RequestBody {
   campaignTitle?: string;
 }
 
+// Helper function to get campaign defaults
+function getCampaignDefaults(campaignId: string): {
+  title: string;
+  goal: number;
+} {
+  const campaignDefaults: Record<string, { title: string; goal: number }> = {
+    "warmth-for-all": {
+      title: "Warmth For All",
+      goal: 10000,
+    },
+    "christmas-turkey-giveaway": {
+      title: "Christmas Turkey Giveaway",
+      goal: 750, 
+    },
+  };
+
+  return (
+    campaignDefaults[campaignId] || {
+      title: "General Campaign",
+      goal: 10000,
+    }
+  );
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ campaignId: string }> }
@@ -65,15 +89,14 @@ export async function GET(
 
     // If campaign doesn't exist, create it with default values
     if (!campaign) {
+      const defaults = getCampaignDefaults(campaignId);
+
       const defaultCampaign: CampaignDocument = {
         campaignId,
-        campaignTitle:
-          campaignId === "warmth-for-all"
-            ? "Warmth For All"
-            : "General Campaign",
+        campaignTitle: defaults.title,
         totalRaised: 0,
         totalDonations: 0,
-        goal: 10000, // Set default goal to 10,000
+        goal: defaults.goal,
         lastUpdated: new Date(),
         createdAt: new Date(),
       };

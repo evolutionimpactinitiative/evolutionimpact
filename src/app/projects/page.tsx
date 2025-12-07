@@ -74,22 +74,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const Projects = () => {
   const upcomingProjects = [
     {
-      title: "Warmth for all\n 18th October 2025 ",
-      description:
-        "Community outreach providing coats, trainers, and sleeping bags to those in need.",
-      image: "/assets/warmth.jpg",
-      slug: "warmth-for-all",
-    },
-    {
       title: "The Big Bake Off – Christmas Edition 13th December 2025",
       description:
         "Join us for The Big Bake Off – Christmas Edition — a joyful, team-based baking challenge where...",
       image: "/assets/bake.jpg",
       slug: "the-big-bake-off",
     },
+    {
+      title: "Christmas Turkey Giveaway \n 23th December 2025",
+      description:
+        "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a....",
+      image: "/assets/Free-turkey.jpg",
+      slug: "christmas-turkey-giveaway",
+    },
   ];
 
   const pastProjects = [
+    {
+      title: "Warmth for all\n 18th October 2025 ",
+      description:
+        "Community outreach providing coats, trainers, and sleeping bags to those in need.",
+      image: "/assets/warmth.jpg",
+      slug: "warmth-for-all",
+    },
     {
       title: "Kids' Jewellery Making\n 25th October 2025 ",
       description:

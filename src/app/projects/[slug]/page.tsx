@@ -11,6 +11,7 @@ import React from "react";
 import { useState } from "react";
 import { notFound, useRouter } from "next/navigation";
 import BakeOffModal from "@/components/BakeOffModal";
+import TurkeyGiveawayModal from "@/components/TurkeyGiveawayModal";
 
 // Share Modal Component
 const ShareModal: React.FC<{
@@ -150,7 +151,7 @@ interface ProjectData {
     buttons: Array<{
       text: string;
       type: "primary" | "secondary" | "disabled";
-      action: "volunteer" | "donate" | "share" | "soldout";
+      action: "volunteer" | "donate" | "share" | "soldout" | "donate_page";
     }>;
     footerMessage?: string;
   };
@@ -160,11 +161,111 @@ interface ProjectData {
     | "sipPaint"
     | "jewellery"
     | "bakeOff"
+    | "turkeyGiveaway"
     | "none";
 }
 
 // Project data
 const projectsData: Record<string, ProjectData> = {
+  "christmas-turkey-giveaway": {
+    slug: "christmas-turkey-giveaway",
+    title: "Christmas Turkey Giveaway 2025",
+    subtitle: "Medway Soup Kitchen × Evolution Impact Initiative",
+    bannerImage: "/assets/Free-turkey-Web.jpg",
+    about: {
+      title: "Supporting families in need this Christmas",
+      content: [
+        "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a Christmas Turkey Giveaway for families who are experiencing financial hardship this holiday season.",
+        "On Monday 23rd December 2025, we will distribute fifty turkeys to households across Medway so families can enjoy a festive meal at home without stress or financial pressure.",
+        "Christmas can be overwhelming for those struggling with the cost of living. A turkey may seem small, but it can make a big difference.",
+      ],
+    },
+    eventDetails: {
+      venue: "Medway (Collection point to be confirmed)",
+      date: "Monday, 23rd December 2025",
+    },
+    sections: [
+      {
+        title: "Who This Is For",
+        content: [
+          "This support is for individuals and families in Medway who may find it difficult to afford Christmas food this year.",
+          "Priority will be given to households with children. There is no requirement to explain your circumstances. If you feel you need support, you are welcome to register.",
+        ],
+      },
+      {
+        title: "What You Will Receive",
+        content: [],
+        list: [
+          { text: "One turkey per household" },
+          { text: "Collection from Medway" },
+          { text: "Delivery available for those unable to collect" },
+          {
+            text: "Details of collection point will be confirmed shortly and communicated by email or text",
+          },
+        ],
+      },
+      {
+        title: "How You Can Help",
+        content: [
+          "We are inviting individuals, families and businesses to sponsor a turkey for a local household this Christmas.",
+        ],
+        list: [
+          { text: "A donation of £10 supports one family" },
+          {
+            text: "Every contribution directly funds a turkey for someone in need",
+          },
+          {
+            text: "If each of us can find five people to donate a turkey, we can reach our goal quickly and easily",
+          },
+        ],
+      },
+      {
+        title: "Why This Matters",
+        content: [
+          "A Christmas meal is more than food. It is dignity, family and celebration.",
+          "Together we can relieve stress, reduce food insecurity and create moments of joy for families who are struggling.",
+        ],
+      },
+    ],
+    sidebar: {
+      title: "Register for Support",
+      description:
+        "If you would like to receive support, please fill out the registration form below. Spaces are limited so early registration is advised.",
+      eventDetails: [
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Christmas Turkey Giveaway",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Monday, 23rd December 2025",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Location",
+          value: "Medway (Details to be confirmed)",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Priority",
+          value: "Households with children",
+        },
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Support",
+          value: "One turkey per household",
+        },
+      ],
+      buttons: [
+        { text: "Register ", type: "primary", action: "volunteer" },
+        { text: "Donate Now", type: "secondary", action: "donate_page" },
+      ],
+      footerMessage: "Small Acts • Big Impact",
+    },
+    modalType: "turkeyGiveaway",
+  },
   "jewellery-making": {
     slug: "jewellery-making",
     title: "Kids' Jewellery Making Workshop",
@@ -263,6 +364,7 @@ const projectsData: Record<string, ProjectData> = {
     title: "Warmth for All – Community Outreach Event",
     subtitle: "Warmth for All – Community Outreach Event",
     bannerImage: "/assets/warmth-for-all-banner.jpg",
+    isPastEvent: true,
     about: {
       title: "About the Event",
       content: [
@@ -879,6 +981,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
             onClose={() => setIsModalOpen(false)}
           />
         );
+      case "turkeyGiveaway":
+        return (
+          <TurkeyGiveawayModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        );
       default:
         return null;
     }
@@ -891,6 +1000,9 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
         break;
       case "donate":
         setIsDonationModalOpen(true);
+        break;
+      case "donate_page":
+        router.push("/donate");
         break;
       case "share":
         setIsShareModalOpen(true);
@@ -1161,8 +1273,8 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
             {/* Modal Content */}
             <div className="p-4">
               <DonationForm
-                campaignId="warmth-for-all"
-                campaignTitle="Warmth For All"
+                campaignId="christmas-turkey-giveaway"
+                campaignTitle="Christmas Turkey Giveaway"
                 onSuccess={() => {
                   // Optional: Add any callback logic here
                   console.log("Donation successful");

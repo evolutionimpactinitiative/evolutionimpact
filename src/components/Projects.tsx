@@ -62,11 +62,11 @@ const ProjectsSection: React.FC = () => {
       slug: "the-big-bake-off",
     },
     {
-      title: "Warmth for all\n 22nd November 2025",
+      title: "Christmas Turkey Giveaway \n 23th December 2025",
       description:
-        "Community outreach providing coats, trainers, and sleeping bags to those in need.",
-      image: "/assets/warmth.jpg",
-      slug: "warmth-for-all",
+        "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a....",
+      image: "/assets/Free-turkey.jpg",
+      slug: "christmas-turkey-giveaway",
     },
   ];
 

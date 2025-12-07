@@ -214,8 +214,8 @@ const JoinMovementSection: React.FC = () => {
             {/* Modal Content */}
             <div className="p-4">
               <DonationForm
-                campaignId="warmth-for-all"
-                campaignTitle="Warmth For All"
+                campaignId="christmas-turkey-giveaway"
+                campaignTitle="Christmas Turkey Giveaway"
                 onSuccess={() => {
                   // Optional: Add any callback logic here
                   console.log("Donation successful");

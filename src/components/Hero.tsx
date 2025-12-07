@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import DonationForm from "./DonationForm";
+import { useRouter } from "next/navigation";
 
 export interface CampaignStats {
   campaignId: string;
@@ -16,6 +17,7 @@ export interface CampaignStats {
 
 const Hero = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [campaignStats, setCampaignStats] = useState<CampaignStats | null>(
@@ -41,7 +43,9 @@ const Hero = () => {
     const fetchCampaignStats = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/campaigns/warmth-for-all");
+        const response = await fetch(
+          "/api/campaigns/christmas-turkey-giveaway"
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch campaign stats");
@@ -260,8 +264,8 @@ const Hero = () => {
                   {/* Card Image */}
                   <div className="relative  sm:h-56 md:h-64 lg:h-73 mb-3">
                     <Image
-                      src="/assets/warmth-for-all-card.png"
-                      alt="Warmth for All"
+                      src="/assets/Free-turkey-donate.png"
+                      alt="Free-turkey-donate"
                       width={376}
                       height={278}
                       className="object-cover rounded-xl lg:rounded-3xl w-full h-full"
@@ -285,10 +289,10 @@ const Hero = () => {
                           Or Make One Time Donation
                         </p>
                         <h3 className="text-lg md:text-xl font-bold text-[#0F0005] my-1 md:my-2">
-                          {campaignStats?.campaignTitle || "Warmth For All"}
+                          Christmas Turkey
                         </h3>
                         <p className="text-[10px] md:text-xs text-[#0F0005]/50">
-                          Together, We Can Keep Medway Warm
+                          A Christmas meal is more than food.
                         </p>
                       </div>
                     </div>
@@ -336,7 +340,7 @@ const Hero = () => {
 
                     {/* Donate Button */}
                     <button
-                      onClick={openModal}
+                      onClick={() => router.push("/donate")}
                       className="w-full cursor-pointer bg-[#31B67D] text-white font-bold py-2 md:py-[7.45px] px-4 rounded-full hover:bg-[#2a9f6b] transition-colors duration-200 text-sm md:text-base"
                     >
                       Donate Now
@@ -454,8 +458,8 @@ const Hero = () => {
             {/* Modal Content */}
             <div className="p-4">
               <DonationForm
-                campaignId="warmth-for-all"
-                campaignTitle="Warmth For All"
+                campaignId="christmas-turkey-giveaway"
+                campaignTitle="Christmas Turkey Giveaway"
                 onSuccess={refreshCampaignData}
               />
             </div>
