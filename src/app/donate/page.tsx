@@ -50,7 +50,7 @@ const DonatePage = () => {
                 <div className="space-y-4">
                   <div className="flex items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-100">
                     <div className="flex-shrink-0 w-12 h-12 bg-[#31B67D] rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      £10
+                      £15
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">
@@ -64,7 +64,7 @@ const DonatePage = () => {
 
                   <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
                     <div className="flex-shrink-0 w-12 h-12 bg-[#17569D] rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      £20
+                      £30
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">
@@ -78,7 +78,7 @@ const DonatePage = () => {
 
                   <div className="flex items-start gap-4 p-4 bg-purple-50 rounded-lg border border-purple-100">
                     <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      £50
+                      £45
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">
@@ -251,7 +251,7 @@ const DonatePage = () => {
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-[#17569D] mb-2">
-                  £10
+                  £15
                 </div>
                 <div className="text-sm md:text-base text-gray-600">
                   Per Turkey

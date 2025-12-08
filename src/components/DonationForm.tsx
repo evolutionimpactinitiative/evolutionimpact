@@ -26,7 +26,7 @@ const DonationForm: React.FC<DonationFormProps> = ({
   const [error, setError] = useState<string>("");
 
   // Preset amounts for one-time donations
-  const presetAmounts = [10, 25, 50, 100];
+  const presetAmounts = [15, 30, 45];
 
   const handlePresetSelect = (amount: number) => {
     setSelectedAmount(amount);

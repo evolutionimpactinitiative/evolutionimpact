@@ -278,7 +278,7 @@ const Hero = () => {
                       <div className="w-full">
                         <p className="mb-1">
                           <span className="text-sm md:text-sm text-[#31B67D]">
-                            £10
+                            £15
                           </span>
                           /
                           <span className="text-xs md:text-[13px] text-[#0F0005]">

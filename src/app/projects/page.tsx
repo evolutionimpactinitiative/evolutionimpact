@@ -90,13 +90,13 @@ const Projects = () => {
   ];
 
   const pastProjects = [
-    {
-      title: "Warmth for all\n 18th October 2025 ",
-      description:
-        "Community outreach providing coats, trainers, and sleeping bags to those in need.",
-      image: "/assets/warmth.jpg",
-      slug: "warmth-for-all",
-    },
+    // {
+    //   title: "Warmth for all\n 18th October 2025 ",
+    //   description:
+    //     "Community outreach providing coats, trainers, and sleeping bags to those in need.",
+    //   image: "/assets/warmth.jpg",
+    //   slug: "warmth-for-all",
+    // },
     {
       title: "Kids' Jewellery Making\n 25th October 2025 ",
       description:

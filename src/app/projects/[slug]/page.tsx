@@ -210,7 +210,7 @@ const projectsData: Record<string, ProjectData> = {
           "We are inviting individuals, families and businesses to sponsor a turkey for a local household this Christmas.",
         ],
         list: [
-          { text: "A donation of £10 supports one family" },
+          { text: "A donation of £15 supports one family" },
           {
             text: "Every contribution directly funds a turkey for someone in need",
           },
