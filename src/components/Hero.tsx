@@ -282,7 +282,7 @@ const Hero = () => {
                           </span>
                           /
                           <span className="text-xs md:text-[13px] text-[#0F0005]">
-                            Month
+                            Per Turkey
                           </span>
                         </p>
                         <p className="text-[7px] md:text-[7.8px] text-[#0F0005]">
