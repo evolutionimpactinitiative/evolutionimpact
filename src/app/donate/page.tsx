@@ -48,7 +48,10 @@ const DonatePage = () => {
                   How Your Donation Helps
                 </h2>
                 <div className="space-y-4">
-                  <div className="flex items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-100">
+                  <div
+                    onClick={openModal}
+                    className="flex items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-100"
+                  >
                     <div className="flex-shrink-0 w-12 h-12 bg-[#31B67D] rounded-full flex items-center justify-center text-white font-bold text-lg">
                       £15
                     </div>
@@ -62,7 +65,10 @@ const DonatePage = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                  <div
+                    onClick={openModal}
+                    className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100"
+                  >
                     <div className="flex-shrink-0 w-12 h-12 bg-[#17569D] rounded-full flex items-center justify-center text-white font-bold text-lg">
                       £30
                     </div>
@@ -76,7 +82,10 @@ const DonatePage = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 p-4 bg-purple-50 rounded-lg border border-purple-100">
+                  <div
+                    onClick={openModal}
+                    className="flex items-start gap-4 p-4 bg-purple-50 rounded-lg border border-purple-100"
+                  >
                     <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                       £45
                     </div>
