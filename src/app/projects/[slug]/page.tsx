@@ -481,6 +481,8 @@ const projectsData: Record<string, ProjectData> = {
     title: "The Big Bake Off – Christmas Edition",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/bake-off-web.jpg",
+    isPastEvent: true,
+
     about: {
       title: "A Festive Baking Challenge for Young Creators!",
       content: [
