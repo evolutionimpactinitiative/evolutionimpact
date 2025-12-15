@@ -55,13 +55,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsSection: React.FC = () => {
   const projects = [
     {
-      title: "The Big Bake Off – Christmas Edition 13th December 2025",
-      description:
-        "Join us for The Big Bake Off – Christmas Edition — a joyful, team-based baking challenge where...",
-      image: "/assets/bake.jpg",
-      slug: "the-big-bake-off",
-    },
-    {
       title: "Christmas Turkey Giveaway \n 23th December 2025",
       description:
         "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a....",
