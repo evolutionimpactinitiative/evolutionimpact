@@ -72,7 +72,7 @@ const getUserEmailTemplate = (formData: TurkeyGiveawayFormData): string => `
             <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
                 <h3 style="color: #047857; margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">What Happens Next?</h3>
                 <p style="color: #047857; margin: 0; font-size: 14px;">
-                    We will contact you via email or text message with details about collection point or delivery arrangements before Monday 23rd December 2025.
+                    We will contact you via email or text message with details about collection point or delivery arrangements before Tuesday 23rd December 2025.
                 </p>
             </div>
             
@@ -125,7 +125,7 @@ const getUserEmailTemplate = (formData: TurkeyGiveawayFormData): string => `
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600; width: 40%;">Distribution Date:</td>
-                        <td style="padding: 8px 0; color: #334155;">Monday, 23rd December 2025</td>
+                        <td style="padding: 8px 0; color: #334155;">Tuesday, 23rd December 2025</td>
                     </tr>
                     <tr>
                         <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Location:</td>
@@ -389,12 +389,12 @@ Your Registration Details:
       }
 
 Event Details:
-- Distribution Date: Monday, 23rd December 2025
+- Distribution Date: Tuesday, 23rd December 2025
 - Location: Medway (Details to be confirmed)
 - Support: One turkey per household
 
 What Happens Next?
-We will contact you via email or text message with details about collection point or delivery arrangements before Monday 23rd December 2025.
+We will contact you via email or text message with details about collection point or delivery arrangements before Tuesday 23rd December 2025.
 
 If you have any questions or need to update your information, please don't hesitate to contact us.
 

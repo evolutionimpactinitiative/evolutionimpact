@@ -176,13 +176,13 @@ const projectsData: Record<string, ProjectData> = {
       title: "Supporting families in need this Christmas",
       content: [
         "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a Christmas Turkey Giveaway for families who are experiencing financial hardship this holiday season.",
-        "On Monday 23rd December 2025, we will distribute fifty turkeys to households across Medway so families can enjoy a festive meal at home without stress or financial pressure.",
+        "On Tuesday 23rd December 2025, we will distribute fifty turkeys to households across Medway so families can enjoy a festive meal at home without stress or financial pressure.",
         "Christmas can be overwhelming for those struggling with the cost of living. A turkey may seem small, but it can make a big difference.",
       ],
     },
     eventDetails: {
       venue: "Medway (Collection point to be confirmed)",
-      date: "Monday, 23rd December 2025",
+      date: "Tuesday, 23rd December 2025",
     },
     sections: [
       {
@@ -240,7 +240,7 @@ const projectsData: Record<string, ProjectData> = {
         {
           icon: "/assets/date-icon-white.svg",
           label: "Date",
-          value: "Monday, 23rd December 2025",
+          value: "Tuesday, 23rd December 2025",
         },
         {
           icon: "/assets/location-icon-white.svg",
