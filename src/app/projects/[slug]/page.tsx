@@ -198,7 +198,7 @@ const projectsData: Record<string, ProjectData> = {
         list: [
           { text: "One turkey per household" },
           { text: "Collection from Medway" },
-          { text: "Delivery available for those unable to collect" },
+          // { text: "Delivery available for those unable to collect" },
           {
             text: "Details of collection point will be confirmed shortly and communicated by email or text",
           },
