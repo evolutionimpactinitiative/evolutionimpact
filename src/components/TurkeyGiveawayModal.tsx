@@ -10,7 +10,6 @@ interface TurkeyGiveawayFormData {
   postcode: string;
   householdSize: string;
   hasChildren: string;
-  preferredOption: string;
   accessNeeds: string;
   additionalInfo: string;
 }
@@ -26,7 +25,6 @@ const TurkeyGiveawayModal: React.FC<{
     postcode: "",
     householdSize: "",
     hasChildren: "",
-    preferredOption: "",
     accessNeeds: "",
     additionalInfo: "",
   });
@@ -55,9 +53,7 @@ const TurkeyGiveawayModal: React.FC<{
       !formData.email ||
       !formData.postcode ||
       !formData.householdSize ||
-      !formData.hasChildren ||
-      !formData.preferredOption
-    ) {
+      !formData.hasChildren     ) {
       setErrorMessage("Please fill out all required fields.");
       return false;
     }
@@ -113,7 +109,6 @@ const TurkeyGiveawayModal: React.FC<{
           postcode: "",
           householdSize: "",
           hasChildren: "",
-          preferredOption: "",
           accessNeeds: "",
           additionalInfo: "",
         });
@@ -183,8 +178,7 @@ const TurkeyGiveawayModal: React.FC<{
                   This support is available for individuals and families in
                   Medway who are experiencing financial hardship this Christmas.
                   There is no requirement to explain your situation in detail.
-                  Please complete the form below so we can organise collection
-                  and delivery.
+                 
                 </p>
               </div>
 
@@ -319,7 +313,7 @@ const TurkeyGiveawayModal: React.FC<{
                 </div>
 
                 {/* Collection/Delivery Options */}
-                <div>
+                {/* <div>
                   <h3 className="text-lg 2xl:text-xl font-semibold text-[#000000] mb-4">
                     Collection & Delivery
                   </h3>
@@ -361,7 +355,7 @@ const TurkeyGiveawayModal: React.FC<{
                       </div>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* Additional Information */}
                 <div>
@@ -442,7 +436,7 @@ const TurkeyGiveawayModal: React.FC<{
         status={submitStatus}
         message={
           submitStatus === "success"
-            ? "Thank you for registering. We will contact you soon with details about collection or delivery."
+            ? "Thank you for registering. We will contact you soon with details."
             : errorMessage || "An error occurred. Please try again."
         }
       />

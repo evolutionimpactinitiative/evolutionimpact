@@ -27,7 +27,6 @@ interface TurkeyGiveawayFormData {
   postcode: string;
   householdSize: string;
   hasChildren: string;
-  preferredOption: string;
   accessNeeds: string;
   additionalInfo: string;
 }
@@ -61,18 +60,12 @@ const getUserEmailTemplate = (formData: TurkeyGiveawayFormData): string => `
               formData.fullName
             },</h2>
             
-            <p style="color: #334155; line-height: 1.6; margin: 0 0 20px 0; font-size: 16px;">
-                Thank you for registering for the Christmas Turkey Giveaway. We have received your request and will be in touch soon with details about ${
-                  formData.preferredOption === "collection"
-                    ? "collection"
-                    : "delivery"
-                }.
-            </p>
+            
             
             <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
                 <h3 style="color: #047857; margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">What Happens Next?</h3>
                 <p style="color: #047857; margin: 0; font-size: 14px;">
-                    We will contact you via email or text message with details about collection point or delivery arrangements before Tuesday 23rd December 2025.
+                    We will contact you via email or text message with details before Tuesday 23rd December 2025.
                 </p>
             </div>
             
@@ -109,14 +102,7 @@ const getUserEmailTemplate = (formData: TurkeyGiveawayFormData): string => `
                           formData.hasChildren === "yes" ? "Yes" : "No"
                         }</td>
                     </tr>
-                    <tr>
-                        <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Preferred Option:</td>
-                        <td style="padding: 8px 0; color: #334155;">${
-                          formData.preferredOption === "collection"
-                            ? "Collection"
-                            : "Delivery"
-                        }</td>
-                    </tr>
+                    
                 </table>
             </div>
             
@@ -243,16 +229,7 @@ const getAdminEmailTemplate = (formData: TurkeyGiveawayFormData): string => `
                         </span>
                     </td>
                 </tr>
-                <tr style="background-color: #f8fafc;">
-                    <td style="padding: 12px 15px; color: #374151; font-weight: 600; border: 1px solid #e5e7eb;">Preferred Option</td>
-                    <td style="padding: 12px 15px; color: #111827; border: 1px solid #e5e7eb;">
-                        <strong>${
-                          formData.preferredOption === "collection"
-                            ? "📦 Collection"
-                            : "🚚 Delivery"
-                        }</strong>
-                    </td>
-                </tr>
+
             </table>
             
             ${
@@ -323,7 +300,6 @@ export async function POST(request: NextRequest) {
       "postcode",
       "householdSize",
       "hasChildren",
-      "preferredOption",
     ];
 
     for (const field of requiredFields) {
@@ -374,19 +350,14 @@ export async function POST(request: NextRequest) {
       TextBody: `
 Hello ${formData.fullName},
 
-Thank you for registering for the Christmas Turkey Giveaway. We have received your request and will be in touch soon with details about ${
-        formData.preferredOption === "collection" ? "collection" : "delivery"
-      }.
-
+Thank you for registering for the Christmas Turkey Giveaway. We have received your request and will be in touch soon.
 Your Registration Details:
 - Name: ${formData.fullName}
 - Contact: ${formData.phone}
 - Postcode: ${formData.postcode}
 - Household Size: ${formData.householdSize} people
 - Children: ${formData.hasChildren === "yes" ? "Yes" : "No"}
-- Preferred Option: ${
-        formData.preferredOption === "collection" ? "Collection" : "Delivery"
-      }
+
 
 Event Details:
 - Distribution Date: Tuesday, 23rd December 2025
@@ -394,7 +365,7 @@ Event Details:
 - Support: One turkey per household
 
 What Happens Next?
-We will contact you via email or text message with details about collection point or delivery arrangements before Tuesday 23rd December 2025.
+We will contact you via email or text message with details before Tuesday 23rd December 2025.
 
 If you have any questions or need to update your information, please don't hesitate to contact us.
 
@@ -432,9 +403,6 @@ Recipient Information:
 Household Details:
 - Household Size: ${formData.householdSize} people
 - Children Present: ${formData.hasChildren === "yes" ? "YES (PRIORITY)" : "No"}
-- Preferred Option: ${
-        formData.preferredOption === "collection" ? "COLLECTION" : "DELIVERY"
-      }
 
 ${formData.accessNeeds ? `Access Needs:\n${formData.accessNeeds}\n` : ""}
 ${
