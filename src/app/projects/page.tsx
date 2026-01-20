@@ -6,6 +6,41 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+// Helper function to parse event date strings into Date objects
+const parseEventDate = (dateStr: string): Date | null => {
+  // Remove day of week if present (e.g., "Saturday, " or "Tuesday, ")
+  const cleanedDate = dateStr.replace(/^[A-Za-z]+,?\s*/, "");
+
+  // Parse date strings like "23rd December 2025", "25th October 2025", "27th September"
+  const dateMatch = cleanedDate.match(/(\d{1,2})[a-z]{0,2}\s+([A-Za-z]+)\s*(\d{4})?/i);
+
+  if (!dateMatch) return null;
+
+  const day = parseInt(dateMatch[1], 10);
+  const monthStr = dateMatch[2];
+  const year = dateMatch[3] ? parseInt(dateMatch[3], 10) : new Date().getFullYear();
+
+  const months: Record<string, number> = {
+    january: 0, february: 1, march: 2, april: 3,
+    may: 4, june: 5, july: 6, august: 7,
+    september: 8, october: 9, november: 10, december: 11
+  };
+
+  const month = months[monthStr.toLowerCase()];
+  if (month === undefined) return null;
+
+  return new Date(year, month, day, 23, 59, 59); // End of the event day
+};
+
+// Helper function to check if an event date is in the past
+const isEventPast = (dateStr: string): boolean => {
+  const eventDate = parseEventDate(dateStr);
+  if (!eventDate) return false;
+
+  const today = new Date();
+  return eventDate < today;
+};
+
 interface ProjectCardProps {
   title: string;
   description: string;
@@ -72,31 +107,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 };
 
 const Projects = () => {
-  const upcomingProjects = [
+  // All projects with their event dates for automatic categorization
+  const allProjects = [
     {
-      title: "Christmas Turkey Giveaway \n 23th December 2025",
+      title: "Christmas Turkey Giveaway \n 23rd December 2025",
       description:
         "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a....",
       image: "/assets/Free-turkey.jpg",
       slug: "christmas-turkey-giveaway",
+      eventDate: "23rd December 2025",
     },
-  ];
-
-  const pastProjects = [
-    // {
-    //   title: "Warmth for all\n 18th October 2025 ",
-    //   description:
-    //     "Community outreach providing coats, trainers, and sleeping bags to those in need.",
-    //   image: "/assets/warmth.jpg",
-    //   slug: "warmth-for-all",
-    // },
     {
       title: "The Big Bake Off – Christmas Edition 13th December 2025",
       description:
         "Join us for The Big Bake Off – Christmas Edition — a joyful, team-based baking challenge where...",
       image: "/assets/bake.jpg",
       slug: "the-big-bake-off",
-      isPastEvent: true,
+      eventDate: "13th December 2025",
     },
     {
       title: "Kids' Jewellery Making\n 25th October 2025 ",
@@ -104,7 +131,7 @@ const Projects = () => {
         "A creative workshop where children design and make their own bracelets, necklaces, and keychains.",
       image: "/assets/jewellery-making.jpg",
       slug: "jewellery-making",
-      isPastEvent: true,
+      eventDate: "25th October 2025",
     },
     {
       title:
@@ -113,7 +140,7 @@ const Projects = () => {
         "Essential safety skills training for children aged 5-11 in a fun and supportive environment.",
       image: "/assets/safety.jpg",
       slug: "child-safety",
-      isPastEvent: true,
+      eventDate: "28th September 2025",
     },
     {
       title: "Sip & Paint for Kids.\n 27th September 2025 \n1:00 PM – 3:00 PM",
@@ -121,16 +148,15 @@ const Projects = () => {
         "A creative weekend experience for children in a safe, welcoming environment.",
       image: "/assets/sip-and-paint.jpg",
       slug: "sip-and-paint",
-      isPastEvent: true,
+      eventDate: "27th September 2025",
     },
-
     {
       title: "Back-to-School Giveaway.\n Sat - 30th August 2025 \n 11:00-14:00",
       description:
         "Provided free school uniforms and supplies to children in Medway.",
       image: "/assets/back-to-school.jpg",
       slug: "back-to-school",
-      isPastEvent: true,
+      eventDate: "30th August 2025",
     },
     {
       title:
@@ -139,9 +165,13 @@ const Projects = () => {
         "Gave children a taste of mixed martial arts with Evolution Impact Initiative.",
       image: "/assets/summer-warriors.jpeg",
       slug: "summer-warriors",
-      isPastEvent: true,
+      eventDate: "19th July 2025",
     },
   ];
+
+  // Automatically categorize projects based on event date
+  const upcomingProjects = allProjects.filter(project => !isEventPast(project.eventDate));
+  const pastProjects = allProjects.filter(project => isEventPast(project.eventDate));
 
   return (
     <>
@@ -193,7 +223,7 @@ const Projects = () => {
                   description={project.description}
                   image={project.image}
                   slug={project.slug}
-                  isPastEvent={project.isPastEvent}
+                  isPastEvent={true}
                 />
               ))}
             </div>
