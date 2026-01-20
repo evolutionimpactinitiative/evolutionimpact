@@ -12,6 +12,7 @@ import { useState } from "react";
 import { notFound, useRouter } from "next/navigation";
 import BakeOffModal from "@/components/BakeOffModal";
 import TurkeyGiveawayModal from "@/components/TurkeyGiveawayModal";
+import ValentinesSipPaintModal from "@/components/ValentinesSipPaintModal";
 import { isEventPast } from "@/utils/dateUtils";
 
 // Share Modal Component
@@ -163,11 +164,112 @@ interface ProjectData {
     | "jewellery"
     | "bakeOff"
     | "turkeyGiveaway"
+    | "valentinesSipPaint"
     | "none";
 }
 
 // Project data
 const projectsData: Record<string, ProjectData> = {
+  "valentines-sip-and-paint": {
+    slug: "valentines-sip-and-paint",
+    title: "Valentine's Sip & Paint",
+    subtitle: "Celebrating Children's Mental Health Week",
+    bannerImage: "/assets/valentines-sip-paint-banner.jpg",
+    about: {
+      title: "A Creative Celebration for Children's Mental Health Week",
+      content: [
+        "Join us for a special Valentine's Sip & Paint event celebrating Children's Mental Health Week! This creative, fun-filled session gives children the chance to express themselves through art in a safe and supportive environment.",
+        "Painting and creative activities are proven to support emotional wellbeing, helping children relax, build confidence, and explore their feelings in a positive way.",
+        "Each child will create their own Valentine's-themed artwork to take home, while enjoying refreshments and making new friends.",
+      ],
+    },
+    eventDetails: {
+      venue: "Sunlight Centre, 105 Richmond Road, Gillingham, Kent, ME7 1LX",
+      date: "Saturday, 14th February 2026",
+      time: "12:00 PM – 2:00 PM",
+    },
+    sections: [
+      {
+        title: "Event Highlights",
+        content: [],
+        list: [
+          { text: "Free entry – supported by Evolution Impact Initiative CIC" },
+          { text: "All art materials and supplies provided" },
+          { text: "Valentine's-themed painting activity" },
+          { text: "Children take home their artwork" },
+          { text: "Refreshments included" },
+          { text: "Safe, inclusive, and supervised environment" },
+        ],
+      },
+      {
+        title: "Why Children's Mental Health Week Matters",
+        content: [
+          "Children's Mental Health Week is a national campaign that shines a light on the importance of children and young people's mental health.",
+          "Creative activities like painting help children:",
+        ],
+        list: [
+          { text: "Express emotions they may find hard to put into words" },
+          { text: "Build confidence and self-esteem" },
+          { text: "Reduce stress and anxiety" },
+          { text: "Develop focus and mindfulness" },
+          { text: "Connect with others in a relaxed setting" },
+        ],
+      },
+      {
+        title: "What to Expect",
+        content: [],
+        list: [
+          { text: "Step-by-step guided painting session" },
+          { text: "All materials provided – just bring your child!" },
+          { text: "A welcoming space for children of all abilities" },
+          { text: "A finished painting to take home and treasure" },
+        ],
+      },
+    ],
+    sidebar: {
+      title: "Register Your Child",
+      description:
+        "Spaces are limited to ensure every child gets individual attention and a great experience. Register now to secure your child's place!",
+      eventDetails: [
+        {
+          icon: "/assets/calendar-icon-white.svg",
+          label: "Event",
+          value: "Valentine's Sip & Paint",
+        },
+        {
+          icon: "/assets/date-icon-white.svg",
+          label: "Date",
+          value: "Saturday, 14th February 2026",
+        },
+        {
+          icon: "/assets/clock-icon-white.svg",
+          label: "Time",
+          value: "12:00 PM – 2:00 PM",
+        },
+        {
+          icon: "/assets/location-icon-white.svg",
+          label: "Venue",
+          value: "Sunlight Centre, Gillingham",
+        },
+        {
+          icon: "/assets/phone-icon-white.svg",
+          label: "Age Group",
+          value: "Children aged 4–11 years",
+        },
+        {
+          icon: "/assets/time-icon-white.svg",
+          label: "Cost",
+          value: "FREE (Limited spaces)",
+        },
+      ],
+      buttons: [
+        { text: "Register", type: "primary", action: "volunteer" },
+        { text: "Share Event", type: "secondary", action: "share" },
+      ],
+      footerMessage: "Creativity • Wellbeing • Community",
+    },
+    modalType: "valentinesSipPaint",
+  },
   "christmas-turkey-giveaway": {
     slug: "christmas-turkey-giveaway",
     title: "Christmas Turkey Giveaway 2025",
@@ -983,6 +1085,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
       case "turkeyGiveaway":
         return (
           <TurkeyGiveawayModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        );
+      case "valentinesSipPaint":
+        return (
+          <ValentinesSipPaintModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
           />

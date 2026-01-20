@@ -61,6 +61,14 @@ const ProjectsSection: React.FC = () => {
   // All projects with their event dates for automatic categorization
   const allProjects = [
     {
+      title: "Valentine's Sip & Paint\n 14th February 2026",
+      description:
+        "Celebrating Children's Mental Health Week with a creative painting session for kids aged 4-11.",
+      image: "/assets/valentines-sip-paint-banner.jpg",
+      slug: "valentines-sip-and-paint",
+      eventDate: "14th February 2026",
+    },
+    {
       title: "Christmas Turkey Giveaway \n 23rd December 2025",
       description:
         "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a....",
