@@ -13,6 +13,41 @@ import { notFound, useRouter } from "next/navigation";
 import BakeOffModal from "@/components/BakeOffModal";
 import TurkeyGiveawayModal from "@/components/TurkeyGiveawayModal";
 
+// Helper function to parse event date strings into Date objects
+const parseEventDate = (dateStr: string): Date | null => {
+  // Remove day of week if present (e.g., "Saturday, " or "Tuesday, ")
+  const cleanedDate = dateStr.replace(/^[A-Za-z]+,?\s*/, "");
+
+  // Parse date strings like "23rd December 2025", "25th October 2025", "27th September"
+  const dateMatch = cleanedDate.match(/(\d{1,2})[a-z]{0,2}\s+([A-Za-z]+)\s*(\d{4})?/i);
+
+  if (!dateMatch) return null;
+
+  const day = parseInt(dateMatch[1], 10);
+  const monthStr = dateMatch[2];
+  const year = dateMatch[3] ? parseInt(dateMatch[3], 10) : new Date().getFullYear();
+
+  const months: Record<string, number> = {
+    january: 0, february: 1, march: 2, april: 3,
+    may: 4, june: 5, july: 6, august: 7,
+    september: 8, october: 9, november: 10, december: 11
+  };
+
+  const month = months[monthStr.toLowerCase()];
+  if (month === undefined) return null;
+
+  return new Date(year, month, day, 23, 59, 59); // End of the event day
+};
+
+// Helper function to check if an event date is in the past
+const isEventPast = (dateStr: string): boolean => {
+  const eventDate = parseEventDate(dateStr);
+  if (!eventDate) return false;
+
+  const today = new Date();
+  return eventDate < today;
+};
+
 // Share Modal Component
 const ShareModal: React.FC<{
   isOpen: boolean;
@@ -271,7 +306,6 @@ const projectsData: Record<string, ProjectData> = {
     title: "Kids' Jewellery Making Workshop",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/jewellery-making-banner.jpg",
-    isPastEvent: true,
     about: {
       title: "A Creative & Confidence-Building Experience for Children",
       content: [
@@ -364,7 +398,6 @@ const projectsData: Record<string, ProjectData> = {
     title: "Warmth for All – Community Outreach Event",
     subtitle: "Warmth for All – Community Outreach Event",
     bannerImage: "/assets/warmth-for-all-banner.jpg",
-    isPastEvent: true,
     about: {
       title: "About the Event",
       content: [
@@ -481,8 +514,6 @@ const projectsData: Record<string, ProjectData> = {
     title: "The Big Bake Off – Christmas Edition",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/bake-off-web.jpg",
-    isPastEvent: true,
-
     about: {
       title: "A Festive Baking Challenge for Young Creators!",
       content: [
@@ -585,8 +616,6 @@ const projectsData: Record<string, ProjectData> = {
     subtitle:
       "Keeping Your Children Safe – In Partnership with ECA, NEXGEN PROTECTION & Evolution Impact Initiative CIC",
     bannerImage: "/assets/safety-banner.jpg",
-    isPastEvent: true,
-
     about: {
       title: "About the Programme",
       content: [
@@ -680,8 +709,6 @@ const projectsData: Record<string, ProjectData> = {
     title: "Sip & Paint for Kids!",
     subtitle: "Hosted by Evolution Impact Initiative CIC",
     bannerImage: "/assets/sipandpaint.jpg",
-    isPastEvent: true,
-
     about: {
       title: "A Creative Weekend Experience for Children",
       content: [
@@ -749,7 +776,6 @@ const projectsData: Record<string, ProjectData> = {
     title: "Back to School Giveaway",
     subtitle: "August 2025",
     bannerImage: "/assets/back-to-school-web.jpg",
-    isPastEvent: true,
     about: {
       title: "About the Event",
       content: [
@@ -825,7 +851,6 @@ const projectsData: Record<string, ProjectData> = {
     subtitle:
       "FREE KIDS EVENT – Ages 5–11 | 2 Hours of Fun | Confidence & Energy",
     bannerImage: "/assets/summer-warriors-banner.jpg",
-    isPastEvent: true,
     about: {
       title: "About the Event",
       content: [
@@ -934,7 +959,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const resolvedParams = React.use(params);
 
-  const project = projectsData[resolvedParams.slug];
+  const projectData = projectsData[resolvedParams.slug];
+
+  // Compute isPastEvent dynamically based on the event date
+  const project = projectData ? {
+    ...projectData,
+    isPastEvent: isEventPast(projectData.eventDetails.date)
+  } : null;
 
   const router = useRouter();
 
@@ -942,7 +973,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ params }) => {
     router.back();
   };
 
-  if (!project) {
+  if (!project || !projectData) {
     notFound();
   }
 
