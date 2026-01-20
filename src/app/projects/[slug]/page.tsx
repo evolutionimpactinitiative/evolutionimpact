@@ -174,7 +174,7 @@ const projectsData: Record<string, ProjectData> = {
     slug: "valentines-sip-and-paint",
     title: "Valentine's Sip & Paint",
     subtitle: "Celebrating Children's Mental Health Week",
-    bannerImage: "/assets/valentines-sip-paint-card.jpg",
+    bannerImage: "/assets/valentines-sip-paint-banner.jpg",
     about: {
       title: "A Creative Celebration for Children's Mental Health Week",
       content: [

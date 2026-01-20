@@ -79,7 +79,7 @@ const Projects = () => {
       title: "Valentine's Sip & Paint\n 14th February 2026",
       description:
         "Celebrating Children's Mental Health Week with a creative painting session for kids aged 4-11.",
-      image: "/assets/valentines-sip-paint-banner.jpg",
+      image: "/assets/valentines-sip-paint-card.jpg",
       slug: "valentines-sip-and-paint",
       eventDate: "14th February 2026",
     },
