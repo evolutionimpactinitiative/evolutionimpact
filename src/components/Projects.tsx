@@ -3,12 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { isEventPast } from "@/utils/dateUtils";
 
 interface ProjectCardProps {
   title: string;
   description: string;
   image: string;
   slug: string;
+  isPastEvent?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -16,6 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   image,
   slug,
+  isPastEvent = false,
 }) => {
   return (
     <Link href={`/projects/${slug}`} className="block bg-white cursor-pointer">
@@ -24,8 +27,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <Image src={image} alt={title} fill className="object-cover" />
         {/* Community Badge */}
         <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center space-x-2 shadow-sm">
-          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-          <span className="text-sm font-medium text-[#0F0005]">Community</span>
+          <div className={`w-2 h-2 rounded-full ${isPastEvent ? "bg-gray-400" : "bg-blue-500"}`}></div>
+          <span className="text-sm font-medium text-[#0F0005]">
+            {isPastEvent ? "Past Event" : "Community"}
+          </span>
         </div>
       </div>
 
@@ -38,7 +43,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {description}
         </p>
         <div className="inline-flex gap-[4px] items-center text-green-500 font-medium border-b border-green-500 pb-0.5 hover:text-green-600 hover:border-green-600 transition-colors duration-200">
-          Learn More
+          {isPastEvent ? "View Event" : "Learn More"}
           <Image
             src="/assets/arrow.svg"
             alt="Arrow"
@@ -53,15 +58,41 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 };
 
 const ProjectsSection: React.FC = () => {
-  const projects = [
+  // All projects with their event dates for automatic categorization
+  const allProjects = [
     {
-      title: "Christmas Turkey Giveaway \n 23th December 2025",
+      title: "Christmas Turkey Giveaway \n 23rd December 2025",
       description:
         "Medway Soup Kitchen CIC in partnership with Evolution Impact Initiative CIC is running a....",
       image: "/assets/Free-turkey.jpg",
       slug: "christmas-turkey-giveaway",
+      eventDate: "23rd December 2025",
+    },
+    {
+      title: "The Big Bake Off – Christmas Edition\n 13th December 2025",
+      description:
+        "Join us for The Big Bake Off – Christmas Edition — a joyful, team-based baking challenge where...",
+      image: "/assets/bake.jpg",
+      slug: "the-big-bake-off",
+      eventDate: "13th December 2025",
+    },
+    {
+      title: "Kids' Jewellery Making\n 25th October 2025",
+      description:
+        "A creative workshop where children design and make their own bracelets, necklaces, and keychains.",
+      image: "/assets/jewellery-making.jpg",
+      slug: "jewellery-making",
+      eventDate: "25th October 2025",
     },
   ];
+
+  // Automatically categorize projects based on event date
+  const upcomingProjects = allProjects.filter(project => !isEventPast(project.eventDate));
+  const recentPastProjects = allProjects.filter(project => isEventPast(project.eventDate)).slice(0, 3);
+
+  // Show upcoming if available, otherwise show recent past events
+  const hasUpcoming = upcomingProjects.length > 0;
+  const projectsToShow = hasUpcoming ? upcomingProjects : recentPastProjects;
 
   return (
     <section className="py-6 md:py-16 px-6">
@@ -72,22 +103,27 @@ const ProjectsSection: React.FC = () => {
             Projects
           </h3>
           <h2 className="text-2xl md:text-[48px] font-bold text-gray-900 mb-2">
-            Current & Upcoming <br className="block md:hidden" /> Projects
+            {hasUpcoming ? (
+              <>Current & Upcoming <br className="block md:hidden" /> Projects</>
+            ) : (
+              <>Recent <br className="block md:hidden" /> Projects</>
+            )}
           </h2>
           <p className="text-[#0F0005] text-lg max-w-2xl mx-auto">
-            Making a Difference in Action
+            {hasUpcoming ? "Making a Difference in Action" : "See what we've accomplished together"}
           </p>
         </div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10 lg:mb-20">
-          {projects.map((project, index) => (
+          {projectsToShow.map((project, index) => (
             <ProjectCard
               key={index}
               title={project.title}
               description={project.description}
               image={project.image}
               slug={project.slug}
+              isPastEvent={!hasUpcoming}
             />
           ))}
         </div>
