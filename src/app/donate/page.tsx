@@ -19,12 +19,14 @@ const DonatePage = () => {
         {/* Hero Section */}
         <div className="bg-gradient-to-br from-[#17569D] to-[#125082] text-white py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
+            <p className="text-sm md:text-base text-white/80 mb-4">
+              Your donation will help create a safe, fun day for children and families in Medway.
+            </p>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Sponsor a Turkey for a Family This Christmas
+              Summer Fun Day 2026 Fundraiser
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              This Christmas we are providing fifty turkeys to local families
-              who would otherwise struggle to afford a festive meal.
+              We're raising funds to deliver a free Summer Fun Day for local families. Your support helps us provide activities, food, games, entertainment and a welcoming space where children can enjoy the holidays with dignity and joy.
             </p>
           </div>
         </div>
@@ -34,14 +36,6 @@ const DonatePage = () => {
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left Column - Information */}
             <div className="space-y-8">
-              {/* Introduction */}
-              <div>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Your donation will help a family sit around the table with
-                  warmth, dignity and celebration.
-                </p>
-              </div>
-
               {/* How Your Donation Helps */}
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-[#17569D] mb-6">
@@ -53,14 +47,14 @@ const DonatePage = () => {
                     className="flex cursor-pointer items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-100"
                   >
                     <div className="flex-shrink-0 w-12 h-12 bg-[#31B67D] rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      £15
+                      £10
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">
-                        Supports one family
+                        Supports one child
                       </p>
                       <p className="text-sm text-gray-600">
-                        One turkey for a household in need
+                        Covers a child's activity pack, games and refreshments.
                       </p>
                     </div>
                   </div>
@@ -70,14 +64,14 @@ const DonatePage = () => {
                     className="flex cursor-pointer items-start gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100"
                   >
                     <div className="flex-shrink-0 w-12 h-12 bg-[#17569D] rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      £30
+                      £25
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">
-                        Supports two families
+                        Supports a family
                       </p>
                       <p className="text-sm text-gray-600">
-                        Two turkeys for two households
+                        Helps cover family entry essentials, food and shared activities.
                       </p>
                     </div>
                   </div>
@@ -87,14 +81,14 @@ const DonatePage = () => {
                     className="flex items-start gap-4 cursor-pointer p-4 bg-purple-50 rounded-lg border border-purple-100"
                   >
                     <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      £45
+                      £50
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">
-                        Supports five families
+                        Supports a group
                       </p>
                       <p className="text-sm text-gray-600">
-                        Five turkeys for five households
+                        Contributes towards entertainment, equipment hire and group activities for multiple children.
                       </p>
                     </div>
                   </div>
@@ -102,11 +96,11 @@ const DonatePage = () => {
                   <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <p className="text-gray-700">
                       <strong>
-                        Every contribution helps us reach more households.
+                        Every contribution helps us reach more families.
                       </strong>
                       <br />
                       <span className="text-sm">
-                        You can also donate an amount of your choice.
+                        You can also donate any amount that feels right.
                       </span>
                     </p>
                   </div>
@@ -119,14 +113,23 @@ const DonatePage = () => {
                   Fundraising Goal
                 </h3>
                 <p className="text-gray-700 mb-2">
-                  We aim to raise between <strong>£500 and £750</strong> to
-                  cover the cost of fifty turkeys.
+                  We aim to raise between <strong>£1,000 and £2,500</strong> to deliver Summer Fun Day 2026 and keep it free for families who need it most.
                 </p>
                 <p className="text-gray-700">
-                  With your help, we can make that happen quickly.
+                  With your help, we can make summer memorable.
                 </p>
                 <p className="text-[#31B67D] font-bold text-lg mt-3">
                   Small Acts • Big Impact
+                </p>
+              </div>
+
+              {/* Why Your Support Matters */}
+              <div className="bg-gradient-to-br from-[#17569D] to-[#125082] text-white p-6 rounded-xl">
+                <h3 className="text-xl font-bold mb-3">
+                  Why Your Support Matters
+                </h3>
+                <p className="text-white/90 leading-relaxed">
+                  For many families, the summer holidays can be a tough period financially. Summer Fun Day 2026 is about giving children a day to feel included, celebrated and safe. Together, we can reduce pressure on households, strengthen community connections and create real moments of joy.
                 </p>
               </div>
 
@@ -136,9 +139,7 @@ const DonatePage = () => {
                   Business and Community Support
                 </h3>
                 <p className="text-gray-700 mb-4">
-                  If your business or organisation would like to sponsor
-                  multiple turkeys, partner with this project or donate food
-                  directly, please contact us.
+                  If your business or organisation would like to sponsor activities, donate items, provide food, volunteer, or partner with this event, please contact us. We welcome community partners who want to help us create something special.
                 </p>
                 <a
                   href="mailto:info@evolutionimpactinitiative.co.uk"
@@ -178,8 +179,8 @@ const DonatePage = () => {
                 {/* Card Image */}
                 <div className="relative h-64">
                   <Image
-                    src="/assets/Free-turkey-donate.png"
-                    alt="Christmas Turkey Donation"
+                    src="/assets/summer-fun-day-2026.png"
+                    alt="Summer Fun Day 2026"
                     width={500}
                     height={300}
                     className="w-full h-full object-cover"
@@ -189,11 +190,10 @@ const DonatePage = () => {
                 {/* Card Content */}
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-[#17569D] mb-2">
-                    Make a Difference Today
+                    Make a Difference This Summer
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    Choose your donation amount and help provide Christmas
-                    turkeys to families in need.
+                    Choose your donation amount and help us deliver a free Summer Fun Day packed with games, activities, food and positive experiences for children and families.
                   </p>
 
                   <button
@@ -223,47 +223,32 @@ const DonatePage = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Additional Info Card */}
-              <div className="mt-6 bg-gradient-to-br from-[#17569D] to-[#125082] text-white p-6 rounded-xl">
-                <h4 className="font-bold text-lg mb-2">
-                  Why Your Support Matters
-                </h4>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  A Christmas meal is more than food. It is dignity, family and
-                  celebration. Together we can relieve stress, reduce food
-                  insecurity and create moments of joy for families who are
-                  struggling.
-                </p>
-              </div>
             </div>
           </div>
 
           {/* Impact Section */}
           <div className="mt-16 text-center max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-[#17569D] mb-6">
-              Together We Can Make This Christmas Special
+              Together We Can Make Summer Special
             </h2>
             <p className="text-lg text-gray-700 mb-8">
-              Every donation, no matter the size, brings warmth and hope to a
-              family this festive season. Your generosity creates lasting
-              memories and shows families they are not forgotten.
+              Every donation, no matter the size, helps us deliver a day full of laughter, connection and positive memories for children and families. Your generosity helps us create a welcoming event where everyone feels valued.
             </p>
             <div className="grid grid-cols-3 gap-4 md:gap-8">
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-[#31B67D] mb-2">
-                  50
+                  300
                 </div>
                 <div className="text-sm md:text-base text-gray-600">
-                  Families Supported
+                  Children Reached
                 </div>
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-[#17569D] mb-2">
-                  £15
+                  £10
                 </div>
                 <div className="text-sm md:text-base text-gray-600">
-                  Per Turkey
+                  Supports One Child
                 </div>
               </div>
               <div className="text-center">
@@ -271,10 +256,13 @@ const DonatePage = () => {
                   100%
                 </div>
                 <div className="text-sm md:text-base text-gray-600">
-                  Goes to Families
+                  Goes Into The Event
                 </div>
               </div>
             </div>
+            <p className="text-sm text-gray-500 mt-4">
+              Any surplus supports our year-round community programmes.
+            </p>
           </div>
         </div>
       </div>
@@ -306,8 +294,8 @@ const DonatePage = () => {
             {/* Modal Content */}
             <div className="p-4">
               <DonationForm
-                campaignId="christmas-turkey-giveaway"
-                campaignTitle="Christmas Turkey Giveaway"
+                campaignId="summer-fun-day-2026"
+                campaignTitle="Summer Fun Day 2026"
                 onSuccess={() => {
                   console.log("Donation successful");
                 }}
