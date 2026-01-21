@@ -44,7 +44,7 @@ const Hero = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "/api/campaigns/christmas-turkey-giveaway"
+          "/api/campaigns/summer-fun-day-2026"
         );
 
         if (!response.ok) {
@@ -61,11 +61,11 @@ const Hero = () => {
         );
         // Set fallback data
         setCampaignStats({
-          campaignId: "warmth-for-all",
-          campaignTitle: "Warmth For All",
+          campaignId: "summer-fun-day-2026",
+          campaignTitle: "Summer Fun Day 2026",
           totalRaised: 0,
           totalDonations: 0,
-          goal: 10000, // Set to 10,000 as requested
+          goal: 3000,
           progressPercentage: 0,
           lastUpdated: new Date().toISOString(),
         });
@@ -264,8 +264,8 @@ const Hero = () => {
                   {/* Card Image */}
                   <div className="relative  sm:h-56 md:h-64 lg:h-73 mb-3">
                     <Image
-                      src="/assets/Free-turkey-donate.png"
-                      alt="Free-turkey-donate"
+                      src="/assets/summer-fun-day-2026.png"
+                      alt="Summer Fun Day 2026"
                       width={376}
                       height={278}
                       className="object-cover rounded-xl lg:rounded-3xl w-full h-full"
@@ -278,21 +278,14 @@ const Hero = () => {
                       <div className="w-full">
                         <p className="mb-1">
                           <span className="text-sm md:text-sm text-[#31B67D]">
-                            £15
+                            Free Entry
                           </span>
-                          /
-                          <span className="text-xs md:text-[13px] text-[#0F0005]">
-                            Per Turkey
-                          </span>
-                        </p>
-                        <p className="text-[7px] md:text-[7.8px] text-[#0F0005]">
-                          Or Make One Time Donation
                         </p>
                         <h3 className="text-lg md:text-xl font-bold text-[#0F0005] my-1 md:my-2">
-                          Christmas Turkey
+                          Summer Fun Day 2026
                         </h3>
                         <p className="text-[10px] md:text-xs text-[#0F0005]/50">
-                          A Christmas meal is more than food.
+                          A full day of fun for children and families, bringing the community together through activities, food and positive vibes.
                         </p>
                       </div>
                     </div>
@@ -458,8 +451,8 @@ const Hero = () => {
             {/* Modal Content */}
             <div className="p-4">
               <DonationForm
-                campaignId="christmas-turkey-giveaway"
-                campaignTitle="Christmas Turkey Giveaway"
+                campaignId="summer-fun-day-2026"
+                campaignTitle="Summer Fun Day 2026"
                 onSuccess={refreshCampaignData}
               />
             </div>
