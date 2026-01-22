@@ -11,6 +11,7 @@ interface ProjectCardProps {
   image: string;
   slug: string;
   isPastEvent?: boolean;
+  fullyBooked?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -19,17 +20,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   slug,
   isPastEvent = false,
+  fullyBooked = false,
 }) => {
   return (
-    <Link href={`/projects/${slug}`} className="block bg-white cursor-pointer">
+    <Link href={`/projects/${slug}`} className={`block bg-white cursor-pointer ${fullyBooked ? "opacity-60 grayscale" : ""}`}>
       {/* Project Image */}
       <div className="relative h-[500px] mb-4">
         <Image src={image} alt={title} fill className="object-cover" />
         {/* Community Badge */}
         <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center space-x-2 shadow-sm">
-          <div className={`w-2 h-2 rounded-full ${isPastEvent ? "bg-gray-400" : "bg-blue-500"}`}></div>
+          <div className={`w-2 h-2 rounded-full ${fullyBooked ? "bg-gray-400" : isPastEvent ? "bg-gray-400" : "bg-blue-500"}`}></div>
           <span className="text-sm font-medium text-[#0F0005]">
-            {isPastEvent ? "Past Event" : "Community"}
+            {fullyBooked ? "Fully Booked" : isPastEvent ? "Past Event" : "Community"}
           </span>
         </div>
       </div>
@@ -42,8 +44,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="text-gray-600 text-sm mb-4 leading-relaxed">
           {description}
         </p>
-        <div className="inline-flex gap-[4px] items-center text-green-500 font-medium border-b border-green-500 pb-0.5 hover:text-green-600 hover:border-green-600 transition-colors duration-200">
-          {isPastEvent ? "View Event" : "Learn More"}
+        <div className={`inline-flex gap-[4px] items-center font-medium border-b pb-0.5 transition-colors duration-200 ${fullyBooked ? "text-gray-400 border-gray-400" : "text-green-500 border-green-500 hover:text-green-600 hover:border-green-600"}`}>
+          {fullyBooked ? "Fully Booked" : isPastEvent ? "View Event" : "Learn More"}
           <Image
             src="/assets/arrow.svg"
             alt="Arrow"
@@ -67,6 +69,7 @@ const ProjectsSection: React.FC = () => {
       image: "/assets/valentines-sip-paint-card.jpg",
       slug: "valentines-sip-and-paint",
       eventDate: "14th February 2026",
+      fullyBooked: true,
     },
     {
       title: "Christmas Turkey Giveaway \n 23rd December 2025",
@@ -132,6 +135,7 @@ const ProjectsSection: React.FC = () => {
               image={project.image}
               slug={project.slug}
               isPastEvent={!hasUpcoming}
+              fullyBooked={project.fullyBooked}
             />
           ))}
         </div>
