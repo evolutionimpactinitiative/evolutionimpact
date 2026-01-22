@@ -175,6 +175,7 @@ const projectsData: Record<string, ProjectData> = {
     title: "Valentine's Sip & Paint",
     subtitle: "Celebrating Children's Mental Health Week",
     bannerImage: "/assets/valentines-sip-paint-banner.jpg",
+    disabled: true,
     about: {
       title: "A Creative Celebration for Children's Mental Health Week",
       content: [
@@ -263,7 +264,7 @@ const projectsData: Record<string, ProjectData> = {
         },
       ],
       buttons: [
-        { text: "Register", type: "primary", action: "volunteer" },
+        { text: "Fully Booked", type: "disabled", action: "soldout" },
         { text: "Share Event", type: "secondary", action: "share" },
       ],
       footerMessage: "Creativity • Wellbeing • Community",

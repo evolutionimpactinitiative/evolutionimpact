@@ -69,7 +69,6 @@ const ProjectsSection: React.FC = () => {
       image: "/assets/valentines-sip-paint-card.jpg",
       slug: "valentines-sip-and-paint",
       eventDate: "14th February 2026",
-      fullyBooked: true,
     },
     {
       title: "Christmas Turkey Giveaway \n 23rd December 2025",
